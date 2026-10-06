@@ -1,0 +1,90 @@
+/*
+ * Tokens de diseño de "For her".
+ * Light es el default; dark se activa con data-theme="dark" en <html> (lo pone next-themes).
+ * Tailwind los expone en app/globals.css (bg-surface, text-ink, border-line, etc.).
+ */
+
+:root {
+  color-scheme: light;
+
+  --bg: #fff8f1;
+  --surface: #ffffff;
+  --sunken: #fbeee2;
+  --ink: #2b1e17;
+  --muted: #76604f;
+  --line: #f0e2d4;
+  --accent: #f08a5d;
+  --accent-ink: #2b1408;
+  --accent-soft: #fde3d5;
+  --accent-text: #b4502a;
+  --sage: #6e9b7b;
+  --sage-soft: #e3efe2;
+  --honey: #e9b04a;
+  --honey-soft: #fcefcf;
+  --hero: #2e1f18;
+  --hero-ink: #fff4ec;
+
+  /* Materias: solo para puntos e indicadores. */
+  --subj-anatomia: #c8613f;
+  --subj-bioquimica: #8a62b0;
+  --subj-fisiologia: #b98417;
+  --subj-clinica: #c2414f;
+  --subj-comunitaria: #3f7fa6;
+  /* Paleta rotativa para materias nuevas. */
+  --subj-r1: #2f8a7a;
+  --subj-r2: #a0527f;
+  --subj-r3: #6f7f2e;
+  --subj-r4: #5a6b85;
+  --subj-r5: #9a6a3a;
+
+  /* Fases del plan (fondo de la franja de semanas). */
+  --phase-1: #f7c4a8;
+  --phase-2: #f2a0a0;
+  --phase-3: #bfd8b8;
+  --phase-4: #f4d58a;
+  --phase-5: #d9cbef;
+  --phase-6: #c5ddf0;
+
+  --shadow-float: 0 10px 30px -10px rgb(43 30 23 / 0.28), 0 2px 8px rgb(43 30 23 / 0.08);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #1a1411;
+  --surface: #231b17;
+  --sunken: #2d231e;
+  --ink: #f6ece4;
+  --muted: #bfaea2;
+  --line: #3b2f28;
+  --accent: #f59a72;
+  --accent-ink: #24140d;
+  --accent-soft: #4a2c20;
+  --accent-text: #f7a984;
+  --sage: #93bf9f;
+  --sage-soft: #26352a;
+  --honey: #efc56b;
+  --honey-soft: #3b3020;
+  --hero: #3a2219;
+  --hero-ink: #fbede4;
+
+  --subj-anatomia: #f29a78;
+  --subj-bioquimica: #c3a6e6;
+  --subj-fisiologia: #f0c25e;
+  --subj-clinica: #f08a93;
+  --subj-comunitaria: #86bee0;
+  --subj-r1: #7ecdbf;
+  --subj-r2: #e3a3c6;
+  --subj-r3: #c2d27a;
+  --subj-r4: #a9b8d1;
+  --subj-r5: #d9b088;
+
+  --phase-1: #6a3b28;
+  --phase-2: #7a3036;
+  --phase-3: #3e5a44;
+  --phase-4: #6b5424;
+  --phase-5: #4a3a66;
+  --phase-6: #2e4a63;
+
+  --shadow-float: 0 10px 30px -10px rgb(0 0 0 / 0.6), 0 2px 8px rgb(0 0 0 / 0.3);
+}
