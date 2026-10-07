@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.0 — 2026-10-07
+
+- Nueva paleta: escala de azules en modo claro y azul marino en modo oscuro. Verde (dominado) y ámbar (a repasar) se mantienen como colores funcionales.
+- Ícono de la app y del navegador en azul.
+- Accesibilidad: sigue en 100 en Lighthouse en todas las pantallas, en claro y oscuro.
+
 ## v0.2.0 — 2026-10-07
 
 - Instalable en el celular ("Agregar a pantalla de inicio"): manifest, íconos y accesos directos (Repasar tarjetas, Anotar una pregunta, Bloque de foco).

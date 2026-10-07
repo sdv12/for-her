@@ -20,7 +20,7 @@ export function FocusPill() {
       aria-label={`${label}: quedan ${formatClock(remainingSeconds(focus, now))}${focus.status === "paused" ? ", en pausa" : ""}. Ir a Foco`}
       className="fixed right-4 bottom-[calc(5.75rem+env(safe-area-inset-bottom))] z-40 inline-flex min-h-11 items-center gap-2 rounded-full bg-hero px-4 text-sm font-semibold text-hero-ink shadow-float desk:hidden"
     >
-      <Timer aria-hidden className="size-4 text-accent" />
+      <Timer aria-hidden className="size-4 text-hero-accent" />
       <span className="tabular">{formatClock(remainingSeconds(focus, now))}</span>
       {focus.status === "paused" && <span className="text-hero-ink/70">en pausa</span>}
     </Link>

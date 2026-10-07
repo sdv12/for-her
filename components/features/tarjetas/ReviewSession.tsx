@@ -21,7 +21,7 @@ const RATING_STYLE: Record<Rating, string> = {
   again: "bg-accent-soft",
   hard: "bg-honey-soft",
   good: "bg-sage-soft",
-  easy: "bg-sunken",
+  easy: "bg-surface",
 };
 
 type Session = { queue: string[]; index: number; requeued: string[]; counts: Record<Rating, number>; mistakes: string[] };

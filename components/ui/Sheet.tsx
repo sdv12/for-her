@@ -46,7 +46,7 @@ export function Sheet({ open, onClose, title, side = "auto", children, footer }:
       }}
       className={cn(
         "fixed m-0 max-w-none bg-surface p-0 text-ink shadow-float",
-        "backdrop:bg-[rgb(26_20_17/0.45)]",
+        "backdrop:bg-[var(--backdrop)]",
         // Celular: desde abajo.
         "inset-x-0 top-auto bottom-0 max-h-[90dvh] w-full rounded-t-[24px]",
         side === "auto" &&
