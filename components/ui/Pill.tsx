@@ -4,7 +4,8 @@ type Tone = "neutral" | "accent" | "sage" | "honey" | "hero";
 
 const CHIP_TONES: Record<Tone, string> = {
   neutral: "bg-sunken text-muted",
-  accent: "bg-accent-soft text-accent-text",
+  // Texto oscuro sobre el naranja suave: accent-text ahí da 4,15:1 (no llega a AA).
+  accent: "bg-accent-soft text-ink",
   sage: "bg-sage-soft text-ink",
   honey: "bg-honey-soft text-ink",
   hero: "bg-hero-ink/12 text-hero-ink",

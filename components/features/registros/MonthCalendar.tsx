@@ -78,7 +78,8 @@ export function MonthCalendar({ year, month, today, selected, minutesByDate, pla
                     className={cn(
                       "flex aspect-square min-h-11 w-full flex-col items-center justify-center gap-1 rounded-[12px] border-2 text-sm font-semibold transition-colors",
                       minutes ? "bg-sage-soft" : "hover:bg-sunken",
-                      !d.inMonth && "opacity-40",
+                      // Días de otro mes: atenuados por color (no por opacidad) para no perder contraste.
+                      !d.inMonth && "font-normal text-muted",
                       isSelected ? "border-ink" : isToday ? "border-accent" : "border-transparent",
                     )}
                   >

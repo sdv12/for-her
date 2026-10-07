@@ -17,6 +17,9 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: { default: "For her", template: "%s · For her" },
   description: "Estudio activo para el examen oral integrador.",
+  applicationName: "For her",
+  appleWebApp: { capable: true, title: "For her", statusBarStyle: "default" },
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {

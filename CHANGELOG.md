@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.0 — 2026-10-07
+
+- Instalable en el celular ("Agregar a pantalla de inicio"): manifest, íconos y accesos directos (Repasar tarjetas, Anotar una pregunta, Bloque de foco).
+- Ícono propio en la pestaña del navegador.
+- Accesibilidad: 100 en Lighthouse en todas las pantallas, en modo claro y oscuro (contraste de chips y del calendario, nombre accesible de la tarjeta de repaso).
+- Pulido de estados vacíos en Hoy.
+- Se quitó la página interna de componentes.
+
 ## v0.1.0 — 2026-10-06
 
 Primera versión de prueba (sin backend, datos en el navegador).

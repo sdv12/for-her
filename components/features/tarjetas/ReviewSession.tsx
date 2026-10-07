@@ -195,7 +195,6 @@ export function ReviewSession({ deckId }: { deckId: string | null }) {
             type="button"
             onClick={() => setRevealed(true)}
             disabled={revealed}
-            aria-label={revealed ? undefined : "Mostrar respuesta"}
             className="block w-full rounded-card p-6 text-left disabled:cursor-default desk:p-8"
           >
             {subject && (

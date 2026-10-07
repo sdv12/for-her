@@ -6,6 +6,7 @@ import { diffDays, toISODate } from "@/lib/plan-import/dates";
 export type TodayView = {
   today: string;
   hasPlan: boolean;
+  hasCards: boolean;
   /** Día del plan con fecha de hoy (el primero si hay varios). */
   day: PlanDay | null;
   dayTask: Task | null;
@@ -46,6 +47,7 @@ export function selectToday(db: DB, now: Date = new Date()): TodayView {
   return {
     today,
     hasPlan: Boolean(view && view.weeks.length > 0),
+    hasCards: db.cards.length > 0,
     day,
     dayTask: day ? (db.tasks.find((t) => t.plan_day_id === day.id) ?? null) : null,
     week: dayWeek,

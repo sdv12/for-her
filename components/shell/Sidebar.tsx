@@ -78,7 +78,7 @@ function SidebarLink({ item, active, badge }: { item: NavItem; active: boolean; 
         <span
           className={cn(
             "tabular rounded-full px-2 py-0.5 text-xs font-semibold",
-            active ? "bg-accent-soft text-accent-text" : "bg-sunken text-muted",
+            active ? "bg-accent-soft text-ink" : "bg-sunken text-muted",
           )}
         >
           {badge}

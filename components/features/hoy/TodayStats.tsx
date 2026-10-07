@@ -56,16 +56,16 @@ export function TodayStats({ v }: { v: TodayView }) {
         <Tile
           label="Tarjetas para hoy"
           value={String(v.cardsDue)}
-          sub={v.cardsReviewedToday ? `${v.cardsReviewedToday} repasadas hoy` : v.cardsDue ? "Tocá para repasar" : "Al día"}
-          bar={cardsTotal ? v.cardsReviewedToday / cardsTotal : 1}
+          sub={v.cardsReviewedToday ? `${v.cardsReviewedToday} repasadas hoy` : v.cardsDue ? "Tocá para repasar" : v.hasCards ? "Al día" : "Todavía no hay tarjetas"}
+          bar={cardsTotal ? v.cardsReviewedToday / cardsTotal : v.hasCards ? 1 : 0}
           tone="accent"
         />
       </Link>
       <Link href="/plan" className={TILE}>
         <Tile
           label="Días del plan"
-          value={`${weekDone}/${v.weekDays.length}`}
-          sub="hechos esta semana"
+          value={v.hasPlan ? `${weekDone}/${v.weekDays.length}` : "—"}
+          sub={v.hasPlan ? "hechos esta semana" : "Todavía sin plan"}
           bar={v.weekDays.length ? weekDone / v.weekDays.length : 0}
           tone="sage"
         />
