@@ -2,12 +2,12 @@
 
 import { useState, useTransition } from "react";
 import { FileText, Sparkles } from "lucide-react";
-import { extractDocxText } from "@/app/(app)/plan/importar/actions";
+import { extractDocx } from "@/app/actions/docx";
 import { Button } from "@/components/ui/Button";
 import { TextAreaField, TextField } from "@/components/ui/Field";
 import { addDaysISO, nextWeekday, toISODate } from "@/lib/plan-import/dates";
 import { blankDraft } from "@/lib/plan-import/draft";
-import { parsePlanText } from "@/lib/plan-import/parse-docx";
+import { parsePlanDocument } from "@/lib/plan-import/parse-docx";
 import { parsePlanJson } from "@/lib/plan-import/parse-json";
 import type { ParseResult, PlanDraft } from "@/lib/plan-import/types";
 
@@ -104,9 +104,9 @@ export function DocxSource({ onDraft }: { onDraft: OnDraft }) {
     const form = new FormData();
     form.set("file", file);
     startTransition(async () => {
-      const res = await extractDocxText(form);
+      const res = await extractDocx(form);
       if (!res.ok) return setError({ error: res.error });
-      const parsed = parsePlanText(res.text);
+      const parsed = parsePlanDocument(res.blocks);
       if (!parsed.ok) return setError(parsed);
       onDraft(parsed.draft, parsed.warnings);
     });
@@ -119,7 +119,7 @@ export function DocxSource({ onDraft }: { onDraft: OnDraft }) {
           <FileText aria-hidden className="size-6" />
         </span>
         <span className="text-[15px] font-semibold">{pending ? "Leyendo el documento…" : fileName ?? "Elegí el .docx del cronograma"}</span>
-        <span className="text-sm text-muted">Busco “Fase…”, “Semana N · fechas — título” y los días con su contenido y modo.</span>
+        <span className="text-sm text-muted">Entiende la tabla “una fila por semana” (fechas, tema, subtemas, tip del tribunal) y también el formato con días Lun–Vie.</span>
         <input
           type="file"
           accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document"

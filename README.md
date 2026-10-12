@@ -17,6 +17,11 @@ pnpm test       # tests de lógica (SRS, parser del cronograma, fechas…)
 pnpm build
 ```
 
+## Importar
+
+- **Cronograma** (Plan → Importar): Word (.docx) en formato "una fila por semana" o con días Lun–Vie, JSON, o en blanco. Siempre con vista previa editable.
+- **Banco de preguntas** (Preguntas → Importar banco): Word (.docx) con secciones y tabla "Pregunta", CSV o JSON.
+
 ## Estructura
 
 - `app/(app)/…` — una ruta por sección (hoy, plan, tablero, tarjetas, simulacro, foco, preguntas, errores, registros, temario, ajustes).

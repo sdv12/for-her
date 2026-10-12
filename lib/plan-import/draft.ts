@@ -63,7 +63,7 @@ export function blankDraft(title: string, start: string, weeks: number): PlanDra
 
 const SUBJECT_HINTS: Array<[RegExp, keyof typeof BASE_SUBJECT_COLORS]> = [
   [/anatom|torax|abdomen|retroperitoneo|mediastino|traquea/, "Anatomía"],
-  [/bioquim|krebs|metabol|glucolisis|enzima/, "Bioquímica"],
+  [/bioquim|krebs|glucolisis|enzima/, "Bioquímica"],
   [/fisiolog/, "Fisiología"],
   [/salud comunitaria|epidemiolog|tasas|incidencia|prevalencia|prevencion|psicosocial/, "Salud comunitaria"],
 ];
@@ -71,7 +71,13 @@ const SUBJECT_HINTS: Array<[RegExp, keyof typeof BASE_SUBJECT_COLORS]> = [
 /** Materia sugerida por palabras clave del título; si no hay pista, Clínica. */
 export function guessSubject(text: string): string {
   const t = fold(text);
-  return SUBJECT_HINTS.find(([re]) => re.test(t))?.[1] ?? "Clínica";
+  // Gana la pista que aparece primero en el título ("Fisiología respiratoria + ciclo de Krebs" → Fisiología).
+  let best: { at: number; subject: string } | null = null;
+  for (const [re, subject] of SUBJECT_HINTS) {
+    const at = t.search(re);
+    if (at >= 0 && (!best || at < best.at)) best = { at, subject };
+  }
+  return best?.subject ?? "Clínica";
 }
 
 const NOT_A_TOPIC = /^(simulaci|repaso|revisi|correcci|descanso|grupo|active|estrategia)/;
@@ -85,6 +91,16 @@ export function detectTopics(draft: PlanDraft): Array<{ subject: string; name: s
   const out: Array<{ subject: string; name: string }> = [];
   for (const w of draft.phases.flatMap((p) => p.weeks)) {
     if (!w.subject) continue;
+    // Si el cronograma trae los subtemas explícitos, esos son los temas.
+    if (w.topics) {
+      for (const name of w.topics) {
+        const id = `${w.subject}|${fold(name)}`;
+        if (!name || seen.has(id)) continue;
+        seen.add(id);
+        out.push({ subject: w.subject, name });
+      }
+      continue;
+    }
     for (const d of w.days) {
       const head = d.content.split(":")[0].trim();
       if (head === d.content.trim() || head.length > 40 || NOT_A_TOPIC.test(fold(head))) continue;

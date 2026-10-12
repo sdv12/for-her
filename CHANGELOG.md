@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.4.0 — 2026-10-12
+
+- Importar cronograma: ahora lee el formato "una fila por semana" (Sem · Fechas · Fase · Tema principal · Subtemas · Tip del tribunal · Prioridad) con su tabla resumen de fases y la sección de preguntas por semana.
+  - Arma los días de lunes a viernes: subtemas de lunes a jueves y simulación el viernes.
+  - Si las fechas del documento no empiezan en lunes, alinea las semanas y avisa.
+  - Guarda el tip del tribunal y la prioridad de cada semana (se ven en Plan y en Hoy); los subtemas van al Temario y las preguntas por semana al banco.
+- El .docx se lee con su estructura de tablas (antes se perdía al pasarlo a texto). También toma la "Alerta" de cada fase.
+- Banco de preguntas: acepta archivos de Word (.docx) con secciones y tablas # · Pregunta · 🔴/🟡/🟢, o preguntas numeradas.
+- Arreglos: semana actual cuando hay huecos entre semanas; materia sugerida según el título (la primera pista que aparece).
+
 ## v0.3.0 — 2026-10-07
 
 - Nueva paleta: escala de azules en modo claro y azul marino en modo oscuro. Verde (dominado) y ámbar (a repasar) se mantienen como colores funcionales.

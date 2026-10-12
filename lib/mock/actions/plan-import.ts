@@ -6,10 +6,11 @@ import { fold } from "@/lib/plan-import/dates";
 import { importOptionsSchema, planDraftSchema, type ImportOptions } from "@/lib/plan-import/schema";
 import type { PlanDraft } from "@/lib/plan-import/types";
 import { kindFromMode } from "@/lib/plan";
+import { normalizeQuestion } from "@/lib/questions";
 import { mutate, newRow } from "../store";
 import { ensureSubject } from "./subjects";
 
-export type ImportSummary = { weeks: number; days: number; tasks: number; topics: number };
+export type ImportSummary = { weeks: number; days: number; tasks: number; topics: number; questions: number };
 
 /** Borra el plan activo con su estructura y sus tareas del plan. Los registros quedan, desvinculados. */
 function removeActivePlan(db: DB) {
@@ -34,10 +35,10 @@ function removeActivePlan(db: DB) {
  */
 export function importPlan(input: PlanDraft, options: ImportOptions): ImportSummary {
   const draft = planDraftSchema.parse(input);
-  const { mode, createTopics } = importOptionsSchema.parse(options);
+  const { mode, createTopics, addQuestions } = importOptionsSchema.parse(options);
 
   return mutate((db) => {
-    const summary: ImportSummary = { weeks: 0, days: 0, tasks: 0, topics: 0 };
+    const summary: ImportSummary = { weeks: 0, days: 0, tasks: 0, topics: 0, questions: 0 };
     if (mode === "replace") removeActivePlan(db);
 
     let plan = db.plans.find((p) => p.is_active);
@@ -58,9 +59,23 @@ export function importPlan(input: PlanDraft, options: ImportOptions): ImportSumm
       for (const dw of dp.weeks) {
         let week = db.plan_weeks.find((w) => w.plan_id === planId && w.num === dw.num);
         if (!week) {
-          week = { ...newRow(), plan_id: planId, phase_id: phase.id, num: dw.num, start_date: dw.start, end_date: dw.end, title: dw.title } satisfies PlanWeek;
+          week = {
+            ...newRow(),
+            plan_id: planId,
+            phase_id: phase.id,
+            num: dw.num,
+            start_date: dw.start,
+            end_date: dw.end,
+            title: dw.title,
+            tip: dw.tip ?? null,
+            priority: dw.priority ?? null,
+          } satisfies PlanWeek;
           db.plan_weeks.push(week);
           summary.weeks += 1;
+        } else {
+          // Fusión: completa lo que la semana existente no tenía.
+          week.tip ??= dw.tip ?? null;
+          week.priority ??= dw.priority ?? null;
         }
         const weekId = week.id;
         const range = { start: week.start_date, end: week.end_date };
@@ -107,6 +122,28 @@ export function importPlan(input: PlanDraft, options: ImportOptions): ImportSumm
         if (topics.some((x) => fold(x.name) === fold(t.name))) continue;
         db.syllabus_topics.push({ ...newRow(), subject_id: subjectId, name: t.name, level: 0, sort: topics.length });
         summary.topics += 1;
+      }
+    }
+
+    if (addQuestions && draft.questions?.length) {
+      const seen = new Set(db.exam_questions.map((q) => normalizeQuestion(q.text)));
+      const subjectOfWeek = new Map(draft.phases.flatMap((p) => p.weeks).map((w) => [w.num, w.subject]));
+      for (const q of draft.questions) {
+        const key = normalizeQuestion(q.text);
+        if (seen.has(key)) continue;
+        seen.add(key);
+        db.exam_questions.push({
+          ...newRow(),
+          text: q.text,
+          subject_id: ensureSubject(db, (q.weekNum !== null ? subjectOfWeek.get(q.weekNum) : null) ?? "Clínica")!,
+          source: q.weekNum !== null ? `Cronograma · semana ${q.weekNum}` : "Cronograma",
+          asked_on: null,
+          times_asked: 0,
+          priority: q.priority,
+          model_answer: null,
+          follow_up: null,
+        });
+        summary.questions += 1;
       }
     }
 

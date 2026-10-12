@@ -3,7 +3,8 @@
 import { ChevronRight, Info, Plus, Trash2 } from "lucide-react";
 import { phaseColor } from "@/components/features/plan/phase";
 import { Button } from "@/components/ui/Button";
-import { TextField } from "@/components/ui/Field";
+import { TextAreaField, TextField } from "@/components/ui/Field";
+import { Chip } from "@/components/ui/Pill";
 import { cn } from "@/lib/cn";
 import type { Weekday } from "@/lib/data/types";
 import { formatRange } from "@/lib/plan";
@@ -52,6 +53,7 @@ export function PlanPreview({ draft, onChange, warnings, subjects }: Props) {
 
       <p className="text-sm text-muted">
         {draft.phases.length} {draft.phases.length === 1 ? "fase" : "fases"} · {weeks.length} semanas · {countDays(draft)} días
+        {draft.questions && draft.questions.length > 0 && <> · {draft.questions.length} preguntas</>}
         {first && last && <> · {formatRange(first.start, last.end)}</>}
       </p>
 
@@ -104,6 +106,7 @@ export function PlanPreview({ draft, onChange, warnings, subjects }: Props) {
                     <span className="tabular w-16 shrink-0 text-sm font-semibold">Sem {week.num}</span>
                     <span className="min-w-0 flex-1 truncate text-sm">{week.title}</span>
                     <span className="hidden shrink-0 text-xs text-muted sm:inline">{formatRange(week.start, week.end)}</span>
+                    {week.priority && <Chip tone={/alta|cr[ií]tica/i.test(week.priority) ? "accent" : "neutral"}>{week.priority}</Chip>}
                     <span className="tabular shrink-0 rounded-full bg-surface px-2 py-0.5 text-xs font-semibold text-muted">
                       {week.days.length} d
                     </span>
@@ -171,6 +174,20 @@ function WeekEditor({
           </select>
         </div>
       </div>
+
+      {week.tip !== undefined && (
+        <TextAreaField
+          label="Tip del tribunal"
+          rows={2}
+          value={week.tip ?? ""}
+          onChange={(e) => onWeek((w) => ({ ...w, tip: e.target.value || null }))}
+        />
+      )}
+      {week.topics && week.topics.length > 0 && (
+        <p className="text-sm text-muted">
+          <span className="font-semibold text-ink">Subtemas (van al Temario):</span> {week.topics.join(" · ")}
+        </p>
+      )}
 
       {week.days.length === 0 && <p className="text-sm text-muted">Sin días. Podés agregarlos ahora o después desde el Plan.</p>}
 

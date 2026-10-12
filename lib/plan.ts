@@ -24,12 +24,16 @@ export function selectActivePlan(db: DB): PlanView | null {
   return { plan, phases, weeks, daysByWeek };
 }
 
-/** Semana que contiene `today`; si el plan no empezó, la primera; si terminó, la última. */
+/**
+ * Semana que contiene `today`. Si cae en un hueco entre semanas (o el plan no empezó), la próxima;
+ * si el plan ya terminó, la última.
+ */
 export function currentWeek(weeks: PlanWeek[], today: ISODate): PlanWeek | null {
   if (weeks.length === 0) return null;
   const inside = weeks.find((w) => w.start_date <= today && today <= w.end_date);
   if (inside) return inside;
-  return today < weeks[0].start_date ? weeks[0] : weeks[weeks.length - 1];
+  const sorted = [...weeks].sort((a, b) => a.start_date.localeCompare(b.start_date));
+  return sorted.find((w) => w.start_date > today) ?? sorted[sorted.length - 1];
 }
 
 export function isWeekCurrent(week: PlanWeek, today: ISODate) {

@@ -36,6 +36,7 @@ export function ImportWizard() {
   const [warnings, setWarnings] = useState<string[]>([]);
   const [mode, setMode] = useState<ImportOptions["mode"]>("replace");
   const [createTopics, setCreateTopics] = useState(true);
+  const [addQuestions, setAddQuestions] = useState(true);
   const [saveError, setSaveError] = useState<string | null>(null);
 
   const current = useMemo(() => (db ? selectActivePlan(db) : null), [db]);
@@ -57,9 +58,10 @@ export function ImportWizard() {
   function save() {
     if (!draft) return;
     try {
-      const s = importPlan(draft, { mode: current ? mode : "replace", createTopics });
+      const s = importPlan(draft, { mode: current ? mode : "replace", createTopics, addQuestions });
       const parts = [`${s.weeks} semanas`, `${s.days} días`, `${s.tasks} tareas en el Tablero`];
       if (s.topics) parts.push(`${s.topics} temas`);
+      if (s.questions) parts.push(`${s.questions} preguntas al banco`);
       toast({ message: `Listo: ${parts.join(", ")}.` });
       router.push("/plan");
     } catch (e) {
@@ -124,6 +126,19 @@ export function ImportWizard() {
             <p className="mt-1 text-sm text-muted">
               {topics.slice(0, 8).map((t) => t.name).join(" · ")}
               {topics.length > 8 && ` y ${topics.length - 8} más`}
+            </p>
+          </div>
+        )}
+
+        {draft.questions && draft.questions.length > 0 && (
+          <div>
+            <Checkbox
+              checked={addQuestions}
+              onChange={(e) => setAddQuestions(e.target.checked)}
+              label={`Sumar ${draft.questions.length} preguntas de práctica al banco`}
+            />
+            <p className="mt-1 text-sm text-muted">
+              Las “preguntas tipo examen” de cada semana, con la materia y la prioridad de su semana. Las repetidas no se duplican.
             </p>
           </div>
         )}

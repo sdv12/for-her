@@ -3,6 +3,8 @@ import { normalizeWeekday, parseFechas } from "./dates";
 import { detectTopics, shiftDraft } from "./draft";
 import { parsePlanText } from "./parse-docx";
 import { parsePlanJson } from "./parse-json";
+import { parseWeekTablePlan } from "./parse-week-table";
+import type { DocBlock } from "../docx/blocks";
 
 describe("parseFechas", () => {
   it("rango dentro de un mes", () => {
@@ -194,5 +196,85 @@ describe("parsePlanText (.docx)", () => {
 
   it("sin semanas, error claro", () => {
     expect(parsePlanText("Hola\nNada por acá").ok).toBe(false);
+  });
+});
+
+
+describe("parseWeekTablePlan (una fila por semana)", () => {
+  const blocks: DocBlock[] = [
+    { type: "p", text: "PLAN DE REINGRESO — MEDICINA FCM-UNC" },
+    { type: "p", text: "Arranca: 13 de octubre de 2026 · 24 semanas · 1h/día · 5 días/semana" },
+    { type: "table", rows: [["FASE 1 · Oct–Dic", "FASE 2 · Dic–Ene"], ["Básicas clínicas\n8 semanas", "Clínica mayor\n8 semanas"]] },
+    {
+      type: "table",
+      rows: [
+        ["Sem", "Fechas", "FASE", "Tema Principal", "Subtemas Clave", "Tip del Tribunal", "🔴/🟡"],
+        ["1", "13–17 Oct", "BÁSICAS CON ENFOQUE CLÍNICO", "Anatomía de Tórax", "Tráquea y relaciones · Bronquios · Mediastino · Pulmones: lóbulos e hilio · Diafragma", "Arranca por acá.", "🔴 ALTA"],
+        ["12", "29 Dic – 2 Ene", "CLÍNICA MAYOR", "Arritmias", "FA · TSV", "Semana de fiestas.", "🟡 MEDIA"],
+        ["23", "16–20 Mar", "CLÍNICA MAYOR", "SIMULACIONES I — Básicas", "Simulación oral completa · Corrección", "Simular la apertura.", "🔴 CRÍTICA"],
+      ],
+    },
+    { type: "p", text: "PREGUNTAS TIPO EXAMEN — POR SEMANA" },
+    { type: "p", text: "Semana 1 — Anatomía de Tórax" },
+    { type: "p", text: "1. ¿Dónde comienza la tráquea?" },
+    { type: "p", text: "Semana 12 — Arritmias" },
+    { type: "p", text: "1. ¿Cómo diagnosticás FA?" },
+    { type: "p", text: "2. RECORDATORIO: dormí bien." },
+  ];
+  const r = parseWeekTablePlan(blocks)!;
+
+  it("detecta el formato y arma fases con su resumen", () => {
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.draft.title).toBe("Plan de reingreso — medicina FCM-UNC");
+    expect(r.draft.phases.map((p) => [p.code, p.name, p.description])).toEqual([
+      ["1", "Básicas con enfoque clínico", "Oct–Dic · Básicas clínicas · 8 semanas"],
+      ["2", "Clínica mayor", "Dic–Ene · Clínica mayor · 8 semanas"],
+    ]);
+  });
+
+  it("alinea las semanas a lunes–viernes (13 oct 2026 es martes) y cruza de año", () => {
+    if (!r.ok) return;
+    const [w1] = r.draft.phases[0].weeks;
+    const [w12, w23] = r.draft.phases[1].weeks;
+    expect(w1).toMatchObject({ start: "2026-10-12", end: "2026-10-18", tip: "Arranca por acá.", priority: "Alta", subject: "Anatomía" });
+    expect(w1.days.map((d) => [d.weekday, d.date])).toEqual([
+      ["Lun", "2026-10-12"],
+      ["Mar", "2026-10-13"],
+      ["Mié", "2026-10-14"],
+      ["Jue", "2026-10-15"],
+      ["Vie", "2026-10-16"],
+    ]);
+    expect(w12).toMatchObject({ start: "2026-12-28", end: "2027-01-03", priority: "Media" });
+    expect(r.warnings[0]).toMatch(/lunes a viernes/);
+    // Semana de simulación: 5 días de práctica oral.
+    expect(w23.days).toHaveLength(5);
+    expect(w23.days.every((d) => d.mode === "Simulación oral")).toBe(true);
+    expect(w23.priority).toBe("Crítica");
+  });
+
+  it("reparte los subtemas en lunes–jueves y deja el viernes para simular", () => {
+    if (!r.ok) return;
+    const w1 = r.draft.phases[0].weeks[0];
+    expect(w1.days.map((d) => d.content)).toEqual([
+      "Tráquea y relaciones · Bronquios",
+      "Mediastino",
+      "Pulmones: lóbulos e hilio",
+      "Diafragma",
+      "Simulación de la semana: Anatomía de Tórax (preguntas tipo examen en voz alta)",
+    ]);
+    expect(w1.topics).toEqual(["Tráquea y relaciones", "Bronquios", "Mediastino", "Pulmones", "Diafragma"]);
+  });
+
+  it("toma las preguntas por semana (sin los recordatorios) con la prioridad de su semana", () => {
+    if (!r.ok) return;
+    expect(r.draft.questions?.map((q) => [q.weekNum, q.text, q.priority])).toEqual([
+      [1, "¿Dónde comienza la tráquea?", 1],
+      [12, "¿Cómo diagnosticás FA?", 2],
+    ]);
+  });
+
+  it("devuelve null si no es este formato", () => {
+    expect(parseWeekTablePlan([{ type: "p", text: "Hola" }])).toBeNull();
   });
 });

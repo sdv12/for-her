@@ -45,7 +45,7 @@ export function parsePlanJson(input: string): ParseResult {
       }
       after = start;
 
-      const week = { key: draftKey(), num: s.num, start, end, title: s.titulo || `Semana ${s.num}`, subject: guessSubject(`${s.titulo} ${f.nombre}`), days: [] as DraftWeek["days"] };
+      const week = { key: draftKey(), num: s.num, start, end, title: s.titulo || `Semana ${s.num}`, subject: guessSubject(s.titulo), days: [] as DraftWeek["days"] };
       week.days = s.dias.map((d) => {
         const { date, inRange } = dayDate(week, d.dia);
         if (!inRange) warnings.push(`Semana ${s.num}: ${d.dia} no cae entre las fechas de la semana; lo puse el ${date}.`);

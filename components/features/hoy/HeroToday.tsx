@@ -52,6 +52,11 @@ export function HeroToday({ v }: { v: TodayView }) {
             </Chip>
           )}
         </div>
+        {v.week?.tip && (
+          <p className="mt-4 max-w-3xl text-[15px] text-hero-ink/90">
+            <span className="font-semibold text-hero-accent">Tip del tribunal:</span> {v.week.tip}
+          </p>
+        )}
         <Actions>
           <Link href={startHref(v.day.mode, v.dayTask?.id ?? null)} className={buttonClasses({ variant: "primary", size: "lg" })}>
             Empezar <ArrowRight aria-hidden />

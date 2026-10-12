@@ -69,6 +69,9 @@ export const planDraftSchema = z.object({
             end: z.iso.date(),
             title: z.string().trim().min(1, "Cada semana necesita un título."),
             subject: z.string().nullable(),
+            tip: z.string().nullable().optional(),
+            priority: z.string().nullable().optional(),
+            topics: z.array(z.string()).optional(),
             days: z.array(
               z.object({
                 key: z.string(),
@@ -83,10 +86,22 @@ export const planDraftSchema = z.object({
       ),
     }),
   ),
+  questions: z
+    .array(
+      z.object({
+        key: z.string(),
+        weekNum: z.number().int().nullable(),
+        text: z.string().trim().min(1),
+        priority: z.union([z.literal(1), z.literal(2), z.literal(3)]),
+      }),
+    )
+    .optional(),
 });
 
 export const importOptionsSchema = z.object({
   mode: z.enum(["replace", "merge"]),
   createTopics: z.boolean(),
+  /** Sumar al banco de Preguntas de examen las preguntas por semana que trae el cronograma. */
+  addQuestions: z.boolean().default(false),
 });
-export type ImportOptions = z.infer<typeof importOptionsSchema>;
+export type ImportOptions = z.input<typeof importOptionsSchema>;

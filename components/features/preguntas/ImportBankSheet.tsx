@@ -7,7 +7,8 @@ import { TextAreaField } from "@/components/ui/Field";
 import { Chip } from "@/components/ui/Pill";
 import { Sheet } from "@/components/ui/Sheet";
 import { fold } from "@/lib/plan-import/dates";
-import { normalizeQuestion, parseBank, PRIORITY_LABEL, type BankParse } from "@/lib/questions";
+import { extractDocx } from "@/app/actions/docx";
+import { normalizeQuestion, parseBank, parseBankBlocks, PRIORITY_LABEL, type BankParse } from "@/lib/questions";
 
 type Props = {
   existingTexts: string[];
@@ -26,6 +27,7 @@ export function ImportBankSheet({ existingTexts, subjectNames, onClose, onImport
   const [text, setText] = useState("");
   const [fileName, setFileName] = useState<string | null>(null);
   const [result, setResult] = useState<BankParse | null>(null);
+  const [reading, setReading] = useState(false);
 
   const preview = useMemo(() => {
     if (!result?.ok) return null;
@@ -39,12 +41,25 @@ export function ImportBankSheet({ existingTexts, subjectNames, onClose, onImport
       return { ...r, status };
     });
     const newSubjects = [...new Set(result.rows.map((r) => r.subject).filter((s) => !known.has(fold(s))))];
-    return { rows, added: rows.filter((r) => r.status === "nueva").length, newSubjects };
+    const bySubject = new Map<string, number>();
+    for (const r of rows) if (r.status === "nueva") bySubject.set(r.subject, (bySubject.get(r.subject) ?? 0) + 1);
+    return { rows, added: rows.filter((r) => r.status === "nueva").length, newSubjects, bySubject: [...bySubject] };
   }, [result, existingTexts, subjectNames]);
 
   async function onFile(file: File | undefined) {
     if (!file) return;
     setFileName(file.name);
+    if (/\.docx?$/i.test(file.name)) {
+      // Word: se lee en el server (tablas incluidas) y se analiza acá.
+      setReading(true);
+      const form = new FormData();
+      form.set("file", file);
+      const res = await extractDocx(form);
+      setReading(false);
+      setText("");
+      setResult(res.ok ? parseBankBlocks(res.blocks) : { ok: false, error: res.error });
+      return;
+    }
     const content = await file.text();
     setText(content);
     setResult(parseBank(content));
@@ -75,13 +90,20 @@ export function ImportBankSheet({ existingTexts, subjectNames, onClose, onImport
       {!preview ? (
         <div className="flex flex-col gap-4">
           <p className="text-sm text-muted">
-            CSV (con coma o punto y coma, como lo exporta Excel) o JSON. Columnas: <b>pregunta</b> (o question), <b>materia</b> (o subject),
-            prioridad y fuente. Las preguntas repetidas no se duplican.
+            <b>Word (.docx)</b>: secciones con un título (“ANATOMÍA — TÓRAX”) y una tabla con la columna <b>Pregunta</b> (prioridad con 🔴🟡🟢), o
+            preguntas numeradas debajo de un título. También <b>CSV</b> (coma o punto y coma, como lo exporta Excel) o <b>JSON</b> con columnas
+            pregunta, materia, prioridad y fuente. Las repetidas no se duplican.
           </p>
           <label className="flex cursor-pointer items-center gap-3 rounded-card-sm border border-dashed border-line px-4 py-4 hover:bg-sunken has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-accent-text">
             <FileUp aria-hidden className="size-5 text-accent-text" />
-            <span className="text-[15px] font-semibold">{fileName ?? "Elegí un .csv o .json"}</span>
-            <input type="file" accept=".csv,.json,.txt,text/csv,application/json" className="sr-only" onChange={(e) => onFile(e.target.files?.[0])} />
+            <span className="text-[15px] font-semibold">{reading ? "Leyendo el documento…" : (fileName ?? "Elegí un .docx, .csv o .json")}</span>
+            <input
+              type="file"
+              accept=".docx,.doc,.csv,.json,.txt,text/csv,application/json,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              className="sr-only"
+              disabled={reading}
+              onChange={(e) => (onFile(e.target.files?.[0]), (e.target.value = ""))}
+            />
           </label>
           <TextAreaField
             label="…o pegalo acá"
@@ -108,6 +130,12 @@ export function ImportBankSheet({ existingTexts, subjectNames, onClose, onImport
             <b>{preview.rows.length}</b> en el archivo · <b>{preview.added}</b> nuevas ·{" "}
             <b>{preview.rows.length - preview.added}</b> repetidas
           </p>
+          {preview.bySubject.length > 1 && (
+            <p className="text-sm text-muted">
+              <span className="font-semibold text-ink">Por materia:</span>{" "}
+              {preview.bySubject.map(([name, n]) => `${name} ${n}`).join(" · ")}
+            </p>
+          )}
           {preview.newSubjects.length > 0 && (
             <p className="rounded-card-sm bg-honey-soft p-3 text-sm">
               Se crean {preview.newSubjects.length === 1 ? "la materia" : "las materias"} <b>{preview.newSubjects.join(", ")}</b>.

@@ -36,6 +36,10 @@ export type PlanWeek = Row & {
   start_date: ISODate;
   end_date: ISODate;
   title: string;
+  /** "Tip del tribunal" de la semana (opcional). */
+  tip?: string | null;
+  /** Prioridad de la semana según el cronograma: "Alta", "Media", "Crítica"… (opcional). */
+  priority?: string | null;
 };
 export type Weekday = "Lun" | "Mar" | "Mié" | "Jue" | "Vie" | "Sáb" | "Dom";
 export type PlanDay = Row & {

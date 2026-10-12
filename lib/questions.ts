@@ -1,5 +1,7 @@
 import type { ExamQuestion } from "@/lib/data/types";
+import type { DocBlock } from "@/lib/docx/blocks";
 import { fold } from "@/lib/plan-import/dates";
+import { niceCase, stripLeadingSymbols } from "@/lib/text";
 
 /** Texto comparable: sin acentos, mayúsculas, signos ni espacios de más. "¿Qué es el GC?" = "que es el gc". */
 export function normalizeQuestion(text: string): string {
@@ -11,10 +13,14 @@ export function normalizeQuestion(text: string): string {
 
 export const PRIORITY_LABEL: Record<1 | 2 | 3, string> = { 1: "Alta", 2: "Media", 3: "Baja" };
 
-/** "1", "alta", "Alta ", "A" → 1. Sin dato o desconocido → 2 (media). */
+/** "1", "alta", "🔴", "🔴 ALTA" → 1 · "3", "baja", "🟢" → 3 · el resto (o vacío) → 2 (media). */
 export function parsePriority(value: unknown): 1 | 2 | 3 {
-  const v = fold(String(value ?? ""));
-  if (["1", "alta", "a", "high"].includes(v)) return 1;
+  const raw = String(value ?? "");
+  if (raw.includes("🔴")) return 1;
+  if (raw.includes("🟢")) return 3;
+  if (raw.includes("🟡")) return 2;
+  const v = fold(raw);
+  if (["1", "alta", "a", "high", "critica"].includes(v)) return 1;
   if (["3", "baja", "b", "low"].includes(v)) return 3;
   return 2;
 }
@@ -108,4 +114,96 @@ export function parseBank(input: string): BankParse {
   const [header, ...body] = parseCsv(text, delimiter);
   if (!header || body.length === 0) return { ok: false, error: "El CSV necesita una fila de encabezado y al menos una pregunta." };
   return toRows(body.map((cells) => Object.fromEntries(header.map((h, i) => [h.trim(), cells[i] ?? ""]))));
+}
+
+const BASE_SECTIONS: Array<[RegExp, string]> = [
+  [/^anatom[a-z]*/, "Anatomía"],
+  [/^fisiolog[a-z]*/, "Fisiología"],
+  [/^bioquim[a-z]*/, "Bioquímica"],
+  [/^clinica( medica)?/, "Clínica"],
+  [/^(salud comunitaria|epidemiolog)[a-z ]*/, "Salud comunitaria"],
+];
+
+/**
+ * Sección de un banco en Word → materia + detalle para la fuente.
+ * "ANATOMÍA — TÓRAX" → Anatomía · "Tórax" · "FISIOLOGÍA RENAL" → Fisiología · "Renal" ·
+ * "PEDIATRÍA" → materia propia "Pediatría".
+ */
+export function mapBankSection(section: string): { subject: string; detail: string | null } {
+  const clean = niceCase(stripLeadingSymbols(section)).replace(/\s+/g, " ").trim();
+  const folded = fold(clean);
+  for (const [re, subject] of BASE_SECTIONS) {
+    const m = folded.match(re);
+    if (!m) continue;
+    const rest = clean.slice(m[0].length).replace(/^[\s—–\-:·,y]+/i, "").trim();
+    const detail = subject === "Salud comunitaria" || !rest ? null : rest.charAt(0).toLocaleUpperCase("es") + rest.slice(1);
+    return { subject, detail };
+  }
+  return { subject: clean, detail: null };
+}
+
+/** Línea que funciona como título de sección (no es una pregunta ni un metadato con números). */
+function isSectionHeading(text: string): boolean {
+  const t = text.trim();
+  return t.length >= 3 && t.length <= 80 && !t.includes("?") && !/^\d/.test(t) && !/[=]/.test(t) && !/\d+\s+preguntas/i.test(t);
+}
+
+/**
+ * Banco de preguntas en Word: secciones (título + tabla "# | Pregunta | Prioridad"), o listas
+ * numeradas "1. ¿…?" debajo de un título. Si la tabla trae columna de materia, se usa esa.
+ */
+export function parseBankBlocks(blocks: DocBlock[]): BankParse {
+  const rows: BankRow[] = [];
+  const skipped: string[] = [];
+  let section: string | null = null;
+
+  const push = (text: string, sectionName: string | null, priority: unknown, subjectCell?: string, sourceCell?: string) => {
+    const clean = text.replace(/\s+/g, " ").trim();
+    if (!clean) return;
+    const mapped = subjectCell ? { subject: niceCase(subjectCell), detail: null } : sectionName ? mapBankSection(sectionName) : null;
+    if (!mapped) return skipped.push(`Sin materia: “${clean.slice(0, 50)}…”.`);
+    rows.push({
+      text: clean,
+      subject: mapped.subject,
+      priority: parsePriority(priority),
+      source: sourceCell?.trim() || (mapped.detail ? `Banco · ${mapped.detail}` : "Banco de preguntas"),
+    });
+  };
+
+  for (const b of blocks) {
+    if (b.type === "p") {
+      const numbered = b.text.match(/^\d{1,3}[.)]\s+([\s\S]+)$/);
+      if (numbered) {
+        push(numbered[1], section, "");
+        continue;
+      }
+      const week = b.text.match(/^semana\s+\d+\s*[—–:-]\s*(.+)$/i);
+      if (week) section = week[1];
+      else if (isSectionHeading(b.text)) section = b.text;
+      continue;
+    }
+
+    const header = b.rows[0].map((c) => fold(stripLeadingSymbols(c)));
+    let qCol = header.findIndex((c) => /pregunta|question/.test(c));
+    const hasHeader = qCol >= 0;
+    const pCol = header.findIndex((c, i) => /prioridad|priority/.test(c) || /[🔴🟡🟢]/u.test(b.rows[0][i]));
+    const sCol = header.findIndex((c) => /^materia|subject/.test(c));
+    const fCol = header.findIndex((c) => /fuente|source|origen/.test(c));
+    if (!hasHeader) {
+      // Sin encabezado: la columna con más texto es la de la pregunta.
+      const widths = b.rows[0].map((_, i) => b.rows.reduce((n, r) => n + (r[i]?.length ?? 0), 0));
+      qCol = widths.indexOf(Math.max(...widths));
+    }
+    for (const r of b.rows.slice(hasHeader ? 1 : 0)) {
+      const text = r[qCol] ?? "";
+      if (!text.trim() || !/[a-záéíóú]/i.test(text)) continue;
+      const prio = pCol >= 0 ? r[pCol] : (r.find((c) => /[🔴🟡🟢]/u.test(c)) ?? "");
+      push(text, section, prio, sCol >= 0 ? r[sCol] : undefined, fCol >= 0 ? r[fCol] : undefined);
+    }
+  }
+
+  if (rows.length === 0) {
+    return { ok: false, error: "No encontré preguntas en el documento. Tienen que estar en tablas con una columna “Pregunta”, o numeradas (1., 2., …) debajo de un título." };
+  }
+  return { ok: true, rows, skipped };
 }

@@ -16,7 +16,16 @@ export type DraftWeek = {
   /** Nombre de materia sugerido (para la tarea del Tablero y los temas). */
   subject: string | null;
   days: DraftDay[];
+  /** "Tip del tribunal" de la semana, si el cronograma lo trae. */
+  tip?: string | null;
+  /** Prioridad de la semana tal como la escribe el cronograma ("Alta", "Media", "Crítica"). */
+  priority?: string | null;
+  /** Subtemas explícitos (van al Temario). Si no hay, se detectan del contenido de los días. */
+  topics?: string[];
 };
+
+/** Pregunta de práctica que trae el cronograma (va al banco de Preguntas de examen). */
+export type DraftQuestion = { key: string; weekNum: number | null; text: string; priority: 1 | 2 | 3 };
 
 export type DraftPhase = {
   key: string;
@@ -29,7 +38,7 @@ export type DraftPhase = {
   weeks: DraftWeek[];
 };
 
-export type PlanDraft = { title: string; start: ISODate; phases: DraftPhase[] };
+export type PlanDraft = { title: string; start: ISODate; phases: DraftPhase[]; questions?: DraftQuestion[] };
 
 export type ParseResult =
   | { ok: true; draft: PlanDraft; warnings: string[] }

@@ -1,5 +1,9 @@
+import type { DocBlock } from "@/lib/docx/blocks";
+import { blocksToText } from "@/lib/docx/blocks";
+import { niceCase, stripLeadingSymbols } from "@/lib/text";
 import { addDaysISO, fold, normalizeWeekday, parseFechas } from "./dates";
 import { dayDate, draftKey, guessSubject } from "./draft";
+import { parseWeekTablePlan } from "./parse-week-table";
 import type { DraftPhase, DraftWeek, ParseResult } from "./types";
 
 /*
@@ -17,19 +21,20 @@ const WEEK_RE = /^semana\s+(\d+)\b\s*(.*)$/i;
 const INLINE_DAY_RE =
   /^(lunes|martes|mi[eé]rcoles|jueves|viernes|s[aá]bado|domingo|lun|mar|mi[eé]|jue|vie|s[aá]b|dom)\.?\s*[:—–-]\s*(.+)$/i;
 const TABLE_HEADERS = new Set(["dia", "contenido", "modo de estudio", "modo"]);
-const PHASE_KEYS = new Set(["periodo", "objetivo", "materias"]);
-
-/** "CIMIENTOS CARDIOVASCULARES" → "Cimientos cardiovasculares"; si ya tiene minúsculas, lo deja. */
-function niceCase(s: string): string {
-  if (/[a-záéíóúñ]/.test(s)) return s;
-  const lower = s.toLocaleLowerCase("es");
-  return lower.charAt(0).toLocaleUpperCase("es") + lower.slice(1);
-}
+const PHASE_KEYS = new Set(["periodo", "objetivo", "materias", "alerta"]);
 
 function splitMode(text: string): { content: string; mode: string } {
   const parts = text.split(/\s+[·|]\s+/);
   if (parts.length < 2) return { content: text.trim(), mode: "" };
   return { content: parts.slice(0, -1).join(" · ").trim(), mode: parts[parts.length - 1].trim() };
+}
+
+/**
+ * Punto de entrada para un .docx: si tiene la tabla "semana por fila" usa ese formato;
+ * si no, lee el texto línea por línea (formato con días Lun–Vie en tablas Día/Contenido/Modo).
+ */
+export function parsePlanDocument(blocks: DocBlock[]): ParseResult {
+  return parseWeekTablePlan(blocks) ?? parsePlanText(blocksToText(blocks));
 }
 
 export function parsePlanText(text: string): ParseResult {
@@ -96,7 +101,7 @@ export function parsePlanText(text: string): ParseResult {
       }
       after = start;
       const title = (range ? range.rest : rest).replace(/^[\s·:—–-]+/, "").trim() || `Semana ${num}`;
-      week = { key: draftKey(), num, start, end, title, subject: guessSubject(`${title} ${current.name}`), days: [] };
+      week = { key: draftKey(), num, start, end, title, subject: guessSubject(title), days: [] };
       current.weeks.push(week);
       continue;
     }
@@ -108,6 +113,7 @@ export function parsePlanText(text: string): ParseResult {
         phaseKey = key;
       } else if (phaseKey) {
         if (phaseKey === "objetivo") phase.description = line;
+        if (phaseKey === "alerta") phase.alert = stripLeadingSymbols(line);
         phaseKey = null;
       }
       continue;

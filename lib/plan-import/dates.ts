@@ -76,7 +76,7 @@ const MONTHS: Record<string, number> = {
   dic: 12, diciembre: 12,
 };
 
-function monthOf(word: string | undefined): number | null {
+export function monthOf(word: string | undefined): number | null {
   if (!word) return null;
   return MONTHS[fold(word).replace(/\.$/, "")] ?? null;
 }

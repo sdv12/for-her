@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Info, Plus } from "lucide-react";
+import { Gavel, Info, Plus } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { Chip } from "@/components/ui/Pill";
 import type { PlanDay, PlanPhase, PlanWeek } from "@/lib/data/types";
 import type { PlanDayInput } from "@/lib/data/schemas";
 import { formatRange } from "@/lib/plan";
@@ -59,12 +60,24 @@ export function WeekDetail({ week, phase, days, today, onToggle, onUpdate, onAdd
           </p>
           <h2 className="mt-1 text-2xl font-semibold desk:text-[1.75rem]">{week.title}</h2>
         </div>
-        {days.length > 0 && (
-          <p className="tabular rounded-full bg-sage-soft px-3 py-1 text-sm font-semibold">
-            {done} de {days.length} días
-          </p>
-        )}
+        <div className="flex flex-wrap items-center gap-2">
+          {week.priority && <Chip tone={/alta|cr[ií]tica/i.test(week.priority) ? "accent" : "neutral"}>Prioridad {week.priority.toLowerCase()}</Chip>}
+          {days.length > 0 && (
+            <p className="tabular rounded-full bg-sage-soft px-3 py-1 text-sm font-semibold">
+              {done} de {days.length} días
+            </p>
+          )}
+        </div>
       </div>
+
+      {week.tip && (
+        <div className="mt-4 flex gap-3 rounded-card-sm bg-accent-soft p-4 text-sm">
+          <Gavel aria-hidden className="mt-0.5 size-4 shrink-0 text-accent-text" />
+          <p>
+            <span className="font-semibold">Tip del tribunal:</span> {week.tip}
+          </p>
+        </div>
+      )}
 
       {phase && (phase.description || phase.alert) && (
         <div className="mt-4 rounded-card-sm bg-sunken p-4 text-sm">
