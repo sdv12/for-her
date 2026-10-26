@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.9.0 — 2026-10-26
+
+- Casos clínicos: 28 casos nuevos (84 en total).
+  - Básico: conjuntivitis bacteriana, rinosinusitis viral, reflujo gastroesofágico, migraña sin aura, mordedura de perro, anticoncepción de emergencia en una adolescente, síndrome climatérico.
+  - Intermedio: test de VPH positivo con lesión de alto grado, anafilaxia por picadura, fractura de cadera, depresión posparto, neumotórax espontáneo, enfermedad de Graves, infección urinaria febril en lactante, aborto incompleto, diabetes gestacional.
+  - Avanzado: traumatismo de cráneo en anticoagulado, delirium, cirrosis con peritonitis bacteriana espontánea, debut de VIH con Pneumocystis, leptospirosis, infarto sin elevación del ST, pancreatitis biliar, síndrome nefrótico, escorpionismo, coqueluche.
+  - Desafío: hemorragia posparto por atonía, mordedura de yarará.
+- Nuevas áreas: Oftalmología y Alergia e inmunología.
+
 ## v0.8.0 — 2026-10-26
 
 - Casos clínicos: 14 casos nuevos (56 en total).

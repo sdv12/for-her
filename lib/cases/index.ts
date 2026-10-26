@@ -54,6 +54,34 @@ import { politrauma } from "./data/politrauma";
 import { retencionUrinaria } from "./data/retencion-urinaria";
 import { vaginosis } from "./data/vaginosis";
 import { zoster } from "./data/zoster";
+import { abortoIncompleto } from "./data/aborto-incompleto";
+import { anafilaxia } from "./data/anafilaxia";
+import { anticoncepcionEmergencia } from "./data/anticoncepcion-emergencia";
+import { cirrosisPbe } from "./data/cirrosis-pbe";
+import { conjuntivitis } from "./data/conjuntivitis";
+import { coqueluche } from "./data/coqueluche";
+import { delirium } from "./data/delirium";
+import { depresionPosparto } from "./data/depresion-posparto";
+import { diabetesGestacional } from "./data/diabetes-gestacional";
+import { erge } from "./data/erge";
+import { escorpionismo } from "./data/escorpionismo";
+import { fracturaCadera } from "./data/fractura-cadera";
+import { graves } from "./data/graves";
+import { hemorragiaPosparto } from "./data/hemorragia-posparto";
+import { ituLactante } from "./data/itu-lactante";
+import { leptospirosis } from "./data/leptospirosis";
+import { menopausia } from "./data/menopausia";
+import { migrana } from "./data/migrana";
+import { mordeduraPerro } from "./data/mordedura-perro";
+import { neumotoraxEspontaneo } from "./data/neumotorax-espontaneo";
+import { ofidismo } from "./data/ofidismo";
+import { pancreatitis } from "./data/pancreatitis";
+import { rinosinusitis } from "./data/rinosinusitis";
+import { scasest } from "./data/scasest";
+import { sindromeNefrotico } from "./data/sindrome-nefrotico";
+import { tecAnticoagulado } from "./data/tec-anticoagulado";
+import { vihDebut } from "./data/vih-debut";
+import { vphHsil } from "./data/vph-hsil";
 import type { ClinicalCase } from "./types";
 
 /** Todos los casos, ordenados por nivel. Para sumar un caso: crear su archivo en data/ y agregarlo acá. */
@@ -114,6 +142,34 @@ export const CASES: ClinicalCase[] = [
   retencionUrinaria,
   vaginosis,
   zoster,
+  abortoIncompleto,
+  anafilaxia,
+  anticoncepcionEmergencia,
+  cirrosisPbe,
+  conjuntivitis,
+  coqueluche,
+  delirium,
+  depresionPosparto,
+  diabetesGestacional,
+  erge,
+  escorpionismo,
+  fracturaCadera,
+  graves,
+  hemorragiaPosparto,
+  ituLactante,
+  leptospirosis,
+  menopausia,
+  migrana,
+  mordeduraPerro,
+  neumotoraxEspontaneo,
+  ofidismo,
+  pancreatitis,
+  rinosinusitis,
+  scasest,
+  sindromeNefrotico,
+  tecAnticoagulado,
+  vihDebut,
+  vphHsil,
 ].sort((a, b) => a.level - b.level);
 
 export function getCase(id: string): ClinicalCase | undefined {
