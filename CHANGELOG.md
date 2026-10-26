@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.6.0 — 2026-10-26
+
+- Casos clínicos: 14 casos nuevos (28 en total).
+  - Básico: otitis media aguda, anemia ferropénica, diabetes tipo 2, crisis asmática.
+  - Intermedio: neumonía grave en adulta mayor, apendicitis, pielonefritis en el embarazo, exacerbación de EPOC.
+  - Avanzado: tuberculosis pulmonar, ACV isquémico en ventana, meningitis meningocócica en lactante, embarazo ectópico roto.
+  - Desafío: tromboembolismo pulmonar, intoxicación por monóxido de carbono.
+- Nuevas áreas para filtrar: Hematología, Cirugía y Toxicología.
+
 ## v0.5.0 — 2026-10-26
 
 - Nuevo: Casos clínicos (Estudiar). 14 casos de básico a desafío, de lactantes a adultez mayor, frecuentes y poco frecuentes según edad y sexo.

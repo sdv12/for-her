@@ -18,6 +18,9 @@ export type CaseArea =
   | "Neurología"
   | "Ginecología y obstetricia"
   | "Pediatría"
+  | "Hematología"
+  | "Cirugía"
+  | "Toxicología"
   | "Salud comunitaria";
 
 /**
