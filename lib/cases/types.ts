@@ -23,6 +23,8 @@ export type CaseArea =
   | "Toxicología"
   | "Traumatología"
   | "Salud mental"
+  | "Dermatología"
+  | "Reumatología"
   | "Salud comunitaria";
 
 /**

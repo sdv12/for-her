@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.8.0 — 2026-10-26
+
+- Casos clínicos: 14 casos nuevos (56 en total).
+  - Básico: neumonía en un niño de 4 años, vaginosis bacteriana, escabiosis familiar, herpes zóster.
+  - Intermedio: gota (podagra), hipotiroidismo por Hashimoto, retención aguda de orina por próstata, intoxicación alcohólica aguda, enfermedad pelviana inflamatoria, artritis reumatoidea temprana.
+  - Avanzado: intento de suicidio con benzodiacepinas en una adolescente, insuficiencia renal aguda prerrenal ("triple whammy") con hiperpotasemia.
+  - Desafío: politrauma en motociclista con neumotórax a tensión, lesiones no accidentales en un lactante.
+- Nuevas áreas: Dermatología y Reumatología.
+
 ## v0.7.0 — 2026-10-26
 
 - Casos clínicos: 14 casos nuevos (42 en total), elegidos por ser de los más frecuentes en las guardias argentinas, por edad y por sexo.

@@ -40,6 +40,20 @@ import { lumbalgia } from "./data/lumbalgia";
 import { panico } from "./data/panico";
 import { sifilisEmbarazo } from "./data/sifilis-embarazo";
 import { urgenciaHipertensiva } from "./data/urgencia-hipertensiva";
+import { artritisReumatoidea } from "./data/artritis-reumatoidea";
+import { epi } from "./data/epi";
+import { escabiosis } from "./data/escabiosis";
+import { gota } from "./data/gota";
+import { hipotiroidismo } from "./data/hipotiroidismo";
+import { intentoSuicidio } from "./data/intento-suicidio";
+import { intoxicacionAlcoholica } from "./data/intoxicacion-alcoholica";
+import { iraPrerrenal } from "./data/ira-prerrenal";
+import { maltratoInfantil } from "./data/maltrato-infantil";
+import { nacPediatrica } from "./data/nac-pediatrica";
+import { politrauma } from "./data/politrauma";
+import { retencionUrinaria } from "./data/retencion-urinaria";
+import { vaginosis } from "./data/vaginosis";
+import { zoster } from "./data/zoster";
 import type { ClinicalCase } from "./types";
 
 /** Todos los casos, ordenados por nivel. Para sumar un caso: crear su archivo en data/ y agregarlo acá. */
@@ -86,6 +100,20 @@ export const CASES: ClinicalCase[] = [
   panico,
   sifilisEmbarazo,
   urgenciaHipertensiva,
+  artritisReumatoidea,
+  epi,
+  escabiosis,
+  gota,
+  hipotiroidismo,
+  intentoSuicidio,
+  intoxicacionAlcoholica,
+  iraPrerrenal,
+  maltratoInfantil,
+  nacPediatrica,
+  politrauma,
+  retencionUrinaria,
+  vaginosis,
+  zoster,
 ].sort((a, b) => a.level - b.level);
 
 export function getCase(id: string): ClinicalCase | undefined {
