@@ -101,6 +101,7 @@ export function ageBand(p: ClinicalCase["patient"]): AgeBand {
 
 /** "Mujer de 24 años", "Varón de 7 meses", "Niña de 6 años". */
 export function patientLabel(p: ClinicalCase["patient"]): string {
+  if (p.ageUnit === "días") return `${p.sex === "F" ? "Recién nacida" : "Recién nacido"} de ${p.age} ${p.age === 1 ? "día" : "días"}`;
   const child = p.ageUnit !== "años" || p.age < 15;
   const noun = child ? (p.sex === "F" ? "Niña" : "Niño") : p.sex === "F" ? "Mujer" : "Varón";
   const lactante = p.ageUnit !== "años" || p.age < 2;

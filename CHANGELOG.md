@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.7.0 — 2026-10-26
+
+- Casos clínicos: 14 casos nuevos (42 en total), elegidos por ser de los más frecuentes en las guardias argentinas, por edad y por sexo.
+  - Básico: lumbalgia aguda mecánica, esguince de tobillo, laringitis (crup), convulsión febril simple.
+  - Intermedio: cólico renal, ictericia neonatal por lactancia insuficiente, colecistitis aguda, hipertensión severa sin daño de órgano blanco, celulitis de pierna, crisis de pánico.
+  - Avanzado: hemorragia digestiva alta por AINE, fibrilación auricular, sífilis en el embarazo.
+  - Desafío: hipoglucemia por glibenclamida que simula un ACV.
+- Nuevas áreas: Traumatología y Salud mental. Los recién nacidos se muestran como "Recién nacido/a de N días".
+
 ## v0.6.0 — 2026-10-26
 
 - Casos clínicos: 14 casos nuevos (28 en total).

@@ -87,6 +87,7 @@ describe("rangos y etiquetas", () => {
   it("paciente y franja etaria", () => {
     expect(patientLabel({ age: 7, ageUnit: "meses", sex: "M" })).toBe("Lactante varón de 7 meses");
     expect(patientLabel({ age: 1, ageUnit: "años", sex: "F" })).toBe("Lactante mujer de 1 año");
+    expect(patientLabel({ age: 3, ageUnit: "días", sex: "F" })).toBe("Recién nacida de 3 días");
     expect(patientLabel({ age: 6, ageUnit: "años", sex: "M" })).toBe("Niño de 6 años");
     expect(patientLabel({ age: 24, ageUnit: "años", sex: "F" })).toBe("Mujer de 24 años");
     expect(ageBand({ age: 78, ageUnit: "años", sex: "F" })).toBe("Adultez mayor");

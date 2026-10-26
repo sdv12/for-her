@@ -26,6 +26,20 @@ import { otitis } from "./data/otitis";
 import { pielonefritisEmbarazo } from "./data/pielonefritis-embarazo";
 import { tbc } from "./data/tbc";
 import { tep } from "./data/tep";
+import { celulitis } from "./data/celulitis";
+import { colecistitis } from "./data/colecistitis";
+import { colicoRenal } from "./data/colico-renal";
+import { convulsionFebril } from "./data/convulsion-febril";
+import { crup } from "./data/crup";
+import { esguince } from "./data/esguince";
+import { fibrilacionAuricular } from "./data/fibrilacion-auricular";
+import { hda } from "./data/hda";
+import { hipoglucemia } from "./data/hipoglucemia";
+import { ictericiaNeonatal } from "./data/ictericia-neonatal";
+import { lumbalgia } from "./data/lumbalgia";
+import { panico } from "./data/panico";
+import { sifilisEmbarazo } from "./data/sifilis-embarazo";
+import { urgenciaHipertensiva } from "./data/urgencia-hipertensiva";
 import type { ClinicalCase } from "./types";
 
 /** Todos los casos, ordenados por nivel. Para sumar un caso: crear su archivo en data/ y agregarlo acá. */
@@ -58,6 +72,20 @@ export const CASES: ClinicalCase[] = [
   pielonefritisEmbarazo,
   tbc,
   tep,
+  celulitis,
+  colecistitis,
+  colicoRenal,
+  convulsionFebril,
+  crup,
+  esguince,
+  fibrilacionAuricular,
+  hda,
+  hipoglucemia,
+  ictericiaNeonatal,
+  lumbalgia,
+  panico,
+  sifilisEmbarazo,
+  urgenciaHipertensiva,
 ].sort((a, b) => a.level - b.level);
 
 export function getCase(id: string): ClinicalCase | undefined {
