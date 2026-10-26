@@ -112,7 +112,7 @@ export type Simulation = Row & {
 export type Mistake = Row & {
   text: string;
   correction: string;
-  origin: "tarjeta" | "simulacro" | "tribunal" | "manual";
+  origin: "tarjeta" | "simulacro" | "tribunal" | "manual" | "caso";
   origin_ref: string | null;
   times: number;
   resolved_at: Timestamp | null;
@@ -135,6 +135,23 @@ export type FocusSession = Row & {
   completed: boolean;
 };
 
+/** Un caso clínico jugado (el contenido del caso es estático; acá queda el resultado). */
+export type CaseAttempt = Row & {
+  case_id: string;
+  dx_attempts: number;
+  /** Diagnósticos elegidos que no eran (para Errores y la devolución). */
+  wrong_dx: string[];
+  anamnesis: string[];
+  exam: string[];
+  studies: string[];
+  management: string[];
+  stars_dx: 1 | 2 | 3;
+  stars_studies: 1 | 2 | 3;
+  stars_management: 1 | 2 | 3;
+  xp: number;
+  minutes: number;
+};
+
 export type SyllabusTopic = Row & { subject_id: string; name: string; level: 0 | 1 | 2 | 3; sort: number };
 
 export type DB = {
@@ -154,4 +171,5 @@ export type DB = {
   study_logs: StudyLog[];
   focus_sessions: FocusSession[];
   syllabus_topics: SyllabusTopic[];
+  case_attempts: CaseAttempt[];
 };

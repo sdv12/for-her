@@ -108,6 +108,7 @@ export function startFresh() {
     study_logs: [],
     focus_sessions: [],
     syllabus_topics: [],
+    case_attempts: [],
   });
 }
 

@@ -243,5 +243,6 @@ export function buildSeed(now: Date = new Date()): DB {
     study_logs,
     focus_sessions: [],
     syllabus_topics,
+    case_attempts: [],
   };
 }

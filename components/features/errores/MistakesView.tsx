@@ -26,6 +26,7 @@ const ORIGINS: Array<[Origin, string]> = [
   ["tarjeta", "Tarjetas"],
   ["simulacro", "Simulacro"],
   ["tribunal", "Tribunal"],
+  ["caso", "Casos"],
   ["manual", "Anotados"],
 ];
 

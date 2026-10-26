@@ -8,6 +8,7 @@ import {
   NotebookPen,
   Settings,
   SquareKanban,
+  Stethoscope,
   Sunrise,
   Timer,
   type LucideIcon,
@@ -39,6 +40,7 @@ export const NAV: NavGroup[] = [
     label: "Estudiar",
     items: [
       { href: "/tarjetas", label: "Tarjetas", icon: Layers, badge: (b) => count(b.tarjetasHoy) },
+      { href: "/casos", label: "Casos clínicos", icon: Stethoscope },
       { href: "/simulacro", label: "Simulacro y tribunal", icon: Mic },
       { href: "/foco", label: "Foco", icon: Timer },
     ],
@@ -55,7 +57,7 @@ export const NAV: NavGroup[] = [
 
 /** Pantallas que en el celular se abren desde "Más" (tienen botón ← para volver). */
 export const MORE_ITEMS: NavItem[] = [
-  ...["/preguntas", "/registros", "/simulacro", "/errores", "/foco", "/temario"].map(
+  ...["/casos", "/preguntas", "/registros", "/simulacro", "/errores", "/foco", "/temario"].map(
     (href) => NAV.flatMap((g) => g.items).find((i) => i.href === href)!,
   ),
   { href: "/ajustes", label: "Ajustes", icon: Settings },

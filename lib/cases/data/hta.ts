@@ -1,0 +1,105 @@
+import { act, dx, mg, study } from "../build";
+import type { ClinicalCase } from "../types";
+
+export const hta: ClinicalCase = {
+  id: "hta-esencial",
+  level: 1,
+  area: "Cardiovascular",
+  setting: "Consultorio",
+  patient: { age: 52, ageUnit: "años", sex: "M", context: "Lo derivan del examen preocupacional." },
+  frequency: "muy-frecuente",
+  intro: "“En el examen del trabajo me dijeron que tenía la presión alta. Yo me siento bien.”",
+  vitals: { TA: "158/98 mmHg (dos tomas)", FC: "76 lpm", Peso: "96 kg (IMC 31)" },
+  anamnesis: [
+    act("familia", "¿Hay antecedentes de presión alta, infarto o ACV en la familia?", "clave", "“Mi papá tuvo un infarto a los 60 y era hipertenso.”", "El antecedente familiar de enfermedad cardiovascular precoz suma al riesgo cardiovascular global."),
+    act("tabaco", "¿Fuma? ¿Cuánto?", "clave", "“Diez cigarrillos por día desde los 20.”", "El tabaquismo es el factor de riesgo modificable de mayor impacto; dejar de fumar es parte del tratamiento."),
+    act("aines", "¿Toma algún medicamento, antiinflamatorios, descongestivos?", "clave", "“Ibuprofeno casi todos los días por la espalda.”", "Los AINEs retienen sodio y elevan la presión; también interfieren con los antihipertensivos. Hay que buscarlos siempre."),
+    act("sal", "¿Cómo es su alimentación? ¿Sal, alcohol?", "util", "“Como bastante salado, fiambres; dos o tres vasos de vino por día.”", "Sal y alcohol son causas modificables de hipertensión."),
+    act("ronquidos", "¿Ronca? ¿Se duerme durante el día?", "util", "“Ronco mucho, mi señora dice que dejo de respirar.”", "La apnea obstructiva del sueño es una causa frecuente de HTA secundaria y de HTA resistente."),
+    act("secundaria", "¿Palpitaciones, sudoración, debilidad muscular, calambres?", "util", "“No.”", "Busca pistas de HTA secundaria (feocromocitoma, hiperaldosteronismo). Su ausencia hace más probable la HTA esencial."),
+    act("actividad", "¿Hace actividad física?", "util", "“Nada, trabajo sentado.”", "El sedentarismo es un factor de riesgo y su corrección baja la presión."),
+    act("cefalea", "¿Le duele la cabeza?", "neutro", "“A veces a la mañana, en la nuca.”", "La cefalea es inespecífica: la HTA suele ser asintomática."),
+  ],
+  exam: [
+    act("tecnica", "Presión en ambos brazos con técnica correcta", "clave", "Sentado, después de 5 minutos, manguito adecuado: 160/100 en el brazo derecho y 156/98 en el izquierdo.", "El diagnóstico exige una técnica correcta; la diferencia entre brazos mayor de 15–20 mmHg haría pensar en enfermedad arterial."),
+    act("cintura", "Perímetro de cintura", "clave", "104 cm.", "Obesidad abdominal: componente del síndrome metabólico y marcador de riesgo."),
+    act("fondo", "Fondo de ojo", "util", "Estrechamiento arteriolar y cruces arteriovenosos, sin hemorragias, exudados ni edema de papila.", "Retinopatía hipertensiva leve. Hemorragias, exudados o edema de papila hablarían de una HTA grave o maligna."),
+    act("cardio", "Auscultación cardíaca", "util", "Cuarto ruido, sin soplos.", "El cuarto ruido refleja un ventrículo rígido, hipertrofiado: daño de órgano blanco."),
+    act("pulsos", "Pulsos periféricos y soplos abdominales", "util", "Pulsos simétricos y presentes; sin soplo abdominal.", "Descarta coartación de aorta (pulsos femorales débiles) y orienta en contra de estenosis de arteria renal (soplo abdominal)."),
+    act("tiroides", "Palpación de tiroides", "neutro", "Normal.", "Sin pistas de tiroidopatía."),
+  ],
+  studies: [
+    study("Otros", "mdpa", "Monitoreo de la presión fuera del consultorio (MAPA o MDPA)", "clave", "Promedio domiciliario: 148/94 mmHg.", "Confirma la hipertensión y descarta la de “guardapolvo blanco”. En el MDPA el umbral es 135/85."),
+    study("Laboratorio", "lab", "Glucemia, creatinina con filtrado, ionograma, ácido úrico y perfil lipídico", "clave", "Glucemia 108 mg/dl, creatinina 1,0 (FGe 85), K 4,2, colesterol total 236, LDL 158, HDL 38, triglicéridos 210.", "Es el laboratorio inicial de todo hipertenso: busca otros factores de riesgo y daño renal. Potasio normal: menos probable el hiperaldosteronismo."),
+    study("Laboratorio", "rac", "Orina completa y cociente albúmina/creatinina", "clave", "Albuminuria 45 mg/g.", "La albuminuria es daño de órgano blanco renal y marcador de riesgo cardiovascular."),
+    study("Electrofisiología", "ecg", "Electrocardiograma", "clave", "Ritmo sinusal, criterios de hipertrofia ventricular izquierda (Sokolow 38 mm).", "Hipertrofia ventricular izquierda: daño de órgano blanco cardíaco."),
+    study("Laboratorio", "hba1c", "Hemoglobina glicosilada", "util", "5,9 %.", "Con glucemia de 108 conviene evaluar prediabetes."),
+    study("Imágenes", "eco", "Ecocardiograma", "util", "Hipertrofia concéntrica del ventrículo izquierdo, FEVI conservada, disfunción diastólica leve.", "No es de rutina, pero confirma la hipertrofia sugerida por el ECG."),
+    study("Imágenes", "doppler", "Eco Doppler de arterias renales", "innecesario", "Sin estenosis.", "Se pide si hay sospecha de HTA renovascular (inicio brusco, HTA resistente, soplo abdominal, deterioro renal con IECA)."),
+    study("Laboratorio", "aldo", "Aldosterona y renina plasmáticas", "innecesario", "Normales.", "Se piden si hay hipopotasemia, HTA resistente o incidentaloma suprarrenal."),
+    study("Imágenes", "tc", "TC de cerebro", "innecesario", "Normal.", "Sin síntomas neurológicos no tiene indicación."),
+  ],
+  diagnosis: {
+    prompt: "¿Cuál es tu diagnóstico?",
+    options: [
+      dx("hta", "HTA esencial grado 1 con daño de órgano blanco (HVI, albuminuria): riesgo cardiovascular alto", true, "Presión confirmada fuera del consultorio, sin pistas de causa secundaria, con hipertrofia ventricular y albuminuria, más tabaco, dislipemia, obesidad y antecedente familiar."),
+      dx("guardapolvo", "Hipertensión de guardapolvo blanco", false, "El monitoreo domiciliario confirmó valores elevados fuera del consultorio."),
+      dx("aldo", "HTA secundaria a hiperaldosteronismo primario", false, "Se sospecha con hipopotasemia o HTA resistente; acá el potasio es normal."),
+      dx("urgencia", "Urgencia hipertensiva", false, "Se habla de urgencia con presión ≥ 180/110; sin daño agudo de órgano blanco se maneja igual por vía oral y sin apuro."),
+      dx("feo", "Feocromocitoma", false, "Daría crisis con cefalea, sudoración y palpitaciones."),
+    ],
+  },
+  management: {
+    prompt: "¿Qué indicás?",
+    options: [
+      mg("estilo", "Cambios de estilo de vida: sal < 5 g/día, dieta DASH, bajar de peso, 150 min de actividad por semana, dejar de fumar, reducir alcohol", "clave", "Bajan la presión y el riesgo cardiovascular; acompañan siempre al tratamiento."),
+      mg("aines", "Suspender el ibuprofeno (paracetamol o medidas para la lumbalgia)", "clave", "Elimina un factor que sube la presión y antagoniza los antihipertensivos."),
+      mg("farmaco", "Iniciar tratamiento farmacológico ya: IECA o ARA II combinado con amlodipina o tiazida, idealmente en un comprimido", "clave", "Con riesgo alto y daño de órgano blanco no se espera: la combinación en dosis baja controla mejor y mejora la adherencia."),
+      mg("objetivo", "Control en 4 semanas con objetivo < 130/80 si se tolera", "clave", "El seguimiento y la titulación son parte del tratamiento."),
+      mg("estatina", "Estatina por riesgo cardiovascular alto", "util", "Con LDL 158 y riesgo alto corresponde tratamiento hipolipemiante."),
+      mg("atenolol", "Atenolol como primera línea", "innecesario", "Los betabloqueantes no son de primera elección sin una indicación específica (cardiopatía isquémica, IC, arritmia)."),
+      mg("sublingual", "Bajar la presión en el consultorio con nifedipina o captopril sublingual", "riesgoso", "No es una emergencia; la nifedipina sublingual puede provocar hipotensión brusca e isquemia. Nunca se usa."),
+      mg("derivar", "Derivar a cardiología antes de empezar", "innecesario", "La HTA esencial se maneja en el primer nivel."),
+    ],
+  },
+  debrief: {
+    diagnosis: "HTA esencial grado 1 con daño de órgano blanco (hipertrofia ventricular izquierda y albuminuria), riesgo cardiovascular alto.",
+    pathologies: [
+      { name: "Hipertensión arterial esencial", role: "principal", why: "Presión elevada confirmada fuera del consultorio, sin causa secundaria evidente." },
+      { name: "Hipertrofia ventricular izquierda", role: "asociada", why: "Daño de órgano blanco cardíaco por sobrecarga de presión." },
+      { name: "Síndrome metabólico y dislipemia", role: "asociada", why: "Obesidad abdominal, triglicéridos altos, HDL bajo, glucemia en el límite." },
+      { name: "Apnea obstructiva del sueño", role: "diferencial", why: "Causa secundaria a sospechar por los ronquidos y apneas presenciadas." },
+      { name: "Hiperaldosteronismo, feocromocitoma, enfermedad renovascular", role: "diferencial", why: "Causas secundarias que se buscan ante pistas específicas." },
+    ],
+    reasoning: [
+      "Causa: multifactorial (genética, exceso de sal, obesidad, sedentarismo, alcohol; acá también AINEs).",
+      "Mecanismo: aumento de la resistencia periférica con activación del sistema renina-angiotensina-aldosterona y del simpático, retención de sodio y rigidez arterial.",
+      "Consecuencia: la poscarga elevada hipertrofia el ventrículo izquierdo (hipertrofia concéntrica → rigidez → cuarto ruido → disfunción diastólica, riesgo de FA e IC); en el riñón, la hiperfiltración y la nefroangioesclerosis dan albuminuria; la aterosclerosis acelerada lleva a infarto y ACV.",
+      "Por eso se trata el riesgo global (tabaco, lípidos, peso) y no solo el número de la presión.",
+    ],
+    epidemiology:
+      "Es la enfermedad crónica más frecuente del adulto. En la última Encuesta Nacional de Factores de Riesgo, casi la mitad de los adultos a los que se les midió la presión tenía valores elevados, y una parte importante no lo sabía. Es más frecuente en varones hasta los 50–60 años; después se iguala o predomina en mujeres. Aumenta con la edad, la obesidad y el consumo de sal.",
+    management: [
+      "Confirmar el diagnóstico fuera del consultorio (MDPA o MAPA) con técnica correcta.",
+      "Evaluación inicial: laboratorio, orina con albuminuria y ECG; estimar el riesgo cardiovascular global.",
+      "Cambios de estilo de vida en todos los casos.",
+      "Tratamiento farmacológico: en la mayoría, iniciar con combinación de IECA o ARA II con calcioantagonista o diurético tiazídico, preferentemente en un solo comprimido; titular hasta el objetivo.",
+      "Tratar los otros factores de riesgo (estatina, cesación tabáquica) y seguir cada 4 semanas hasta controlar.",
+    ],
+    sources: [
+      "Consenso Argentino de Hipertensión Arterial (Sociedad Argentina de Cardiología, Federación Argentina de Cardiología y Sociedad Argentina de Hipertensión Arterial).",
+      "Ministerio de Salud de la Nación — Encuesta Nacional de Factores de Riesgo.",
+      "Ministerio de Salud de la Nación — Abordaje integral de personas con enfermedades crónicas no transmisibles (estratificación de riesgo cardiovascular).",
+    ],
+    pearls: [
+      "La HTA no se diagnostica con una sola toma: se confirma con técnica correcta y fuera del consultorio.",
+      "Daño de órgano blanco a buscar: corazón (HVI), riñón (albuminuria, filtrado), retina, cerebro y arterias.",
+      "Nunca nifedipina sublingual.",
+    ],
+    pitfalls: [
+      "No preguntar por AINEs, descongestivos o anticonceptivos.",
+      "Iniciar con betabloqueante sin indicación.",
+      "Tratar el número y olvidar el riesgo global (tabaco, lípidos).",
+    ],
+  },
+};

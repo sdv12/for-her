@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.5.0 — 2026-10-26
+
+- Nuevo: Casos clínicos (Estudiar). 14 casos de básico a desafío, de lactantes a adultez mayor, frecuentes y poco frecuentes según edad y sexo.
+  - Se juegan por etapas: interrogatorio en forma de conversación, examen físico, estudios con resultado, diagnóstico (con reintento y el porqué) y conducta.
+  - Ficha del paciente que se completa con lo que vas descubriendo.
+  - Resolución completa: patologías en juego (diagnóstico, diferenciales y asociadas), causa → mecanismo → clínica, epidemiología, tu recorrido, conducta según normativas argentinas, perlas, errores frecuentes y fuentes.
+  - Estrellas por diagnóstico, estudios y conducta; experiencia y rangos (de Estudiante a De guardia con el tribunal).
+  - Filtros por nivel, edad, sexo, área y estado; caso al azar priorizando los que no jugaste.
+  - El diagnóstico errado va a Errores, los minutos a Registros y el caso se puede pasar a tarjeta.
+
 ## v0.4.0 — 2026-10-12
 
 - Importar cronograma: ahora lee el formato "una fila por semana" (Sem · Fechas · Fase · Tema principal · Subtemas · Tip del tribunal · Prioridad) con su tabla resumen de fases y la sección de preguntas por semana.

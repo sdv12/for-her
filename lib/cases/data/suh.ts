@@ -1,0 +1,106 @@
+import { act, dx, mg, study } from "../build";
+import type { ClinicalCase } from "../types";
+
+export const suh: ClinicalCase = {
+  id: "sindrome-uremico-hemolitico",
+  level: 3,
+  area: "Pediatría",
+  setting: "Guardia",
+  patient: { age: 3, ageUnit: "años", sex: "M", context: "Febrero. Lo traen los padres." },
+  frequency: "poco-frecuente",
+  intro: "“Hace casi una semana tuvo diarrea con sangre, que ya se le pasó. Desde ayer está muy pálido, decaído y casi no hizo pis.”",
+  vitals: { TA: "125/80 mmHg (alta para la edad)", FC: "130 lpm", FR: "28 rpm", "T°": "37 °C", Peso: "14 kg" },
+  anamnesis: [
+    act("diarrea", "¿Cómo fue la diarrea? ¿Tenía sangre?", "clave", "“Empezó hace 6 días, con dolor de panza; al segundo día tenía sangre. Ya no tiene.”", "La diarrea con sangre que precede en días a la palidez y la oliguria es el antecedente típico del SUH por E. coli productora de toxina Shiga."),
+    act("diuresis", "¿Cuánto orinó en las últimas 24 horas?", "clave", "“Un pañal casi seco.”", "Oliguria: insuficiencia renal aguda."),
+    act("alimentos", "¿Qué comió en los días previos a la diarrea?", "clave", "“Hamburguesas en un cumpleaños, hace unos diez días.”", "La carne picada mal cocida es la fuente clásica de E. coli O157:H7; también lácteos sin pasteurizar, agua y contacto persona a persona."),
+    act("petequias", "¿Le aparecieron manchitas o moretones?", "clave", "“Unos puntitos rojos en las piernas.”", "Petequias por plaquetopenia."),
+    act("medicacion", "¿Le dieron algún remedio para la diarrea?", "util", "“Le dimos loperamida un par de días.”", "Los antidiarreicos (antimotilidad) se asocian a mayor riesgo de SUH."),
+    act("contactos", "¿Alguien más tuvo diarrea?", "util", "“Un primo que estuvo en el mismo cumpleaños.”", "Posible brote: es un evento de notificación obligatoria y hay que estudiar a los contactos."),
+    act("neuro", "¿Está irritable? ¿Tuvo convulsiones?", "util", "“Está muy irritable, no convulsionó.”", "El compromiso neurológico es la complicación extrarrenal más grave."),
+  ],
+  exam: [
+    act("palidez", "Coloración de piel y mucosas", "clave", "Palidez cutáneo-mucosa marcada, leve tinte subictérico.", "Anemia por hemólisis."),
+    act("petequias", "Examen de piel", "clave", "Petequias en miembros inferiores.", "Plaquetopenia por consumo."),
+    act("volemia", "Estado de hidratación y edemas", "clave", "Mucosas húmedas, edema palpebral leve.", "Ya no está deshidratado: con oliguria, el riesgo ahora es la sobrecarga de volumen. Cambia el manejo de los líquidos."),
+    act("pulmon", "Auscultación pulmonar", "util", "Rales finos bibasales.", "Sobrecarga de volumen incipiente."),
+    act("neuro", "Examen neurológico", "util", "Irritable, sin foco, pupilas normales.", "Valor basal para detectar compromiso neurológico."),
+    act("abdomen", "Examen abdominal", "neutro", "Blando, levemente doloroso en forma difusa.", "Inespecífico."),
+  ],
+  studies: [
+    study("Laboratorio", "hemograma", "Hemograma con frotis", "clave", "Hb 6,8 g/dl, plaquetas 45.000, esquistocitos abundantes.", "Anemia hemolítica microangiopática (glóbulos rojos fragmentados) + plaquetopenia."),
+    study("Laboratorio", "renal", "Urea y creatinina", "clave", "Urea 180 mg/dl, creatinina 3,2 mg/dl.", "Insuficiencia renal aguda."),
+    study("Laboratorio", "iono", "Ionograma", "clave", "Na 130, K 6,1.", "Hiperpotasemia por insuficiencia renal y hemólisis: riesgo de arritmia."),
+    study("Laboratorio", "hemolisis", "LDH, bilirrubina y haptoglobina", "clave", "LDH 2.100, bilirrubina indirecta 2,4, haptoglobina indetectable.", "Confirman hemólisis intravascular."),
+    study("Laboratorio", "coombs", "Prueba de Coombs directa", "clave", "Negativa.", "Hemólisis no inmune: apoya la causa microangiopática."),
+    study("Laboratorio", "coagulograma", "Coagulograma", "util", "Normal.", "Diferencia el SUH de la coagulación intravascular diseminada (en la CID está alterado)."),
+    study("Laboratorio", "orina", "Orina completa", "util", "Hematuria y proteinuria.", "Daño glomerular."),
+    study("Microbiología", "stec", "Coprocultivo y detección de toxina Shiga (stx)", "util", "E. coli O157, gen stx2 positivo.", "Confirma la etiología y es clave para la vigilancia epidemiológica; no cambia el tratamiento inmediato."),
+    study("Microbiología", "hemocultivos", "Hemocultivos", "innecesario", "Sin desarrollo.", "Sin sospecha de sepsis no aportan."),
+    study("Imágenes", "tc", "TC de abdomen", "innecesario", "No se realiza.", "No aporta y expone a radiación y a contraste en un riñón dañado."),
+  ],
+  diagnosis: {
+    prompt: "¿Cuál es tu diagnóstico?",
+    options: [
+      dx("suh", "Síndrome urémico hemolítico típico (post-diarreico, E. coli productora de toxina Shiga) con insuficiencia renal aguda oligúrica", true, "Tríada de anemia hemolítica microangiopática (esquistocitos, Coombs negativa), plaquetopenia e insuficiencia renal aguda, después de una diarrea con sangre, en un menor de 5 años."),
+      dx("ptt", "Púrpura trombótica trombocitopénica", false, "Más frecuente en adultos, con predominio neurológico, fiebre y déficit de ADAMTS13."),
+      dx("cid", "Coagulación intravascular diseminada por sepsis", false, "El coagulograma estaría alterado (TP y KPTT prolongados, fibrinógeno bajo)."),
+      dx("gnpe", "Glomerulonefritis postestreptocócica", false, "Da hematuria, edemas e HTA, pero no anemia hemolítica ni plaquetopenia."),
+      dx("prerrenal", "Insuficiencia renal prerrenal por deshidratación", false, "No explica la hemólisis ni la plaquetopenia; además el niño ya no está deshidratado."),
+    ],
+  },
+  management: {
+    prompt: "¿Qué hacés?",
+    options: [
+      mg("internar", "Internación en un centro con nefrología pediátrica y diálisis; notificación inmediata al Sistema Nacional de Vigilancia", "clave", "Puede requerir diálisis en horas. La notificación permite estudiar el brote y los contactos."),
+      mg("balance", "Balance hídrico estricto: aportar pérdidas insensibles más la diuresis", "clave", "Con oliguria, el exceso de líquido lleva a edema pulmonar, HTA y convulsiones."),
+      mg("potasio", "Tratar la hiperpotasemia (gluconato de calcio si hay cambios en el ECG, insulina con glucosa, salbutamol, resinas)", "clave", "La hiperpotasemia puede provocar arritmias fatales."),
+      mg("dialisis", "Diálisis (peritoneal en pediatría) si hay anuria prolongada, sobrecarga o potasio o urea que no se controlan", "clave", "Es el tratamiento de sostén de la falla renal."),
+      mg("transfusion", "Transfusión de glóbulos rojos si la Hb cae por debajo de 6–7 g/dl o hay inestabilidad, lenta", "util", "Corrige la anemia sin sobrecargar de volumen."),
+      mg("atb", "Antibióticos", "riesgoso", "No están recomendados en la infección por E. coli productora de toxina Shiga: podrían aumentar la liberación de toxina."),
+      mg("plaquetas", "Transfundir plaquetas por el recuento", "riesgoso", "Puede empeorar la microangiopatía; solo ante sangrado activo o un procedimiento invasivo."),
+      mg("antidiarreicos", "Antidiarreicos o antiespasmódicos", "riesgoso", "Prolongan la exposición a la toxina."),
+      mg("plasmaferesis", "Plasmaféresis", "innecesario", "No está indicada en el SUH típico (sí en la PTT y en algunas formas atípicas)."),
+    ],
+  },
+  debrief: {
+    diagnosis: "Síndrome urémico hemolítico típico por E. coli productora de toxina Shiga, con insuficiencia renal aguda oligúrica e hiperpotasemia.",
+    pathologies: [
+      { name: "Síndrome urémico hemolítico", role: "principal", why: "Microangiopatía trombótica por toxina Shiga." },
+      { name: "Insuficiencia renal aguda", role: "asociada", why: "Daño del endotelio glomerular." },
+      { name: "Hiperpotasemia y sobrecarga de volumen", role: "asociada", why: "Complicaciones de la falla renal que pueden matar." },
+      { name: "Púrpura trombótica trombocitopénica", role: "diferencial", why: "La otra microangiopatía trombótica, típica del adulto." },
+      { name: "Coagulación intravascular diseminada", role: "diferencial", why: "Plaquetopenia con coagulograma alterado." },
+    ],
+    reasoning: [
+      "Causa: E. coli productora de toxina Shiga (O157:H7 y otros serotipos), adquirida por carne picada mal cocida, lácteos sin pasteurizar, agua, verduras contaminadas o de persona a persona.",
+      "Mecanismo: la toxina se absorbe en el intestino, pasa a la sangre y se une al receptor Gb3 del endotelio, abundante en el glomérulo y el cerebro. Su subunidad A inhibe la síntesis proteica (actúa sobre el ARN ribosomal 28S) → daño endotelial → microtrombos de plaquetas y fibrina.",
+      "Consecuencia: los glóbulos rojos se fragmentan al pasar por los capilares dañados (esquistocitos, hemólisis con Coombs negativa); las plaquetas se consumen; la isquemia glomerular produce insuficiencia renal aguda. El cerebro puede afectarse (convulsiones, coma).",
+      "Por eso el tratamiento es de sostén (líquidos, electrolitos, diálisis, transfusión) y no se usan antibióticos ni antidiarreicos.",
+    ],
+    epidemiology:
+      "Argentina tiene la incidencia de SUH más alta del mundo, con cientos de casos por año, sobre todo en menores de 5 años y en los meses cálidos. Es la primera causa de insuficiencia renal aguda en la infancia y una causa importante de enfermedad renal crónica y trasplante renal en niños.",
+    management: [
+      "Sospechar ante palidez, oliguria o petequias después de una diarrea, sobre todo con sangre: pedir hemograma con frotis, función renal y orina.",
+      "Internación con acceso a diálisis y notificación inmediata (es un evento de notificación obligatoria).",
+      "Tratamiento de sostén: balance hídrico estricto, corrección de la hiperpotasemia y la acidosis, control de la HTA, transfusión de glóbulos rojos si hace falta, diálisis cuando está indicada.",
+      "No antibióticos, no antidiarreicos, no plaquetas salvo sangrado.",
+      "Prevención: cocinar bien la carne picada (sin partes rosadas), separar crudos y cocidos, lavarse las manos, consumir lácteos pasteurizados y agua segura.",
+    ],
+    sources: [
+      "Ministerio de Salud de la Nación — Síndrome urémico hemolítico: guía y vigilancia epidemiológica.",
+      "Sociedad Argentina de Pediatría — Consenso sobre síndrome urémico hemolítico (Comité de Nefrología).",
+      "Ley 15.465 — Régimen de notificaciones médicas obligatorias.",
+    ],
+    pearls: [
+      "Tríada: anemia hemolítica microangiopática + plaquetopenia + insuficiencia renal aguda.",
+      "Coombs negativa y esquistocitos: hemólisis mecánica.",
+      "Argentina: incidencia más alta del mundo; la prevención empieza en la cocina.",
+    ],
+    pitfalls: [
+      "Indicar antibióticos o antidiarreicos en la diarrea con sangre del niño.",
+      "Seguir hidratando a un niño que ya está en oliguria.",
+      "Transfundir plaquetas por el número.",
+    ],
+  },
+};

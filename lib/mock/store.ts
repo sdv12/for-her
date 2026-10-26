@@ -29,7 +29,8 @@ function load(): DB {
   try {
     const raw = localStorage.getItem(KEY);
     const parsed = raw ? (JSON.parse(raw) as DB) : null;
-    if (parsed?.version === 1) cache = parsed;
+    // Tablas agregadas después de la v1 del formato: se completan vacías para no perder datos guardados.
+    if (parsed?.version === 1) cache = { ...parsed, case_attempts: parsed.case_attempts ?? [] };
   } catch {
     cache = null;
   }

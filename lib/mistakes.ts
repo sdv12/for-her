@@ -5,6 +5,7 @@ export const ORIGIN_LABEL: Record<Mistake["origin"], string> = {
   simulacro: "Simulacro",
   tribunal: "Tribunal",
   manual: "Anotado a mano",
+  caso: "Caso clínico",
 };
 
 /** "No recordé: X" / "Flojo en: X" → "X" (para usar como frente de una tarjeta). */
