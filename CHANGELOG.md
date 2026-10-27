@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.12.0 — 2026-10-27
+
+- Casos clínicos: 14 casos nuevos (98 en total), elegidos entre los más tomados en el examen y los más frecuentes en guardia y por especialidad. Todos traen sus preguntas del tribunal.
+  - Básico: vértigo posicional paroxístico benigno, síncope vasovagal, Chagas congénito.
+  - Intermedio: quemadura por escaldadura en una niña, hepatitis B aguda, cáncer de mama, endometriosis, glomerulonefritis posestreptocócica, diverticulitis aguda.
+  - Avanzado: intoxicación por organofosforados, estado de mal epiléptico, hidatidosis hepática, cáncer colorrectal.
+  - Desafío: síndrome cardiopulmonar por hantavirus.
+- Nueva área: Oncología.
+
 ## v0.11.0 — 2026-10-27
 
 - Casos clínicos con más contenido (los 84):

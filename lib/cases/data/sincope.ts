@@ -1,0 +1,95 @@
+import { act, dx, mg, qa, study } from "../build";
+import type { ClinicalCase } from "../types";
+
+export const sincope: ClinicalCase = {
+  id: "sincope-vasovagal",
+  level: 1,
+  area: "Cardiovascular",
+  setting: "Guardia",
+  patient: { age: 17, ageUnit: "años", sex: "F", context: "La trae la preceptora desde el acto escolar. Diciembre, mucho calor." },
+  frequency: "muy-frecuente",
+  intro: "“Estábamos paradas en el patio, al sol, hacía como media hora. Me empecé a sentir rara, con calor y náuseas, se me nubló la vista y me desperté en el piso.”",
+  vitals: { TA: "104/64 mmHg", FC: "72 lpm", FR: "16 rpm", "T°": "36,6 °C", "SatO₂": "99 %", Glucemia: "92 mg/dl" },
+  anamnesis: [
+    act("prodromo", "¿Sintió algo antes de desmayarse?", "clave", "“Calor, náuseas, transpiración y se me oscureció la vista.”", "Los pródromos autonómicos son típicos del síncope vasovagal (reflejo)."),
+    act("situacion", "¿Qué estaba haciendo? ¿Fue con esfuerzo o en reposo?", "clave", "“Parada al sol mucho tiempo. No estaba haciendo ejercicio.”", "Bipedestación prolongada y calor: desencadenante clásico. El síncope durante el esfuerzo es de alarma (causa cardíaca)."),
+    act("palpitaciones", "¿Tuvo palpitaciones antes o dolor de pecho?", "clave", "“No.”", "Palpitaciones previas orientan a arritmia."),
+    act("recuperacion", "¿Cómo se recuperó? ¿Estuvo confundida después?", "clave", "“Me desperté enseguida y sabía dónde estaba, con un poco de cansancio.”", "La recuperación rápida y completa es típica del síncope; la confusión prolongada orienta a convulsión."),
+    act("familia", "¿Alguien en su familia murió de forma súbita joven o tiene enfermedades del corazón?", "clave", "“No.”", "La muerte súbita familiar orienta a canalopatías (QT largo, Brugada) o miocardiopatía hipertrófica."),
+    act("movimientos", "¿Le contaron si se movió o se mordió la lengua?", "util", "“Dicen que movió un poco los brazos unos segundos. No me mordí.”", "Las sacudidas breves pueden ocurrir en el síncope; la mordedura lateral de la lengua y la confusión prolongada orientan a crisis epiléptica."),
+    act("previos", "¿Le pasó antes?", "util", "“Una vez, en un análisis de sangre.”", "Episodios previos con desencadenantes típicos apoyan un mecanismo reflejo."),
+    act("comida", "¿Desayunó? ¿Tomó líquido?", "util", "“No desayuné y casi no tomé agua.”", "El ayuno y la deshidratación favorecen el síncope."),
+    act("menstruacion", "¿Puede estar embarazada? ¿Cuándo fue su última menstruación?", "util", "“Hace dos semanas. No tengo relaciones.”", "Descarta embarazo (y ectópico) como causa."),
+    act("farmacos", "¿Toma alguna medicación o consumió algo?", "util", "“No.”", "Algunos fármacos prolongan el QT o bajan la presión."),
+    act("musica", "¿Qué música escucha?", "neutro", "“Pop.”", "No orienta."),
+  ],
+  exam: [
+    act("cardio", "Auscultación cardíaca (en reposo y con maniobras)", "clave", "Ruidos normales, sin soplos.", "Un soplo que aumenta con el Valsalva sugeriría miocardiopatía hipertrófica."),
+    act("ortostatismo", "Presión y frecuencia acostada y de pie", "clave", "Acostada 108/66, FC 70; de pie 104/64, FC 82.", "Sin hipotensión ortostática ni taquicardia postural marcada."),
+    act("neuro", "Examen neurológico", "util", "Normal.", "Un déficit focal orientaría a otra causa."),
+    act("lengua", "Inspección de la lengua", "util", "Sin mordedura.", "La mordedura lateral orienta a convulsión."),
+    act("lesiones", "Buscar lesiones por la caída", "util", "Leve escoriación en el codo.", "Importa en caídas desde la propia altura."),
+  ],
+  studies: [
+    study("Electrofisiología", "ecg", "Electrocardiograma de 12 derivaciones", "clave", "Ritmo sinusal, PR y QRS normales, QTc 410 ms, sin onda delta, sin patrón de Brugada ni hipertrofia.", "Es el estudio obligatorio en todo síncope: descarta QT largo, preexcitación, Brugada, bloqueos y miocardiopatía hipertrófica."),
+    study("Laboratorio", "beta", "Test de embarazo", "util", "Negativo.", "En mujeres en edad fértil con síncope."),
+    study("Imágenes", "tc", "Tomografía de cerebro", "innecesario", "No se realizó.", "Sin traumatismo grave ni signos neurológicos no aporta."),
+    study("Electrofisiología", "eeg", "Electroencefalograma", "innecesario", "No se realizó.", "No se pide en un síncope típico."),
+    study("Electrofisiología", "holter", "Holter de 24 horas", "innecesario", "No se realizó.", "Se reserva para síncopes con sospecha de arritmia."),
+    study("Imágenes", "eco", "Ecocardiograma", "innecesario", "No se realizó.", "Solo con soplo, ECG anormal o sospecha de cardiopatía."),
+  ],
+  diagnosis: {
+    prompt: "¿Cuál es tu diagnóstico?",
+    options: [
+      dx("vasovagal", "Síncope vasovagal (reflejo) típico", true, "Bipedestación prolongada con calor y ayuno, pródromos autonómicos, recuperación rápida, ECG y examen normales, sin señales de alarma."),
+      dx("arritmia", "Síncope por arritmia (QT largo)", false, "Sería sin pródromo o con palpitaciones, durante el esfuerzo o con estímulos auditivos, con QTc prolongado o antecedentes familiares."),
+      dx("convulsion", "Crisis epiléptica", false, "Daría confusión posictal prolongada, mordedura lateral de lengua y movimientos más prolongados; las sacudidas breves pueden verse en el síncope."),
+      dx("hipoglucemia", "Hipoglucemia", false, "La glucemia es normal y la recuperación fue espontánea."),
+      dx("psicogeno", "Pseudosíncope psicógeno", false, "Episodios frecuentes, prolongados, con ojos cerrados y sin cambios hemodinámicos; es un diagnóstico de exclusión."),
+    ],
+  },
+  management: {
+    prompt: "¿Qué indicás?",
+    options: [
+      mg("explicar", "Explicar que es benigno y cómo reconocer los pródromos", "clave", "Tranquiliza y previene: al sentirlo, sentarse o acostarse."),
+      mg("contrapresion", "Enseñar maniobras de contrapresión (cruzar piernas, apretar manos) y acostarse con las piernas elevadas ante los síntomas", "clave", "Abortan o atenúan el episodio."),
+      mg("liquidos", "Hidratación abundante, no saltear comidas, evitar bipedestación prolongada y calor", "clave", "Reducen las recurrencias."),
+      mg("alarma", "Pautas para volver: síncope con esfuerzo, sin aviso, con palpitaciones o dolor de pecho", "util", "Detectan una causa cardíaca."),
+      mg("parar", "Si se vuelve a desmayar, sentarla o pararla de inmediato para que reaccione", "riesgoso", "Mantenerla erguida prolonga la hipoperfusión cerebral: hay que acostarla con las piernas elevadas."),
+      mg("betabloqueante", "Betabloqueante para prevenir nuevos episodios", "innecesario", "No demostró beneficio en el síncope vasovagal."),
+    ],
+  },
+  debrief: {
+    diagnosis: "Síncope vasovagal típico en adolescente de 17 años, desencadenado por bipedestación prolongada, calor y ayuno, con ECG normal.",
+    pathologies: [
+      { name: "Síncope vasovagal", role: "principal", why: "Síncope reflejo con desencadenante y pródromos típicos." },
+      { name: "Síncope cardíaco (arritmias, miocardiopatía hipertrófica)", role: "diferencial", why: "El que puede matar: se busca con la historia y el ECG." },
+      { name: "Crisis epiléptica", role: "diferencial", why: "Pérdida de conciencia con movimientos." },
+      { name: "Hipoglucemia y embarazo", role: "diferencial", why: "Causas a descartar en la guardia." },
+    ],
+    reasoning: [
+      "Causa: bipedestación prolongada con calor y ayuno.",
+      "Mecanismo: la sangre se acumula en las piernas y cae el retorno venoso; el ventrículo se contrae con fuerza sobre poco volumen, se activan mecanorreceptores y se dispara un reflejo paradójico (Bezold-Jarisch): aumenta el tono vagal (bradicardia) y cae el tono simpático (vasodilatación).",
+      "Consecuencia: hipotensión y bradicardia → hipoperfusión cerebral global breve → pérdida de conciencia. Al caer al piso, el retorno venoso mejora y la persona se recupera en segundos.",
+      "Por eso se acuesta al paciente con las piernas elevadas, nunca se lo sostiene de pie.",
+    ],
+    epidemiology:
+      "El síncope es una consulta muy frecuente en guardia y el vasovagal es la causa más común en todas las edades, con un pico en la adolescencia y en mujeres jóvenes. Hasta un 40 % de las personas tendrá un síncope en la vida. Las causas cardíacas son más frecuentes en mayores y en pacientes con cardiopatía, y conllevan riesgo de muerte súbita.",
+    management: [
+      "Confirmar que fue un síncope (pérdida de conciencia transitoria con recuperación espontánea).",
+      "Historia detallada, examen con ortostatismo y ECG en todos.",
+      "Buscar señales de alarma: síncope de esfuerzo o en decúbito, sin pródromo, palpitaciones, cardiopatía, ECG anormal, muerte súbita familiar.",
+      "Síncope reflejo sin alarma: educación, hidratación, maniobras de contrapresión, alta.",
+      "Con alarma: internación o estudio cardiológico (ecocardiograma, Holter, ergometría, estudio electrofisiológico).",
+    ],
+    sources: ["Sociedad Argentina de Cardiología — Consenso de síncope.", "Sociedad Argentina de Pediatría — Recomendaciones sobre síncope en pediatría."],
+    pearls: ["Todo síncope lleva ECG.", "Síncope durante el ejercicio = cardíaco hasta demostrar lo contrario.", "Ante el pródromo: acostarse y elevar las piernas."],
+    pitfalls: ["Pedir tomografía y EEG de rutina.", "No hacer ECG.", "Confundir las sacudidas breves del síncope con una epilepsia."],
+    tribunal: [
+      qa("¿Cómo se clasifica el síncope?", "Reflejo o neuromediado (vasovagal, situacional, del seno carotídeo), por hipotensión ortostática (fármacos, hipovolemia, disautonomía) y cardíaco (arritmias o cardiopatía estructural)."),
+      qa("¿Qué hallazgos del ECG te preocupan en un síncope?", "QT largo o corto, preexcitación (onda delta, Wolff-Parkinson-White), patrón de Brugada, bloqueos AV de alto grado o bloqueo bifascicular, bradicardia sinusal marcada, hipertrofia ventricular y ondas Q o signos de isquemia."),
+      qa("¿Cómo diferenciás síncope de convulsión?", "En el síncope hay pródromo autonómico, palidez, pérdida de conciencia breve, sacudidas cortas y recuperación rápida. En la convulsión puede haber aura, cianosis, movimientos tónico-clónicos prolongados, mordedura lateral de lengua, incontinencia y confusión posictal."),
+      qa("¿Qué es la hipotensión ortostática?", "Una caída de la presión sistólica de 20 mmHg o más (o diastólica de 10) dentro de los 3 minutos de pararse. Causas: hipovolemia, fármacos (antihipertensivos, diuréticos), disautonomía (diabetes, Parkinson) y edad avanzada."),
+    ],
+  },
+};

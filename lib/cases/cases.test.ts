@@ -146,7 +146,7 @@ describe("contenido extra", () => {
         expect(t.q.length, c.id).toBeGreaterThan(10);
         expect(t.a.length, c.id).toBeGreaterThan(20);
       }
-      if (EXTRAS[c.id]?.tribunal) expect(c.debrief.tribunal!.length).toBeGreaterThanOrEqual(3);
+      expect(c.debrief.tribunal?.length ?? 0, `${c.id} sin preguntas del tribunal`).toBeGreaterThanOrEqual(3);
     }
   });
 });

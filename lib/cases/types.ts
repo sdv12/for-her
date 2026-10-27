@@ -27,6 +27,7 @@ export type CaseArea =
   | "Reumatología"
   | "Oftalmología"
   | "Alergia e inmunología"
+  | "Oncología"
   | "Salud comunitaria";
 
 /**

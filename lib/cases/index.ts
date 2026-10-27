@@ -82,6 +82,20 @@ import { sindromeNefrotico } from "./data/sindrome-nefrotico";
 import { tecAnticoagulado } from "./data/tec-anticoagulado";
 import { vihDebut } from "./data/vih-debut";
 import { vphHsil } from "./data/vph-hsil";
+import { cancerColorrectal } from "./data/cancer-colorrectal";
+import { cancerMama } from "./data/cancer-mama";
+import { chagasCongenito } from "./data/chagas-congenito";
+import { diverticulitis } from "./data/diverticulitis";
+import { endometriosis } from "./data/endometriosis";
+import { glomerulonefritis } from "./data/glomerulonefritis";
+import { hantavirus } from "./data/hantavirus";
+import { hepatitisB } from "./data/hepatitis-b";
+import { hidatidosis } from "./data/hidatidosis";
+import { organofosforados } from "./data/organofosforados";
+import { quemadura } from "./data/quemadura";
+import { sincope } from "./data/sincope";
+import { statusEpileptico } from "./data/status-epileptico";
+import { vppb } from "./data/vppb";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -183,6 +197,20 @@ export const CASES: ClinicalCase[] = [
   tecAnticoagulado,
   vihDebut,
   vphHsil,
+  cancerColorrectal,
+  cancerMama,
+  chagasCongenito,
+  diverticulitis,
+  endometriosis,
+  glomerulonefritis,
+  hantavirus,
+  hepatitisB,
+  hidatidosis,
+  organofosforados,
+  quemadura,
+  sincope,
+  statusEpileptico,
+  vppb,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);
