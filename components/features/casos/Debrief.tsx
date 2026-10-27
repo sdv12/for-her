@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Brain, BookOpen, Dices, GraduationCap, Layers, Lightbulb, Mic, RotateCcw, Sparkles, TriangleAlert, Trophy } from "lucide-react";
+import { Brain, BookOpen, Eye, Gavel, Dices, GraduationCap, Layers, Lightbulb, Mic, RotateCcw, Sparkles, TriangleAlert, Trophy } from "lucide-react";
 import { CardSheet } from "@/components/features/tarjetas/CardSheet";
 import { Button, buttonClasses } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -12,7 +12,7 @@ import { Chip } from "@/components/ui/Pill";
 import { useToast } from "@/components/ui/Toast";
 import { CASES } from "@/lib/cases";
 import { coverage, modelPresentation, patientLabel, rankFor, reviewPicks, type CaseScore } from "@/lib/cases/engine";
-import type { CaseAction, ClinicalCase, Pathology } from "@/lib/cases/types";
+import type { CaseAction, ClinicalCase, Pathology, TribunalQA } from "@/lib/cases/types";
 import type { CaseAttempt } from "@/lib/data/types";
 import { createCard } from "@/lib/mock/actions/cards";
 import { useDB } from "@/lib/mock/store";
@@ -25,10 +25,11 @@ type Picks = { asked: string[]; examined: string[]; studies: string[]; mgmt: str
 
 const SELF_CHECK = ["Datos del paciente y motivo de consulta", "Datos clave del interrogatorio", "Hallazgos del examen", "Estudios y su interpretación", "Diagnóstico", "Diferenciales y por qué los descarto", "Conducta en orden"];
 
-type Tab = "explicacion" | "recorrido" | "presentacion" | "repaso";
+type Tab = "explicacion" | "recorrido" | "tribunal" | "presentacion" | "repaso";
 const TABS: Array<{ id: Tab; label: string; icon: typeof BookOpen }> = [
   { id: "explicacion", label: "Explicación", icon: BookOpen },
   { id: "recorrido", label: "Tu recorrido", icon: Brain },
+  { id: "tribunal", label: "Tribunal", icon: Gavel },
   { id: "presentacion", label: "Presentación", icon: Mic },
   { id: "repaso", label: "Repaso", icon: Sparkles },
 ];
@@ -118,7 +119,7 @@ export function Debrief({ c, outcome, picks, onRetry }: { c: ClinicalCase; outco
       </Card>
 
       <div role="tablist" aria-label="Secciones de la resolución" className="-mx-4 flex gap-1.5 overflow-x-auto px-4 pb-1 desk:mx-0 desk:px-0">
-        {TABS.map((t) => (
+        {TABS.filter((t) => t.id !== "tribunal" || !!c.debrief.tribunal?.length).map((t) => (
           <button
             key={t.id}
             type="button"
@@ -239,6 +240,22 @@ export function Debrief({ c, outcome, picks, onRetry }: { c: ClinicalCase; outco
           </div>
         </Section>
         </>
+      )}
+
+      {tab === "tribunal" && c.debrief.tribunal && (
+        <Section title="Lo que te puede preguntar el tribunal" icon={<Gavel aria-hidden className="size-5" />}>
+          <Tribunal
+            items={c.debrief.tribunal}
+            onCard={
+              clinica
+                ? (item) => {
+                    createCard({ front: item.q, back: item.a, subject_id: clinica.id, tags: "tribunal, caso clínico" }, { source: "Caso clínico", source_ref: c.id });
+                    toast({ message: "Tarjeta creada. Ya está para repasar." });
+                  }
+                : undefined
+            }
+          />
+        </Section>
       )}
 
       {tab === "presentacion" && (
@@ -433,6 +450,68 @@ function Presentation({ c, mine }: { c: ClinicalCase; mine: string }) {
             : `${checks.length} de ${SELF_CHECK.length}. Lo que falta es lo primero que te van a preguntar.`}
         </p>
       </fieldset>
+    </div>
+  );
+}
+
+function Tribunal({ items, onCard }: { items: TribunalQA[]; onCard?: (item: TribunalQA) => void }) {
+  const [open, setOpen] = useState<number[]>([]);
+  const [rated, setRated] = useState<Record<number, boolean>>({});
+  const [carded, setCarded] = useState<number[]>([]);
+  const knew = Object.values(rated).filter(Boolean).length;
+  return (
+    <div className="flex flex-col gap-3">
+      <p className="text-sm text-muted">Respondé en voz alta antes de mirar. Después marcá si la sabías.</p>
+      <ol className="flex flex-col gap-3">
+        {items.map((item, i) => {
+          const shown = open.includes(i);
+          return (
+            <li key={item.q} className="rounded-card-sm border border-line bg-surface p-4">
+              <p className="text-[15px] leading-snug font-semibold">{item.q}</p>
+              {shown ? (
+                <>
+                  <p className="mt-2 rounded-[12px] bg-sage-soft px-3 py-2.5 text-sm leading-relaxed">{item.a}</p>
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    {rated[i] === undefined ? (
+                      <>
+                        <Button variant="secondary" onClick={() => setRated({ ...rated, [i]: true })}>
+                          La sabía
+                        </Button>
+                        <Button variant="ghost" onClick={() => setRated({ ...rated, [i]: false })}>
+                          Me costó
+                        </Button>
+                      </>
+                    ) : (
+                      <span className="text-sm font-semibold text-muted">{rated[i] ? "La sabías." : "Para repasar."}</span>
+                    )}
+                    {onCard && (
+                      <Button
+                        variant="ghost"
+                        disabled={carded.includes(i)}
+                        onClick={() => {
+                          onCard(item);
+                          setCarded([...carded, i]);
+                        }}
+                      >
+                        <Layers aria-hidden /> {carded.includes(i) ? "Tarjeta creada" : "Hacer tarjeta"}
+                      </Button>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <Button variant="ghost" className="mt-1" onClick={() => setOpen([...open, i])}>
+                  <Eye aria-hidden /> Ver respuesta
+                </Button>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+      <p aria-live="polite" className="text-sm font-semibold">
+        {Object.keys(rated).length === items.length
+          ? `Sabías ${knew} de ${items.length}.${knew < items.length ? " Las que te costaron, pasalas a tarjeta." : ""}`
+          : `${Object.keys(rated).length} de ${items.length} respondidas`}
+      </p>
     </div>
   );
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.11.0 — 2026-10-27
+
+- Casos clínicos con más contenido (los 84):
+  - 343 preguntas de interrogatorio y maniobras de examen nuevas (3–4 preguntas y 1 maniobra más por caso).
+  - Nueva pestaña "Tribunal" en la resolución: 301 preguntas que te puede hacer el tribunal sobre cada tema, con respuesta modelo. Se responden en voz alta, se marcan "La sabía" / "Me costó" y se pasan a tarjeta con un toque.
+- El contenido extra vive en lib/cases/extras/ y se suma a cada caso sin tocar los archivos originales.
+
 ## v0.10.0 — 2026-10-27
 
 - Casos clínicos más interactivos (en los 84 casos):

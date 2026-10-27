@@ -82,7 +82,20 @@ import { sindromeNefrotico } from "./data/sindrome-nefrotico";
 import { tecAnticoagulado } from "./data/tec-anticoagulado";
 import { vihDebut } from "./data/vih-debut";
 import { vphHsil } from "./data/vph-hsil";
+import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
+
+/** Suma al caso el contenido extra de extras/ (preguntas, maniobras y preguntas del tribunal). */
+function withExtra(c: ClinicalCase): ClinicalCase {
+  const e = EXTRAS[c.id];
+  if (!e) return c;
+  return {
+    ...c,
+    anamnesis: [...c.anamnesis, ...(e.anamnesis ?? [])],
+    exam: [...c.exam, ...(e.exam ?? [])],
+    debrief: { ...c.debrief, tribunal: [...(c.debrief.tribunal ?? []), ...(e.tribunal ?? [])] },
+  };
+}
 
 /** Todos los casos, ordenados por nivel. Para sumar un caso: crear su archivo en data/ y agregarlo acá. */
 export const CASES: ClinicalCase[] = [
@@ -170,7 +183,9 @@ export const CASES: ClinicalCase[] = [
   tecAnticoagulado,
   vihDebut,
   vphHsil,
-].sort((a, b) => a.level - b.level);
+]
+  .map(withExtra)
+  .sort((a, b) => a.level - b.level);
 
 export function getCase(id: string): ClinicalCase | undefined {
   return CASES.find((c) => c.id === id);

@@ -117,5 +117,12 @@ export type ClinicalCase = {
     pearls: string[];
     /** Errores frecuentes. */
     pitfalls: string[];
+    /** Lo que te puede preguntar el tribunal sobre el tema, con respuesta modelo. */
+    tribunal?: TribunalQA[];
   };
 };
+
+export type TribunalQA = { q: string; a: string };
+
+/** Contenido que se suma a un caso ya escrito (más preguntas, maniobras y preguntas del tribunal). */
+export type CaseExtra = { anamnesis?: CaseAction[]; exam?: CaseAction[]; tribunal?: TribunalQA[] };

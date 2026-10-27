@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ageBand, buildQuiz, coverage, dxStars, finalXp, managementStars, modelPresentation, nextHint, patientLabel, rankFor, scoreCase, seededShuffle, studiesStars } from "./engine";
+import { EXTRAS } from "./extras";
 import { CASES, getCase } from "./index";
 
 describe("contenido de los casos", () => {
@@ -133,4 +134,19 @@ describe("modo, pistas y repaso", () => {
       expect(model.every((m) => m.text.length > 0)).toBe(true);
     });
   }
+});
+
+describe("contenido extra", () => {
+  it("cada extra corresponde a un caso existente", () => {
+    for (const id of Object.keys(EXTRAS)) expect(getCase(id), id).toBeDefined();
+  });
+  it("las preguntas del tribunal tienen pregunta y respuesta", () => {
+    for (const c of CASES) {
+      for (const t of c.debrief.tribunal ?? []) {
+        expect(t.q.length, c.id).toBeGreaterThan(10);
+        expect(t.a.length, c.id).toBeGreaterThan(20);
+      }
+      if (EXTRAS[c.id]?.tribunal) expect(c.debrief.tribunal!.length).toBeGreaterThanOrEqual(3);
+    }
+  });
 });
