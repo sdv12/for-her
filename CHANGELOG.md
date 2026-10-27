@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.10.0 — 2026-10-27
+
+- Casos clínicos más interactivos (en los 84 casos):
+  - Modo examen (devolución al final) o modo estudio (ves si cada pregunta, maniobra o estudio era clave y por qué, en el momento; da la mitad de experiencia).
+  - Nueva etapa de hipótesis después del interrogatorio: elegís hasta 3 diagnósticos; si el correcto estaba, suma un bonus.
+  - Pistas en interrogatorio, examen y estudios (descuentan un 10 % de experiencia cada una).
+  - Nueva etapa de presentación oral: la escribís o la decís en voz alta y la comparás con una presentación modelo, con autoevaluación.
+  - Repaso rápido al final: preguntas armadas con el caso (qué no había que hacer, qué estudio era clave, por qué importaba un dato, por qué se descarta un diferencial) y ordenar la conducta.
+  - La ficha del paciente muestra tus hipótesis y tiene un espacio para notas propias.
+  - Las opciones de diagnóstico se muestran mezcladas.
+  - La resolución se organiza en pestañas: Explicación, Tu recorrido, Presentación y Repaso.
+- Catálogo: filtro "Para mejorar" (casos resueltos con menos de 7 estrellas).
+
 ## v0.9.0 — 2026-10-26
 
 - Casos clínicos: 28 casos nuevos (84 en total).

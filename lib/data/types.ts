@@ -150,6 +150,12 @@ export type CaseAttempt = Row & {
   stars_management: 1 | 2 | 3;
   xp: number;
   minutes: number;
+  /** Agregados después: pueden faltar en intentos viejos. */
+  mode?: "examen" | "estudio";
+  hints?: number;
+  /** Diagnósticos que tenías en mente después del interrogatorio. */
+  hypotheses?: string[];
+  presentation?: string | null;
 };
 
 export type SyllabusTopic = Row & { subject_id: string; name: string; level: 0 | 1 | 2 | 3; sort: number };

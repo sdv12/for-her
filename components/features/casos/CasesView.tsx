@@ -17,7 +17,7 @@ import type { CaseAttempt } from "@/lib/data/types";
 import { useDB } from "@/lib/mock/store";
 import { PatientIcon, Stars } from "./bits";
 
-type Filters = { level: CaseLevel | 0; band: AgeBand | ""; sex: Sex | ""; area: CaseArea | ""; state: "todos" | "nuevos" | "resueltos" };
+type Filters = { level: CaseLevel | 0; band: AgeBand | ""; sex: Sex | ""; area: CaseArea | ""; state: "todos" | "nuevos" | "resueltos" | "mejorar" };
 const INITIAL: Filters = { level: 0, band: "", sex: "", area: "", state: "todos" };
 const BANDS: AgeBand[] = ["Lactantes", "Niñez", "Adolescencia", "Adultez", "Adultez mayor"];
 
@@ -30,6 +30,15 @@ function bestAttempts(attempts: CaseAttempt[]) {
     if (!prev || total > prev.stars_dx + prev.stars_studies + prev.stars_management) best.set(a.case_id, a);
   }
   return best;
+}
+
+const total = (a: CaseAttempt) => a.stars_dx + a.stars_studies + a.stars_management;
+
+function matchesState(state: Filters["state"], best: CaseAttempt | undefined) {
+  if (state === "todos") return true;
+  if (state === "nuevos") return !best;
+  if (state === "resueltos") return !!best;
+  return !!best && total(best) < 7; // "Para mejorar": resuelto con menos de 7 de 9 estrellas
 }
 
 export function CasesView() {
@@ -49,7 +58,7 @@ export function CasesView() {
       (!f.band || ageBand(c.patient) === f.band) &&
       (!f.sex || c.patient.sex === f.sex) &&
       (!f.area || c.area === f.area) &&
-      (f.state === "todos" || (f.state === "resueltos") === best.has(c.id)),
+      matchesState(f.state, best.get(c.id)),
   );
 
   function random() {
@@ -137,6 +146,7 @@ export function CasesView() {
               <option value="todos">Todos</option>
               <option value="nuevos">Sin resolver</option>
               <option value="resueltos">Resueltos</option>
+              <option value="mejorar">Para mejorar</option>
             </SelectField>
           </div>
         </section>

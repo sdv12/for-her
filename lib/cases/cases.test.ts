@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ageBand, coverage, dxStars, managementStars, patientLabel, rankFor, scoreCase, studiesStars } from "./engine";
+import { ageBand, buildQuiz, coverage, dxStars, finalXp, managementStars, modelPresentation, nextHint, patientLabel, rankFor, scoreCase, seededShuffle, studiesStars } from "./engine";
 import { CASES, getCase } from "./index";
 
 describe("contenido de los casos", () => {
@@ -93,4 +93,44 @@ describe("rangos y etiquetas", () => {
     expect(ageBand({ age: 78, ageUnit: "años", sex: "F" })).toBe("Adultez mayor");
     expect(ageBand({ age: 15, ageUnit: "años", sex: "F" })).toBe("Adolescencia");
   });
+});
+
+describe("modo, pistas y repaso", () => {
+  it("experiencia final según modo, pistas e hipótesis", () => {
+    expect(finalXp(90, { mode: "examen", hints: 0, hypothesisHit: false, level: 1 })).toBe(90);
+    expect(finalXp(90, { mode: "estudio", hints: 0, hypothesisHit: false, level: 1 })).toBe(45);
+    expect(finalXp(100, { mode: "examen", hints: 2, hypothesisHit: false, level: 2 })).toBe(80);
+    expect(finalXp(100, { mode: "examen", hints: 9, hypothesisHit: false, level: 2 })).toBe(50);
+    expect(finalXp(100, { mode: "examen", hints: 0, hypothesisHit: true, level: 3 })).toBe(115);
+  });
+
+  it("la pista es la primera acción clave pendiente", () => {
+    const c = getCase("bronquiolitis-lactante")!;
+    const keys = c.anamnesis.filter((a) => a.relevance === "clave").map((a) => a.id);
+    expect(nextHint(c.anamnesis, [])?.id).toBe(keys[0]);
+    expect(nextHint(c.anamnesis, keys)).toBeNull();
+  });
+
+  it("mezcla reproducible", () => {
+    expect(seededShuffle([1, 2, 3, 4, 5], "x")).toEqual(seededShuffle([1, 2, 3, 4, 5], "x"));
+    expect([...seededShuffle([1, 2, 3, 4, 5], "y")].sort()).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  for (const c of CASES) {
+    it(`${c.id}: repaso y presentación bien armados`, () => {
+      const quiz = buildQuiz(c, "seed");
+      expect(quiz.length).toBeGreaterThanOrEqual(3);
+      for (const q of quiz) {
+        if (q.kind === "choice") {
+          expect(q.options.filter((o) => o.correct)).toHaveLength(1);
+          expect(new Set(q.options.map((o) => o.id)).size).toBe(q.options.length);
+          expect(q.options.length).toBeGreaterThanOrEqual(3);
+        } else {
+          expect(new Set(q.items).size).toBe(q.items.length);
+        }
+      }
+      const model = modelPresentation(c);
+      expect(model.every((m) => m.text.length > 0)).toBe(true);
+    });
+  }
 });
