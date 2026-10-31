@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.13.0 — 2026-10-31
+
+- Casos clínicos: 30 casos nuevos (128 en total), todos con preguntas del tribunal.
+  - Básico: impétigo, varicela, candidiasis vulvovaginal, constipación funcional en un niño, mononucleosis, úlcera duodenal por H. pylori, gripe en paciente de riesgo, dermatitis atópica, dislipemia en prevención primaria.
+  - Intermedio: anemia megaloblástica por déficit de B12, enfermedad de Parkinson, demencia tipo Alzheimer, invaginación intestinal, estenosis hipertrófica de píloro, hernia inguinal atascada, obstrucción intestinal por bridas, pie diabético infectado, torsión testicular, artritis séptica de cadera.
+  - Avanzado: crisis suprarrenal (Addison), mieloma múltiple con hipercalcemia, endocarditis infecciosa, episodio maníaco, placenta previa, isquemia arterial aguda de miembro, hiponatremia por tiazida, neutropenia febril, intoxicación por paracetamol.
+  - Desafío: desprendimiento de placenta, disección aórtica.
+
 ## v0.12.0 — 2026-10-27
 
 - Casos clínicos: 14 casos nuevos (98 en total), elegidos entre los más tomados en el examen y los más frecuentes en guardia y por especialidad. Todos traen sus preguntas del tribunal.

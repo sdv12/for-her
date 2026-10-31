@@ -96,6 +96,36 @@ import { quemadura } from "./data/quemadura";
 import { sincope } from "./data/sincope";
 import { statusEpileptico } from "./data/status-epileptico";
 import { vppb } from "./data/vppb";
+import { anemiaMegaloblastica } from "./data/anemia-megaloblastica";
+import { artritisSeptica } from "./data/artritis-septica";
+import { candidiasisVulvovaginal } from "./data/candidiasis-vulvovaginal";
+import { constipacionFuncional } from "./data/constipacion-funcional";
+import { demencia } from "./data/demencia";
+import { dermatitisAtopica } from "./data/dermatitis-atopica";
+import { desprendimientoPlacenta } from "./data/desprendimiento-placenta";
+import { diseccionAortica } from "./data/diseccion-aortica";
+import { dislipemia } from "./data/dislipemia";
+import { dispepsiaHp } from "./data/dispepsia-hp";
+import { endocarditis } from "./data/endocarditis";
+import { episodioManiaco } from "./data/episodio-maniaco";
+import { estenosisPilorica } from "./data/estenosis-pilorica";
+import { herniaAtascada } from "./data/hernia-atascada";
+import { hiponatremia } from "./data/hiponatremia";
+import { impetigo } from "./data/impetigo";
+import { influenza } from "./data/influenza";
+import { insuficienciaSuprarrenal } from "./data/insuficiencia-suprarrenal";
+import { invaginacion } from "./data/invaginacion";
+import { isquemiaAgudaMiembro } from "./data/isquemia-aguda-miembro";
+import { mielomaHipercalcemia } from "./data/mieloma-hipercalcemia";
+import { mononucleosis } from "./data/mononucleosis";
+import { neutropeniaFebril } from "./data/neutropenia-febril";
+import { obstruccionBridas } from "./data/obstruccion-bridas";
+import { paracetamol } from "./data/paracetamol";
+import { parkinson } from "./data/parkinson";
+import { pieDiabetico } from "./data/pie-diabetico";
+import { placentaPrevia } from "./data/placenta-previa";
+import { torsionTesticular } from "./data/torsion-testicular";
+import { varicela } from "./data/varicela";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -211,6 +241,36 @@ export const CASES: ClinicalCase[] = [
   sincope,
   statusEpileptico,
   vppb,
+  anemiaMegaloblastica,
+  artritisSeptica,
+  candidiasisVulvovaginal,
+  constipacionFuncional,
+  demencia,
+  dermatitisAtopica,
+  desprendimientoPlacenta,
+  diseccionAortica,
+  dislipemia,
+  dispepsiaHp,
+  endocarditis,
+  episodioManiaco,
+  estenosisPilorica,
+  herniaAtascada,
+  hiponatremia,
+  impetigo,
+  influenza,
+  insuficienciaSuprarrenal,
+  invaginacion,
+  isquemiaAgudaMiembro,
+  mielomaHipercalcemia,
+  mononucleosis,
+  neutropeniaFebril,
+  obstruccionBridas,
+  paracetamol,
+  parkinson,
+  pieDiabetico,
+  placentaPrevia,
+  torsionTesticular,
+  varicela,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);
