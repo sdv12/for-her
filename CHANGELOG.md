@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.16.0 — 2026-11-02
+
+- Casos clínicos: 50 casos nuevos (238 en total), todos con preguntas del tribunal.
+  - 25 diagnósticos ya conocidos en otras personas y contextos: hipertensión sistólica en una adulta mayor con caídas, DM2 en una adolescente, gota en una mujer con tiazida, migraña con abuso de analgésicos en un adolescente, erisipela facial, Chagas crónico en una mujer en edad fértil, sífilis secundaria, pielonefritis en una mujer joven, hipotiroidismo por amiodarona, hipertiroidismo apático en una adulta mayor, conjuntivitis neonatal por clamidia, sarna costrosa en un geriátrico, zoster oftálmico, tuberculosis infantil, ictericia neonatal por incompatibilidad ABO, convulsión febril compleja, ectópico no roto con metotrexato, anafilaxia por maní en un niño, varicela con neumonía en una embarazada, absceso tuboovárico, dengue grave con shock, aborto séptico, insuficiencia renal por nefrotóxicos, edema agudo de pulmón hipertensivo y estado de mal epiléptico en un niño.
+  - 25 diagnósticos nuevos: acné, cefalea tensional, insomnio crónico, síndrome metabólico, artrosis de rodilla, epistaxis, dismenorrea primaria, bronquitis aguda, cólico biliar, displasia de cadera, quemadura química ocular, nódulo tiroideo (carcinoma papilar), úlcera venosa, apnea del sueño, hígado graso metabólico, brucelosis, colitis por C. difficile, pericarditis aguda, TDAH, bloqueo AV completo, crisis miasténica, esclerosis múltiple, ACV hemorrágico, taponamiento cardíaco y aneurisma de aorta abdominal roto.
+
 ## v0.15.0 — 2026-11-01
 
 - Casos clínicos: 30 casos nuevos (188 en total), todos con preguntas del tribunal.

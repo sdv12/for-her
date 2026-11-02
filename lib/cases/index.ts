@@ -186,6 +186,56 @@ import { colaDeCaballo } from "./data/cola-de-caballo";
 import { arteritisTemporal } from "./data/arteritis-temporal";
 import { kawasaki } from "./data/kawasaki";
 import { colangitis } from "./data/colangitis";
+import { htaAdultoMayor } from "./data/hta-adulto-mayor";
+import { dm2Adolescente } from "./data/dm2-adolescente";
+import { gotaMujer } from "./data/gota-mujer";
+import { migranaAdolescente } from "./data/migrana-adolescente";
+import { erisipela } from "./data/erisipela";
+import { chagasMujerJoven } from "./data/chagas-mujer-joven";
+import { sifilisSecundaria } from "./data/sifilis-secundaria";
+import { pielonefritisMujerJoven } from "./data/pielonefritis-mujer-joven";
+import { hipotiroidismoAmiodarona } from "./data/hipotiroidismo-amiodarona";
+import { hipertiroidismoApatico } from "./data/hipertiroidismo-apatico";
+import { conjuntivitisNeonatal } from "./data/conjuntivitis-neonatal";
+import { sarnaCostrosa } from "./data/sarna-costrosa";
+import { zosterOftalmico } from "./data/zoster-oftalmico";
+import { tbcInfantil } from "./data/tbc-infantil";
+import { ictericiaIncompatibilidad } from "./data/ictericia-incompatibilidad";
+import { convulsionFebrilCompleja } from "./data/convulsion-febril-compleja";
+import { ectopicoMetotrexato } from "./data/ectopico-metotrexato";
+import { anafilaxiaNino } from "./data/anafilaxia-nino";
+import { varicelaEmbarazo } from "./data/varicela-embarazo";
+import { epiAbsceso } from "./data/epi-absceso";
+import { dengueShock } from "./data/dengue-shock";
+import { abortoSeptico } from "./data/aborto-septico";
+import { iraNefrotoxica } from "./data/ira-nefrotoxica";
+import { eapHipertensivo } from "./data/eap-hipertensivo";
+import { statusNino } from "./data/status-nino";
+import { acne } from "./data/acne";
+import { cefaleaTensional } from "./data/cefalea-tensional";
+import { insomnio } from "./data/insomnio";
+import { sindromeMetabolico } from "./data/sindrome-metabolico";
+import { artrosisRodilla } from "./data/artrosis-rodilla";
+import { epistaxis } from "./data/epistaxis";
+import { dismenorrea } from "./data/dismenorrea";
+import { bronquitisAguda } from "./data/bronquitis-aguda";
+import { colicoBiliar } from "./data/colico-biliar";
+import { displasiaCadera } from "./data/displasia-cadera";
+import { quemaduraQuimicaOcular } from "./data/quemadura-quimica-ocular";
+import { noduloTiroideo } from "./data/nodulo-tiroideo";
+import { ulceraVenosa } from "./data/ulcera-venosa";
+import { apneaSueno } from "./data/apnea-sueno";
+import { higadoGraso } from "./data/higado-graso";
+import { brucelosis } from "./data/brucelosis";
+import { cDifficile } from "./data/c-difficile";
+import { pericarditis } from "./data/pericarditis";
+import { tdah } from "./data/tdah";
+import { bloqueoAv } from "./data/bloqueo-av";
+import { miastenia } from "./data/miastenia";
+import { esclerosisMultiple } from "./data/esclerosis-multiple";
+import { acvHemorragico } from "./data/acv-hemorragico";
+import { taponamiento } from "./data/taponamiento";
+import { aaaRoto } from "./data/aaa-roto";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -391,6 +441,56 @@ export const CASES: ClinicalCase[] = [
   arteritisTemporal,
   kawasaki,
   colangitis,
+  htaAdultoMayor,
+  dm2Adolescente,
+  gotaMujer,
+  migranaAdolescente,
+  erisipela,
+  chagasMujerJoven,
+  sifilisSecundaria,
+  pielonefritisMujerJoven,
+  hipotiroidismoAmiodarona,
+  hipertiroidismoApatico,
+  conjuntivitisNeonatal,
+  sarnaCostrosa,
+  zosterOftalmico,
+  tbcInfantil,
+  ictericiaIncompatibilidad,
+  convulsionFebrilCompleja,
+  ectopicoMetotrexato,
+  anafilaxiaNino,
+  varicelaEmbarazo,
+  epiAbsceso,
+  dengueShock,
+  abortoSeptico,
+  iraNefrotoxica,
+  eapHipertensivo,
+  statusNino,
+  acne,
+  cefaleaTensional,
+  insomnio,
+  sindromeMetabolico,
+  artrosisRodilla,
+  epistaxis,
+  dismenorrea,
+  bronquitisAguda,
+  colicoBiliar,
+  displasiaCadera,
+  quemaduraQuimicaOcular,
+  noduloTiroideo,
+  ulceraVenosa,
+  apneaSueno,
+  higadoGraso,
+  brucelosis,
+  cDifficile,
+  pericarditis,
+  tdah,
+  bloqueoAv,
+  miastenia,
+  esclerosisMultiple,
+  acvHemorragico,
+  taponamiento,
+  aaaRoto,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);
