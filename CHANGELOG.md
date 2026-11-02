@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.15.0 — 2026-11-01
+
+- Casos clínicos: 30 casos nuevos (188 en total), todos con preguntas del tribunal.
+  - Diagnósticos ya conocidos en otras personas y contextos: neumonía en un adulto joven (ambulatoria), hipoglucemia en una adolescente con DM1, faringitis estreptocócica con alergia grave a la penicilina, otitis bilateral en un lactante, anemia ferropénica del lactante por leche de vaca, crisis asmática grave en una adulta (con AINE), apendicitis perforada en un niño de 4 años, deshidratación por gastroenteritis en una adulta mayor, fibrilación auricular de menos de 48 h, bronquiolitis grave en una ex prematura, infarto por cocaína en un joven, cetoacidosis euglucémica por empagliflozina, preeclampsia posparto, TEP de alto riesgo posoperatorio y hemorragia por várices esofágicas.
+  - Diagnósticos nuevos: giardiasis, trombosis hemorroidal, rinitis alérgica, túnel carpiano, tiña de la cabeza, estenosis aórtica, anorexia nerviosa, hiperémesis gravídica, púrpura trombocitopénica inmune, cáncer de próstata, golpe de calor, síndrome de cola de caballo, arteritis de células gigantes, enfermedad de Kawasaki y colangitis aguda grave.
+
 ## v0.14.0 — 2026-11-01
 
 - Casos clínicos: 30 casos nuevos (158 en total), todos con preguntas del tribunal.

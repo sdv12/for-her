@@ -156,6 +156,36 @@ import { primerEpisodioPsicotico } from "./data/primer-episodio-psicotico";
 import { cancerPulmon } from "./data/cancer-pulmon";
 import { isquemiaMesenterica } from "./data/isquemia-mesenterica";
 import { meningococcemia } from "./data/meningococcemia";
+import { nacAdultoJoven } from "./data/nac-adulto-joven";
+import { hipoglucemiaDm1 } from "./data/hipoglucemia-dm1";
+import { faringitisAlergia } from "./data/faringitis-alergia";
+import { otitisLactante } from "./data/otitis-lactante";
+import { anemiaLactante } from "./data/anemia-lactante";
+import { asmaAdulta } from "./data/asma-adulta";
+import { apendicitisNino } from "./data/apendicitis-nino";
+import { deshidratacionAdultaMayor } from "./data/deshidratacion-adulta-mayor";
+import { faReciente } from "./data/fa-reciente";
+import { bronquiolitisPrematuro } from "./data/bronquiolitis-prematuro";
+import { iamCocaina } from "./data/iam-cocaina";
+import { cadEuglucemica } from "./data/cad-euglucemica";
+import { preeclampsiaPosparto } from "./data/preeclampsia-posparto";
+import { tepMasivo } from "./data/tep-masivo";
+import { hdaVariceal } from "./data/hda-variceal";
+import { giardiasis } from "./data/giardiasis";
+import { hemorroides } from "./data/hemorroides";
+import { rinitisAlergica } from "./data/rinitis-alergica";
+import { tunelCarpiano } from "./data/tunel-carpiano";
+import { tinaCapitis } from "./data/tina-capitis";
+import { estenosisAortica } from "./data/estenosis-aortica";
+import { anorexiaNerviosa } from "./data/anorexia-nerviosa";
+import { hiperemesis } from "./data/hiperemesis";
+import { pti } from "./data/pti";
+import { cancerProstata } from "./data/cancer-prostata";
+import { golpeDeCalor } from "./data/golpe-de-calor";
+import { colaDeCaballo } from "./data/cola-de-caballo";
+import { arteritisTemporal } from "./data/arteritis-temporal";
+import { kawasaki } from "./data/kawasaki";
+import { colangitis } from "./data/colangitis";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -331,6 +361,36 @@ export const CASES: ClinicalCase[] = [
   cancerPulmon,
   isquemiaMesenterica,
   meningococcemia,
+  nacAdultoJoven,
+  hipoglucemiaDm1,
+  faringitisAlergia,
+  otitisLactante,
+  anemiaLactante,
+  asmaAdulta,
+  apendicitisNino,
+  deshidratacionAdultaMayor,
+  faReciente,
+  bronquiolitisPrematuro,
+  iamCocaina,
+  cadEuglucemica,
+  preeclampsiaPosparto,
+  tepMasivo,
+  hdaVariceal,
+  giardiasis,
+  hemorroides,
+  rinitisAlergica,
+  tunelCarpiano,
+  tinaCapitis,
+  estenosisAortica,
+  anorexiaNerviosa,
+  hiperemesis,
+  pti,
+  cancerProstata,
+  golpeDeCalor,
+  colaDeCaballo,
+  arteritisTemporal,
+  kawasaki,
+  colangitis,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);
