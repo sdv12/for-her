@@ -126,6 +126,36 @@ import { pieDiabetico } from "./data/pie-diabetico";
 import { placentaPrevia } from "./data/placenta-previa";
 import { torsionTesticular } from "./data/torsion-testicular";
 import { varicela } from "./data/varicela";
+import { depresionMayor } from "./data/depresion-mayor";
+import { tabaquismo } from "./data/tabaquismo";
+import { controlPrenatal } from "./data/control-prenatal";
+import { heridaTetanos } from "./data/herida-tetanos";
+import { uretritis } from "./data/uretritis";
+import { urticaria } from "./data/urticaria";
+import { hepatitisA } from "./data/hepatitis-a";
+import { mastitis } from "./data/mastitis";
+import { fracturaRadio } from "./data/fractura-radio";
+import { sarampion } from "./data/sarampion";
+import { tvp } from "./data/tvp";
+import { toxoplasmosisEmbarazo } from "./data/toxoplasmosis-embarazo";
+import { amenazaPartoPretermino } from "./data/amenaza-parto-pretermino";
+import { celiaquia } from "./data/celiaquia";
+import { taquicardiaSupraventricular } from "./data/taquicardia-supraventricular";
+import { glaucomaAgudo } from "./data/glaucoma-agudo";
+import { cuerpoExtrano } from "./data/cuerpo-extrano";
+import { violenciaGenero } from "./data/violencia-genero";
+import { triquinosis } from "./data/triquinosis";
+import { shockSeptico } from "./data/shock-septico";
+import { hsa } from "./data/hsa";
+import { lupus } from "./data/lupus";
+import { leucemia } from "./data/leucemia";
+import { hiperpotasemia } from "./data/hiperpotasemia";
+import { estadoHiperosmolar } from "./data/estado-hiperosmolar";
+import { abstinenciaAlcoholica } from "./data/abstinencia-alcoholica";
+import { primerEpisodioPsicotico } from "./data/primer-episodio-psicotico";
+import { cancerPulmon } from "./data/cancer-pulmon";
+import { isquemiaMesenterica } from "./data/isquemia-mesenterica";
+import { meningococcemia } from "./data/meningococcemia";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -271,6 +301,36 @@ export const CASES: ClinicalCase[] = [
   placentaPrevia,
   torsionTesticular,
   varicela,
+  depresionMayor,
+  tabaquismo,
+  controlPrenatal,
+  heridaTetanos,
+  uretritis,
+  urticaria,
+  hepatitisA,
+  mastitis,
+  fracturaRadio,
+  sarampion,
+  tvp,
+  toxoplasmosisEmbarazo,
+  amenazaPartoPretermino,
+  celiaquia,
+  taquicardiaSupraventricular,
+  glaucomaAgudo,
+  cuerpoExtrano,
+  violenciaGenero,
+  triquinosis,
+  shockSeptico,
+  hsa,
+  lupus,
+  leucemia,
+  hiperpotasemia,
+  estadoHiperosmolar,
+  abstinenciaAlcoholica,
+  primerEpisodioPsicotico,
+  cancerPulmon,
+  isquemiaMesenterica,
+  meningococcemia,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);

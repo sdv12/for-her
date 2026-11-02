@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.14.0 — 2026-11-01
+
+- Casos clínicos: 30 casos nuevos (158 en total), todos con preguntas del tribunal.
+  - Básico: depresión mayor, tabaquismo (cesación), control prenatal de la primera consulta, herida cortante y profilaxis antitetánica, uretritis gonocócica, urticaria aguda, hepatitis A, mastitis puerperal, fractura de radio distal (Colles).
+  - Intermedio: sarampión, trombosis venosa profunda, toxoplasmosis en el embarazo, amenaza de parto pretérmino, enfermedad celíaca, taquicardia supraventricular, glaucoma agudo de ángulo cerrado, cuerpo extraño en la vía aérea, violencia de género, triquinosis.
+  - Avanzado: shock séptico de foco urinario, hemorragia subaracnoidea, lupus eritematoso sistémico, leucemia linfoblástica aguda, hiperpotasemia, estado hiperosmolar hiperglucémico, abstinencia alcohólica con delirium tremens, primer episodio psicótico, cáncer de pulmón.
+  - Desafío: isquemia mesentérica aguda, meningococcemia fulminante.
+
 ## v0.13.0 — 2026-10-31
 
 - Casos clínicos: 30 casos nuevos (128 en total), todos con preguntas del tribunal.
