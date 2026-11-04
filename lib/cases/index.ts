@@ -236,6 +236,56 @@ import { esclerosisMultiple } from "./data/esclerosis-multiple";
 import { acvHemorragico } from "./data/acv-hemorragico";
 import { taponamiento } from "./data/taponamiento";
 import { aaaRoto } from "./data/aaa-roto";
+import { nacDerrameNino } from "./data/nac-derrame-nino";
+import { disenteriaShigella } from "./data/disenteria-shigella";
+import { crupGrave } from "./data/crup-grave";
+import { mastoiditis } from "./data/mastoiditis";
+import { ituEscolar } from "./data/itu-escolar";
+import { deshidratacionGraveLactante } from "./data/deshidratacion-grave-lactante";
+import { sifilisCongenita } from "./data/sifilis-congenita";
+import { autolesionesAdolescente } from "./data/autolesiones-adolescente";
+import { vihEmbarazo } from "./data/vih-embarazo";
+import { anemiaEmbarazo } from "./data/anemia-embarazo";
+import { meningitisAdultoMayor } from "./data/meningitis-adulto-mayor";
+import { acvDespertar } from "./data/acv-despertar";
+import { icChagasica } from "./data/ic-chagasica";
+import { epocBiomasa } from "./data/epoc-biomasa";
+import { neumoniaAspirativa } from "./data/neumonia-aspirativa";
+import { cadOmision } from "./data/cad-omision";
+import { hipoglucemiaAlcohol } from "./data/hipoglucemia-alcohol";
+import { pancreatitisAlcoholica } from "./data/pancreatitis-alcoholica";
+import { colecistitisDiabetico } from "./data/colecistitis-diabetico";
+import { apendicitisEmbarazo } from "./data/apendicitis-embarazo";
+import { pielonefritisObstructiva } from "./data/pielonefritis-obstructiva";
+import { hematomaEpidural } from "./data/hematoma-epidural";
+import { coAdultoMayor } from "./data/co-adulto-mayor";
+import { neumotoraxTension } from "./data/neumotorax-tension";
+import { quemaduraInhalatoria } from "./data/quemadura-inhalatoria";
+import { pronacionDolorosa } from "./data/pronacion-dolorosa";
+import { estomatitisHerpetica } from "./data/estomatitis-herpetica";
+import { pediculosis } from "./data/pediculosis";
+import { colicoLactante } from "./data/colico-lactante";
+import { condilomas } from "./data/condilomas";
+import { ciatica } from "./data/ciatica";
+import { manguitoRotador } from "./data/manguito-rotador";
+import { ansiedadGeneralizada } from "./data/ansiedad-generalizada";
+import { hipotiroidismoCongenito } from "./data/hipotiroidismo-congenito";
+import { luxacionHombro } from "./data/luxacion-hombro";
+import { abscesoPerianal } from "./data/absceso-perianal";
+import { erc } from "./data/erc";
+import { hepatitisC } from "./data/hepatitis-c";
+import { desprendimientoRetina } from "./data/desprendimiento-retina";
+import { torsionOvarica } from "./data/torsion-ovarica";
+import { violenciaSexual } from "./data/violencia-sexual";
+import { espondilitis } from "./data/espondilitis";
+import { ingestaCaustico } from "./data/ingesta-caustico";
+import { loxoscelismo } from "./data/loxoscelismo";
+import { ahogamiento } from "./data/ahogamiento";
+import { sepsisNeonatal } from "./data/sepsis-neonatal";
+import { cancerCuello } from "./data/cancer-cuello";
+import { linfomaHodgkin } from "./data/linfoma-hodgkin";
+import { fracturaExpuesta } from "./data/fractura-expuesta";
+import { encefalitisHerpetica } from "./data/encefalitis-herpetica";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -491,6 +541,56 @@ export const CASES: ClinicalCase[] = [
   acvHemorragico,
   taponamiento,
   aaaRoto,
+  nacDerrameNino,
+  disenteriaShigella,
+  crupGrave,
+  mastoiditis,
+  ituEscolar,
+  deshidratacionGraveLactante,
+  sifilisCongenita,
+  autolesionesAdolescente,
+  vihEmbarazo,
+  anemiaEmbarazo,
+  meningitisAdultoMayor,
+  acvDespertar,
+  icChagasica,
+  epocBiomasa,
+  neumoniaAspirativa,
+  cadOmision,
+  hipoglucemiaAlcohol,
+  pancreatitisAlcoholica,
+  colecistitisDiabetico,
+  apendicitisEmbarazo,
+  pielonefritisObstructiva,
+  hematomaEpidural,
+  coAdultoMayor,
+  neumotoraxTension,
+  quemaduraInhalatoria,
+  pronacionDolorosa,
+  estomatitisHerpetica,
+  pediculosis,
+  colicoLactante,
+  condilomas,
+  ciatica,
+  manguitoRotador,
+  ansiedadGeneralizada,
+  hipotiroidismoCongenito,
+  luxacionHombro,
+  abscesoPerianal,
+  erc,
+  hepatitisC,
+  desprendimientoRetina,
+  torsionOvarica,
+  violenciaSexual,
+  espondilitis,
+  ingestaCaustico,
+  loxoscelismo,
+  ahogamiento,
+  sepsisNeonatal,
+  cancerCuello,
+  linfomaHodgkin,
+  fracturaExpuesta,
+  encefalitisHerpetica,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);

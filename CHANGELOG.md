@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.17.0 — 2026-11-04
+
+- Casos clínicos: 50 casos nuevos (288 en total), todos con preguntas del tribunal, priorizando lo más frecuente en Argentina, en guardias, por edad y por sexo.
+  - 25 diagnósticos ya conocidos en otras personas y contextos: neumonía con empiema en una niña, disentería por Shigella, crup grave en una lactante, mastoiditis, infección urinaria recurrente en una escolar, deshidratación grave con shock en un lactante, sífilis congénita, autolesiones en una adolescente, VIH en el embarazo, anemia del embarazo, meningitis neumocócica en un adulto mayor, ACV al despertar con trombectomía, insuficiencia cardíaca chagásica, EPOC por humo de leña, neumonía aspirativa, cetoacidosis por falta de insulina, hipoglucemia alcohólica, pancreatitis alcohólica grave, colecistitis en un diabético, apendicitis en el embarazo, pielonefritis obstructiva, hematoma epidural en un motociclista, monóxido en un adulto mayor, neumotórax a tensión por arma blanca y gran quemado con lesión inhalatoria.
+  - 25 diagnósticos nuevos: pronación dolorosa, gingivoestomatitis herpética, pediculosis, cólico del lactante, condilomas, lumbociatalgia por hernia de disco, tendinopatía del manguito rotador, ansiedad generalizada, hipotiroidismo congénito, luxación de hombro, absceso perianal, enfermedad renal crónica, hepatitis C, desprendimiento de retina, torsión anexial, violencia sexual, espondilitis anquilosante, ingesta de cáusticos, loxoscelismo, ahogamiento, sepsis neonatal precoz, cáncer de cuello uterino, linfoma de Hodgkin, fractura expuesta de tibia y encefalitis herpética.
+
 ## v0.16.0 — 2026-11-02
 
 - Casos clínicos: 50 casos nuevos (238 en total), todos con preguntas del tribunal.
