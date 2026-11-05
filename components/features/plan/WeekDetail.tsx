@@ -75,7 +75,7 @@ export function WeekDetail({ week, phase, days, today, onToggle, onUpdate, onAdd
         <div className="mt-4 flex gap-3 rounded-card-sm bg-accent-soft p-4 text-sm">
           <Gavel aria-hidden className="mt-0.5 size-4 shrink-0 text-accent-text" />
           <p>
-            <span className="font-semibold">Tip del tribunal:</span> {week.tip}
+            <span className="font-semibold">{/^DFDCT/.test(week.tip) ? "Plantilla" : "Tip del tribunal"}:</span> {week.tip}
           </p>
         </div>
       )}

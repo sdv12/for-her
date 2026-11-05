@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { TextAreaField, TextField } from "@/components/ui/Field";
 import { addDaysISO, nextWeekday, toISODate } from "@/lib/plan-import/dates";
 import { blankDraft } from "@/lib/plan-import/draft";
+import { buildPlanMaestro } from "@/lib/plan-maestro";
 import { parsePlanDocument } from "@/lib/plan-import/parse-docx";
 import { parsePlanJson } from "@/lib/plan-import/parse-json";
 import type { ParseResult, PlanDraft } from "@/lib/plan-import/types";
@@ -164,5 +165,25 @@ export function BlankSource({ onDraft }: { onDraft: OnDraft }) {
         </Button>
       </div>
     </form>
+  );
+}
+
+/** Plantilla: el plan maestro integrado del examen de reingreso (24 semanas, 10 ejes). */
+export function MaestroSource({ onDraft }: { onDraft: OnDraft }) {
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1.5 text-[15px] leading-relaxed">
+        <p className="font-semibold">Plan maestro integrado · reingreso FCM-UNC</p>
+        <p className="text-muted">
+          24 semanas en 4 fases (bases, grandes síndromes, especialidades, integración), un eje clínico por semana, temas troncales por prioridad, patologías
+          para el Temario y la plantilla DFDCT. La semana 1 arranca hoy; desde la 2 van en sus fechas, con el corte de fiestas.
+        </p>
+      </div>
+      <div>
+        <Button variant="primary" onClick={() => onDraft(buildPlanMaestro(toISODate(new Date())), [])}>
+          Ver vista previa
+        </Button>
+      </div>
+    </div>
   );
 }

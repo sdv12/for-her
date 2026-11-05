@@ -14,10 +14,12 @@ import { toISODate } from "@/lib/plan-import/dates";
 import { phaseColor, phaseLabel } from "./phase";
 
 const DIA = [
-  { day: "Lunes a viernes, mañana", icon: Sun, text: "10 min recuperar lo de ayer sin apuntes · 35 min el tema de tu cronograma · cierre con esquema de memoria (o la simulación, si el día es de simulación)." },
-  { day: "Lunes, noche", icon: Moon, text: "Puente: recuperá la semana anterior del mismo eje (lo básico) o anticipá la clínica que viene." },
-  { day: "Martes, jueves y viernes, noche", icon: Moon, text: "Caso clínico del eje de la semana." },
-  { day: "Miércoles, noche", icon: Moon, text: "Materia transversal: una pregunta de tu banco de la materia que el cronograma no tiene como semana propia." },
+  { day: "Lunes a viernes, mañana", icon: Sun, text: "10 min recuperar lo de ayer sin apuntes · 35 min el tema troncal del día, recorrido con DFDCT (o la simulación, si el día es de simulación)." },
+  { day: "Lunes, noche", icon: Moon, text: "Patología del eje de la semana." },
+  { day: "Martes, noche", icon: Moon, text: "Diagnóstico diferencial: 3 hipótesis y cómo descartar cada una." },
+  { day: "Miércoles, noche", icon: Moon, text: "Tratamiento y efectos adversos: por qué ese y no otro." },
+  { day: "Jueves, noche", icon: Moon, text: "Caso clínico integrador del eje." },
+  { day: "Viernes, noche", icon: Moon, text: "Preguntas del banco sin apuntes y criterio para avanzar." },
   { day: "Todas las noches", icon: Moon, text: "Una pregunta de la semana en voz alta, como en el tribunal, y anotar en Errores lo que no salió." },
   { day: "Sábado", icon: Sun, text: "Errores de la semana, repaso espaciado (preguntas de prioridad alta de hace 1 y 3 semanas) y un caso acumulativo." },
   { day: "Domingo", icon: Sun, text: "Descanso. Tarjetas solo si hay vencidas." },

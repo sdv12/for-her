@@ -1,6 +1,7 @@
 import type { DB, ExamQuestion, PlanWeek } from "@/lib/data/types";
 import type { PlanView } from "@/lib/plan";
 import { fold } from "@/lib/plan-import/dates";
+import { EJES } from "@/lib/programa/ejes";
 import { ejesForText } from "@/lib/programa/match";
 import type { Eje, MateriaId } from "@/lib/programa/types";
 
@@ -74,12 +75,16 @@ export type WeekInfo = {
 
 const STOP = new Set(["cuales", "cuando", "donde", "porque", "entre", "sobre", "segun", "tiene", "tipos", "explica", "explicame", "describi", "describime", "definicion", "diferencias", "manejo", "tratamiento", "diagnostico", "clinica", "pregunta", "examen", "semana", "estudio", "active", "recall", "simulacion", "simulacion"]);
 
+/** Nombres de materia: no dicen de qué tema trata una pregunta ("relaciones anatómicas" no es "anatomía del páncreas"). */
+const GENERIC = new Set(["anatomi", "fisiolo", "patolog", "farmaco", "bioquim", "histolo", "semiolo", "clinica", "cirugia", "pediatr", "infecto"]);
+
 function tokens(text: string): Set<string> {
   return new Set(
     fold(text)
       .split(/[^a-z0-9]+/)
       .filter((w) => w.length >= 5 && !STOP.has(w))
-      .map((w) => w.slice(0, 7)),
+      .map((w) => w.slice(0, 7))
+      .filter((w) => !GENERIC.has(w)),
   );
 }
 
@@ -105,7 +110,9 @@ export function integratePlan(db: DB, view: PlanView): Map<string, WeekInfo> {
   const wTokens = new Map<string, Set<string>>();
   for (const w of weeks) {
     const text = weekText(view, w);
-    const found = isSim(w) ? [] : ejesForText(text, 2);
+    // Si el cronograma nombra el eje ("E1 · …", "E3+E10 · …"), manda ese; si no, se detecta por el texto.
+    const codes = [...w.title.matchAll(/\bE(\d{1,2})\b/g)].map((m) => EJES.find((e) => e.code === `2.${m[1]}`)).filter((e): e is Eje => !!e);
+    const found = isSim(w) ? [] : codes.length ? [...codes, ...ejesForText(text, 2).filter((e) => !codes.includes(e))].slice(0, 2) : ejesForText(text, 2);
     ejeOf.set(w.id, found[0] ?? null);
     ejesOf.set(w.id, found.map((e) => e.id));
     wTokens.set(w.id, tokens(`${w.title} ${(view.daysByWeek.get(w.id) ?? []).map((d) => d.content).join(" ")}`));
@@ -115,13 +122,14 @@ export function integratePlan(db: DB, view: PlanView): Map<string, WeekInfo> {
   const qWeek = new Map<string, string>();
   const byNum = new Map(weeks.map((w) => [w.num, w]));
   for (const q of db.exam_questions) {
+    // Además del texto, cuentan la subsección del banco ("Banco · Cardiovascular") y la materia.
+    const qt = tokens(`${q.text} ${(q.source ?? "").replace(/banco( de preguntas)?|cronograma|semana \d+/gi, "")} ${subjectName.get(q.subject_id) ?? ""}`);
+    // "Cronograma · semana N": va a esa semana solo si además trata su tema (si cambiaste de cronograma, el número ya no coincide).
     const n = weekFromSource(q);
-    if (n !== null && byNum.has(n)) {
+    if (n !== null && byNum.has(n) && [...qt].filter((t) => wTokens.get(byNum.get(n)!.id)!.has(t)).length >= 2) {
       qWeek.set(q.id, byNum.get(n)!.id);
       continue;
     }
-    // Además del texto, cuentan la subsección del banco ("Banco · Cardiovascular") y la materia.
-    const qt = tokens(`${q.text} ${(q.source ?? "").replace(/banco( de preguntas)?/i, "")} ${subjectName.get(q.subject_id) ?? ""}`);
     let best: { id: string; score: number } | null = null;
     for (const w of weeks) {
       if (isSim(w)) continue;

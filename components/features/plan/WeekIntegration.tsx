@@ -47,7 +47,7 @@ export function WeekIntegration({ week, days }: { week: PlanWeek; days: PlanDay[
       {info && (
         <dl className="grid gap-3 text-sm desk:grid-cols-2">
           {info.puentes.length > 0 && (
-            <Row icon={ArrowLeftRight} title="Puente (lunes a la noche)">
+            <Row icon={ArrowLeftRight} title="Puente con otra semana del eje">
               {info.puentes.map((p) => (
                 <Link key={p.week.id} href={`/plan?semana=${p.week.num}`} className="block font-semibold text-accent-text underline-offset-2 hover:underline">
                   {p.dir === "antes" ? "Recuperá" : "Anticipá"} la semana {p.week.num}: {p.week.title}
@@ -55,7 +55,7 @@ export function WeekIntegration({ week, days }: { week: PlanWeek; days: PlanDay[
               ))}
             </Row>
           )}
-          <Row icon={Layers3} title="Materia transversal (miércoles a la noche)">
+          <Row icon={Layers3} title="Materia transversal">
             {info.transversal.materia ? (
               <Link href={`/programa/materia/${info.transversal.materia}`} className="font-semibold text-accent-text underline-offset-2 hover:underline">
                 {info.transversal.name}

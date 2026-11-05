@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.21.0 — 2026-11-05
+
+- Plan maestro integrado como plantilla (Plan → Importar → Plan maestro): 24 semanas en 4 fases, un eje clínico por semana, temas troncales en orden de prioridad, patologías para el Temario y la plantilla DFDCT de cada semana. La semana 1 arranca el día que se carga y dura hasta el viernes 13 de noviembre; desde la 2 respeta las fechas del plan (de lunes a viernes, con el corte de fiestas).
+- Hoy sigue la distribución del plan maestro: a la mañana el tema troncal del día recorrido con DFDCT; a la noche, lunes patología del eje, martes diagnóstico diferencial, miércoles tratamiento y efectos adversos, jueves caso clínico integrador y viernes preguntas sin apuntes con el criterio para avanzar.
+- Cronograma integrado: toma el eje del código de cada semana ("E1 · …") y reparte mejor las preguntas: las que traían "semana N" de un cronograma anterior solo quedan en esa semana si tratan su tema.
+- Método: la plantilla pasa a ser DFDCT (definición, fisiopatología, diagnóstico, clínica, tratamiento, complicaciones, prevención e integración) y el criterio para avanzar, el del plan maestro.
+
 ## v0.20.0 — 2026-11-05
 
 - Hoy, rediseñado para el examen oral integrador: "Tu día" sigue un solo eje por día (el del tema de tu cronograma; si no hay, el de la ruta integrada) y se arma en dos bloques.

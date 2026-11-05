@@ -17,11 +17,12 @@ import { detectTopics } from "@/lib/plan-import/draft";
 import type { ImportOptions } from "@/lib/plan-import/schema";
 import type { PlanDraft } from "@/lib/plan-import/types";
 import { PlanPreview } from "./PlanPreview";
-import { BlankSource, DocxSource, JsonSource } from "./sources";
+import { BlankSource, DocxSource, JsonSource, MaestroSource } from "./sources";
 
-type Source = "docx" | "json" | "blank";
+type Source = "maestro" | "docx" | "json" | "blank";
 
 const SOURCES = [
+  { value: "maestro", label: "Plan maestro" },
   { value: "docx", label: "Subir .docx" },
   { value: "json", label: "Pegar JSON" },
   { value: "blank", label: "En blanco" },
@@ -31,7 +32,7 @@ export function ImportWizard() {
   const db = useDB();
   const router = useRouter();
   const toast = useToast();
-  const [source, setSource] = useState<Source>("docx");
+  const [source, setSource] = useState<Source>("maestro");
   const [draft, setDraft] = useState<PlanDraft | null>(null);
   const [warnings, setWarnings] = useState<string[]>([]);
   const [mode, setMode] = useState<ImportOptions["mode"]>("replace");
@@ -47,6 +48,7 @@ export function ImportWizard() {
     return (
       <Card className="flex flex-col gap-5 p-5 desk:p-7">
         <SegmentedControl label="Cómo traer el cronograma" options={SOURCES} value={source} onChange={setSource} fullWidth />
+        {source === "maestro" && <MaestroSource onDraft={(d, w) => (setDraft(d), setWarnings(w))} />}
         {source === "docx" && <DocxSource onDraft={(d, w) => (setDraft(d), setWarnings(w))} />}
         {source === "json" && <JsonSource onDraft={(d, w) => (setDraft(d), setWarnings(w))} />}
         {source === "blank" && <BlankSource onDraft={(d, w) => (setDraft(d), setWarnings(w))} />}

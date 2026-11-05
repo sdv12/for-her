@@ -117,7 +117,7 @@ export function EjeDetail({ id }: { id: string }) {
               <p className="text-sm text-muted">
                 Pasá cada una por la{" "}
                 <Link href="/programa/metodo#plantilla" className="font-semibold text-accent-text underline-offset-2 hover:underline">
-                  plantilla de razonamiento
+                  plantilla DFDCT
                 </Link>{" "}
                 ({PLANTILLA.length} apartados, de la definición a la integración).
               </p>

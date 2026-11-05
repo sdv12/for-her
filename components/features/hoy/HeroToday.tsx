@@ -69,7 +69,7 @@ export function HeroToday({ v, agenda, db }: { v: TodayView; agenda: Agenda; db:
         </div>
         {v.week?.tip && (
           <p className="mt-4 max-w-3xl text-[15px] text-hero-ink/90">
-            <span className="font-semibold text-hero-accent">Tip del tribunal:</span> {v.week.tip}
+            <span className="font-semibold text-hero-accent">{/^DFDCT/.test(v.week.tip) ? "Plantilla" : "Tip del tribunal"}:</span> {v.week.tip}
           </p>
         )}
         {list}

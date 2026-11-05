@@ -3,16 +3,16 @@
 export const IDEA_RECTORA =
   "No estudiar las materias como compartimentos separados. Elegir un problema clínico y reconstruirlo desde las distintas perspectivas que aportan las materias.";
 
+/** Plantilla DFDCT del plan maestro: cada apartado se responde en voz alta en 1 a 2 minutos. */
 export const PLANTILLA: Array<{ apartado: string; pregunta: string }> = [
-  { apartado: "Definición", pregunta: "¿Qué enfermedad o síndrome estoy estudiando?" },
-  { apartado: "Anatomía", pregunta: "¿Qué órgano, estructura o territorio está comprometido?" },
-  { apartado: "Fisiopatología", pregunta: "¿Qué mecanismo produce la enfermedad?" },
-  { apartado: "Patología", pregunta: "¿Qué lesión celular o tisular genera?" },
-  { apartado: "Clínica", pregunta: "¿Cómo se presenta y qué signos de alarma tiene?" },
-  { apartado: "Diagnóstico", pregunta: "¿Qué estudios confirman o descartan hipótesis?" },
-  { apartado: "Tratamiento", pregunta: "¿Qué medidas farmacológicas, quirúrgicas o de soporte corresponden?" },
-  { apartado: "Prevención", pregunta: "¿Cómo se evita, detecta precozmente o controla?" },
-  { apartado: "Integración", pregunta: "¿Qué otras materias permiten comprender mejor el caso?" },
+  { apartado: "Definición", pregunta: "¿Qué enfermedad o síndrome estudio? ¿Cuál es su criterio diagnóstico formal?" },
+  { apartado: "Fisiopatología", pregunta: "¿Qué mecanismo produce la enfermedad? ¿Qué órgano o sistema y por qué?" },
+  { apartado: "Diagnóstico", pregunta: "¿Qué estudios confirman o descartan? ¿Cuál es el gold standard?" },
+  { apartado: "Clínica", pregunta: "¿Cómo se presenta? ¿Cuáles son los signos de alarma que no puedo perder?" },
+  { apartado: "Tratamiento", pregunta: "¿Qué fármaco, cirugía o soporte corresponde? ¿Cuánto tiempo? ¿Cuándo es urgente?" },
+  { apartado: "Complicaciones", pregunta: "¿Qué puede pasar si no se trata o se trata mal?" },
+  { apartado: "Prevención", pregunta: "¿Cómo se evita, detecta precozmente o controla a nivel poblacional?" },
+  { apartado: "Integración", pregunta: "¿Qué otras materias permiten comprender mejor este caso?" },
 ];
 
 export const PIE_DIABETICO: Array<{ dimension: string; aplicacion: string }> = [
@@ -75,11 +75,11 @@ export const SEMANA_TIPO: Array<{ day: string; morning: string; night: string }>
 export const REGLA = "No estudiar dos veces lo mismo de la misma manera. La mañana sirve para comprender; la noche, para recuperar, conectar y aplicar.";
 
 export const CRITERIO_AVANCE =
-  "No pasar al siguiente eje por haber terminado de leer, sino cuando puedas explicar el caso, justificar el diagnóstico y defender la conducta terapéutica.";
+  "No avanzar de semana por haber leído, sino cuando puedas: explicar la fisiopatología del eje sin apuntes, construir 3 diagnósticos diferenciales, justificar el tratamiento y por qué no otro, conectar el tema con al menos 3 materias y responder las preguntas de prioridad alta del banco sin mirar la respuesta.";
 
 export const COMO_USARLO = [
   "Elegí un eje prioritario y una enfermedad concreta.",
-  "Completá la plantilla de razonamiento con tus fuentes de estudio.",
+  "Completá la plantilla DFDCT con tus fuentes de estudio.",
   "Identificá qué materias aportan conocimientos centrales y cuáles conexiones secundarias.",
   "Construí preguntas de recuperación y resolvé un caso clínico.",
   "Registrá errores y volvé a ellos en repasos espaciados.",
@@ -91,6 +91,7 @@ export const IDEA_FINAL =
 
 export const FUENTES = [
   "Plan de estudio integrado de Medicina (mapa de relaciones entre 14 materias), material orientativo.",
+  "Plan maestro integrado · examen de reingreso FCM-UNC (24 semanas, 10 ejes, plantilla DFDCT).",
   "FCM-UNC — Programas del plan de estudio de la carrera de Medicina, revisión 2024.",
   "FCM-UNC — Asignaturas de la carrera de Medicina por año.",
 ];

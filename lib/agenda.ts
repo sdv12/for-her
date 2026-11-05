@@ -8,7 +8,6 @@ import { selectActivePlan } from "@/lib/plan";
 import { toISODate } from "@/lib/plan-import/dates";
 import { getEje } from "@/lib/programa/ejes";
 import { casesForEje, ejesForText } from "@/lib/programa/match";
-import { getMateria } from "@/lib/programa/materias";
 import { routePosition, RUTA, sessionKey, sessionsFor } from "@/lib/programa/ruta";
 import type { Eje } from "@/lib/programa/types";
 
@@ -18,9 +17,9 @@ import type { Eje } from "@/lib/programa/types";
  * Integra tu cronograma, tus preguntas de examen y el plan integrado (lib/integracion.ts):
  * un solo eje por día (el de la semana de tu cronograma; si no hay, el de la ruta integrada) y dos bloques.
  * - Mañana · comprender: recuperar lo de ayer sin apuntes y el tema del cronograma (respetando su modo).
- * - Noche · recuperar y aplicar: una integración según el día (lunes puente con otra semana del mismo eje,
- *   martes y jueves caso clínico, miércoles materia transversal, viernes caso), una pregunta de la semana
- *   en voz alta y anotar errores.
+ * - Noche · recuperar y aplicar, como en el plan maestro: lunes patología del eje, martes diagnóstico
+ *   diferencial, miércoles tratamiento y efectos adversos, jueves caso clínico integrador, viernes criterio
+ *   para avanzar; todas las noches una pregunta de la semana en voz alta y anotar errores.
  * Sábado: errores, repaso espaciado (preguntas de alta prioridad de hace 1 y 3 semanas) y caso acumulativo.
  * Domingo: descanso. A 3 semanas del examen, la noche pasa a ser simulacro en modo tribunal.
  * Cada fuente es opcional: con cronograma, con ruta, con las dos o sin ninguna el día se arma igual.
@@ -212,38 +211,30 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
         if (!/caso/i.test(routeSession.n)) pushCaso();
       } else if (examClose) {
         pushCaso();
-      } else if (jsDay === 1 && week?.puentes.length) {
-        const p = week.puentes[0];
-        items.push({
-          key: "puente",
-          slot: "noche",
-          source: "puente",
-          label: `20 min · puente con la semana ${p.week.num}`,
-          text:
-            p.dir === "antes"
-              ? `Recuperá «${p.week.title}» sin apuntes y explicá qué de eso usás en el tema de esta semana.`
-              : `Anticipá la clínica: lo de esta semana se usa en «${p.week.title}». ¿Para qué te sirve?`,
-          done: checked("puente"),
-          action: check("puente"),
-          href: `/plan?semana=${p.week.num}`,
-        });
-      } else if (jsDay === 3 && week?.transversalQuestions.length) {
-        const pool = week.transversalQuestions.filter((q) => q.priority <= 2);
-        const list = pool.length ? pool : week.transversalQuestions;
-        const q = list.find((x) => !practiced.has(x.id)) ?? list[n % list.length];
-        items.push({
-          key: "transversal",
-          slot: "noche",
-          source: "transversal",
-          label: `20 min · materia transversal: ${week.transversal.name}`,
-          text: q.text,
-          done: practiced.has(q.id) && oralToday,
-          action: { type: "link", href: `/simulacro?pregunta=${q.id}` },
-        });
-      } else if (jsDay === 1 || jsDay === 3) {
-        pushConectar(eje);
       } else {
-        pushCaso();
+        // Noche según el plan maestro: lunes patología, martes diferencial, miércoles tratamiento,
+        // jueves caso integrador, viernes preguntas sin apuntes y criterio para avanzar.
+        const fila = (materia: string) => eje.filas.find((f) => f.materia === materia)?.text;
+        if (jsDay === 1) {
+          items.push({ key: "patologia", slot: "noche", source: "conectar", label: "20 min · patología del eje", text: fila("patologia") ?? eje.conexion, done: checked("patologia"), action: check("patologia"), href: `/programa/eje/${eje.id}` });
+        } else if (jsDay === 2) {
+          items.push({ key: "diferencial", slot: "noche", source: "conectar", label: "20 min · diagnóstico diferencial", text: `Armá 3 hipótesis para el tema de hoy y cómo descartarías cada una. Para orientarte: ${eje.diferenciales}`, done: checked("diferencial"), action: check("diferencial"), href: `/programa/eje/${eje.id}` });
+        } else if (jsDay === 3) {
+          items.push({ key: "tratamiento", slot: "noche", source: "conectar", label: "20 min · tratamiento y efectos adversos", text: `${eje.tratamiento} ¿Por qué ese tratamiento y no otro?`, done: checked("tratamiento"), action: check("tratamiento"), href: `/programa/eje/${eje.id}` });
+        } else if (jsDay === 4) {
+          pushCaso();
+        } else {
+          items.push({
+            key: "criterio",
+            slot: "noche",
+            source: "conectar",
+            label: "Criterio para avanzar",
+            text: "¿Explicás la fisiopatología sin apuntes, armás 3 diferenciales, justificás el tratamiento, conectás 3 materias y respondés las preguntas de prioridad alta?",
+            done: checked("criterio"),
+            action: check("criterio"),
+            href: `/programa/eje/${eje.id}`,
+          });
+        }
       }
       pushOral();
     }
@@ -292,15 +283,8 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
       ? [`Simulación oral${sem}`, `${planDay!.content}. En voz alta y sin apuntes.`, "/simulacro?modo=tribunal"]
       : /recall puro|repaso/.test(mode)
         ? [`Repaso activo${sem}`, `${planDay!.content}. Sin apuntes, en voz alta.`, undefined]
-        : [`35 min · cronograma${sem}`, `${planDay!.content}. Cerrá con un esquema de memoria.`, undefined];
+        : [`35 min · cronograma${sem}`, `${planDay!.content}. Recorrelo con DFDCT: definición, fisiopatología, diagnóstico, clínica y tratamiento.`, undefined];
     items.push({ key: `plan-${planDay!.id}`, slot: "manana", source: "cronograma", label, text, done: Boolean(planDay!.done_at), action: { type: "plan-day", dayId: planDay!.id }, href });
-  }
-
-  function pushConectar(e: Eje) {
-    const filas = e.filas.filter((f) => f.peso === "central");
-    const fila = filas[n % filas.length];
-    const materia = getMateria(fila.materia)!;
-    items.push({ key: "conectar", slot: "noche", source: "conectar", label: `20 min · conectá con ${materia.name}`, text: fila.text, done: checked("conectar"), action: check("conectar"), href: `/programa/eje/${e.id}` });
   }
 
   function pushCaso() {
@@ -318,7 +302,7 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
       key: "caso",
       slot: "noche",
       source: "caso",
-      label: "25 min · caso del día",
+      label: "25 min · caso clínico integrador",
       text: `${patientLabel(pick.patient)} (${eje.title.split(",")[0].toLowerCase()})`,
       done: cases.some((c) => playedToday.has(c.id)),
       action: { type: "link", href: `/casos/${pick.id}` },

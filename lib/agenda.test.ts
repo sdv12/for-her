@@ -12,14 +12,17 @@ describe("Tu día (Hoy) para un examen oral integrador", () => {
     const a = selectAgenda(db, at("2026-10-06")); // martes de la semana 1 (tórax)
     expect(a.focus).toBe("cronograma");
     expect(a.eje?.id).toBe("respiratorio"); // el eje es el de la semana, no el de cada día
-    expect(shape(a)).toEqual(["manana:recuperar", "manana:cronograma", "noche:caso", "noche:oral", "noche:errores", "dia:tarjetas", "dia:errores"]);
+    // Martes a la noche: diagnóstico diferencial (como en el plan maestro).
+    expect(shape(a)).toEqual(["manana:recuperar", "manana:cronograma", "noche:conectar", "noche:oral", "noche:errores", "dia:tarjetas", "dia:errores"]);
+    expect(a.items.find((i) => i.slot === "noche")?.key).toBe("diferencial");
     expect(a.items.find((i) => i.source === "recuperar")?.text).toContain("Tráquea");
     // La pregunta oral es de ESTA semana del cronograma.
     expect(a.items.find((i) => i.source === "oral")?.text).toMatch(/tráquea/i);
-    // Lunes: puente con otra semana del mismo eje; miércoles: conectar (sin preguntas de la materia transversal).
-    expect(shape(selectAgenda(db, at("2026-10-05")))).toContain("noche:puente");
-    expect(selectAgenda(db, at("2026-10-05")).items.find((i) => i.source === "puente")?.href).toBe("/plan?semana=3");
-    expect(shape(selectAgenda(db, at("2026-10-07")))).toContain("noche:conectar");
+    // Lunes patología, miércoles tratamiento, jueves caso integrador, viernes criterio para avanzar.
+    const night = (d: string) => selectAgenda(db, at(d)).items.find((i) => i.slot === "noche")?.key;
+    expect(night("2026-10-05")).toBe("patologia");
+    expect(night("2026-10-07")).toBe("tratamiento");
+    expect(night("2026-10-08")).toBe("caso");
   });
 
   it("solo con la ruta: el tema y la conexión salen de la sesión de la ruta", () => {
@@ -62,9 +65,9 @@ describe("Tu día (Hoy) para un examen oral integrador", () => {
 
   it("los tildes propios del día se leen de day_checks y las tareas del Tablero se suman", () => {
     const db = buildSeed(at("2026-10-06"));
-    db.day_checks = ["2026-10-07|conectar"];
+    db.day_checks = ["2026-10-07|tratamiento"];
     db.tasks.push({ ...db.tasks[0], id: "x", origin: "mia", plan_day_id: null, title: "Resumen de shock", due_date: "2026-10-06", status: "pend" });
-    expect(selectAgenda(db, at("2026-10-07")).items.find((i) => i.source === "conectar")?.done).toBe(true);
+    expect(selectAgenda(db, at("2026-10-07")).items.find((i) => i.key === "tratamiento")?.done).toBe(true);
     expect(selectAgenda(db, at("2026-10-06")).items.find((i) => i.source === "tablero")?.text).toBe("Resumen de shock");
   });
 });

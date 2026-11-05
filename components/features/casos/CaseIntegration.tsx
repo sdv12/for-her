@@ -43,9 +43,9 @@ export function CaseIntegration({ c }: { c: ClinicalCase }) {
       <p className="text-sm text-muted">
         Para cerrarlo, contalo con la{" "}
         <Link href="/programa/metodo#plantilla" className="font-semibold text-accent-text underline-offset-2 hover:underline">
-          plantilla de razonamiento
+          plantilla DFDCT
         </Link>
-        : definición, anatomía, fisiopatología, patología, clínica, diagnóstico, tratamiento, prevención e integración.
+        : definición, fisiopatología, diagnóstico, clínica y tratamiento, más complicaciones, prevención e integración.
       </p>
     </div>
   );

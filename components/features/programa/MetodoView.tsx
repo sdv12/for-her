@@ -94,8 +94,8 @@ export function MetodoView() {
         </Section>
 
         <div className="grid items-start gap-8 desk:grid-cols-2">
-          <Section title="Plantilla de razonamiento clínico" id="plantilla">
-            <p className="text-sm text-muted">Para cada enfermedad, la misma estructura. No hace falta escribir páginas: tenés que poder responder cada apartado en voz alta.</p>
+          <Section title="Plantilla DFDCT" id="plantilla">
+            <p className="text-sm text-muted">Definición, fisiopatología, diagnóstico, clínica y tratamiento, más complicaciones, prevención e integración. Para cada enfermedad tenés que poder responder cada apartado en voz alta en 1 a 2 minutos.</p>
             <ol className="divide-y divide-line overflow-hidden rounded-card border border-line bg-surface">
               {PLANTILLA.map((p, i) => (
                 <li key={p.apartado} className="flex gap-3 p-3.5">
