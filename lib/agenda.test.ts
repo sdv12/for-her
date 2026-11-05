@@ -42,6 +42,15 @@ describe("Tu día (Hoy) para un examen oral integrador", () => {
     expect(a.items.find((i) => i.slot === "manana" && i.source === "ruta")?.done).toBe(true);
   });
 
+  it("si el día del cronograma es una simulación oral, no lo trata como estudio ni repite el oral a la noche", () => {
+    const db = buildSeed(at("2026-10-06"));
+    const a = selectAgenda(db, at("2026-10-02")); // viernes 2: "Simulación: Describime la tráquea…"
+    const plan = a.items.find((i) => i.source === "cronograma")!;
+    expect(plan.label).toMatch(/^Simulación oral/);
+    expect(plan.href).toBe("/simulacro?modo=tribunal");
+    expect(a.items.some((i) => i.source === "oral")).toBe(false);
+  });
+
   it("sábado de repaso y caso acumulativo; domingo de descanso", () => {
     const db = buildSeed(at("2026-10-06"));
     expect(shape(selectAgenda(db, at("2026-10-10")))).toEqual(["manana:errores", "noche:caso", "noche:oral", "dia:tarjetas"]);

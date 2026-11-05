@@ -8,6 +8,7 @@
   - En cualquier momento: tarjetas vencidas, un error para repasar y tus tareas del Tablero.
   - El sábado es de repaso de errores y caso acumulativo; el domingo, de descanso; a tres semanas del examen, la noche pasa a ser simulacro en modo tribunal.
   - La ruta integrada ya no compite con el cronograma: manda los días sin cronograma.
+  - Respeta el modo de cada día del cronograma: si es simulación oral, la mañana es la simulación (sin sumar otra pregunta a la noche); si es repaso activo, sin apuntes y en voz alta.
 - Errores: "Anotá en Errores" desde Hoy abre directo el formulario.
 
 ## v0.19.0 — 2026-11-05

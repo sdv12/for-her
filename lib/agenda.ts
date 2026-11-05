@@ -112,6 +112,8 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
       ? routeEje
       : null;
 
+  // Si el cronograma ya pone una simulación oral, la noche no suma otra pregunta en voz alta.
+  const isSimulation = !!planDay && /simulaci/i.test(planDay.mode);
   const played = new Set(db.case_attempts.map((a) => a.case_id));
   const playedToday = new Set(db.case_attempts.filter((a) => toISODate(new Date(a.created_at)) === today).map((a) => a.case_id));
 
@@ -244,18 +246,19 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
   return { items, route, eje, focus, kind, examClose, done: markable.filter((i) => i.done).length, total: markable.length };
 
   function pushPlanDay() {
-    items.push({
-      key: `plan-${planDay!.id}`,
-      slot: "manana",
-      source: "cronograma",
-      label: `35 min · cronograma${planWeek ? `, semana ${planWeek.num}` : ""}`,
-      text: `${planDay!.content}. Cerrá con un esquema de memoria.`,
-      done: Boolean(planDay!.done_at),
-      action: { type: "plan-day", dayId: planDay!.id },
-    });
+    // Respeta el modo del día del cronograma: estudio, repaso activo o simulación oral.
+    const mode = planDay!.mode.toLowerCase();
+    const sem = planWeek ? `, semana ${planWeek.num}` : "";
+    const [label, text, href] = isSimulation
+      ? [`Simulación oral${sem}`, `${planDay!.content}. En voz alta y sin apuntes.`, "/simulacro?modo=tribunal"]
+      : /recall puro|repaso/.test(mode)
+        ? [`Repaso activo${sem}`, `${planDay!.content}. Sin apuntes, en voz alta.`, undefined]
+        : [`35 min · cronograma${sem}`, `${planDay!.content}. Cerrá con un esquema de memoria.`, undefined];
+    items.push({ key: `plan-${planDay!.id}`, slot: "manana", source: "cronograma", label, text, done: Boolean(planDay!.done_at), action: { type: "plan-day", dayId: planDay!.id }, href });
   }
 
   function pushOral() {
+    if (isSimulation) return;
     // Una pregunta de tu banco del eje del día (las más tomadas primero); si no hay, la conexión del eje.
     const qs = db.exam_questions
       .filter((q) => !eje || ejesForText(q.text, 3).some((e) => e.id === eje.id))
