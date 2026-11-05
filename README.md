@@ -1,6 +1,6 @@
 # For her
 
-App de estudio personal para preparar un examen oral integrador de medicina: plan diario, tablero, tarjetas con repaso espaciado, simulacro y modo tribunal, cuaderno de errores, foco (pomodoro), registros y temario.
+App de estudio personal para preparar un examen oral integrador de medicina: plan diario, programa integrado (ejes clínicos, materias de la FCM-UNC por año y ruta de 12 semanas), tablero, tarjetas con repaso espaciado, simulacro y modo tribunal, cuaderno de errores, foco (pomodoro), registros y temario.
 
 > **Versión de prueba.** Todavía no tiene backend: los datos viven en el navegador (localStorage) y no se sincronizan entre dispositivos. Desde **Ajustes → Tus datos** podés exportar un respaldo y restaurarlo en otro dispositivo.
 

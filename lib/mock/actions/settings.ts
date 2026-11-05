@@ -56,6 +56,7 @@ const backupSchema = z.object({
     daily_goal_min: z.number(),
     theme: z.enum(["system", "light", "dark"]),
   }),
+  route: z.object({ start: z.string().nullable(), done: z.array(z.string()) }).optional(),
   ...Object.fromEntries(TABLES.map((t) => [t, z.array(z.object({ id: z.string() }).loose())])),
 });
 
@@ -109,6 +110,7 @@ export function startFresh() {
     focus_sessions: [],
     syllabus_topics: [],
     case_attempts: [],
+    route: { start: null, done: [] },
   });
 }
 

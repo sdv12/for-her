@@ -12,6 +12,7 @@ import { addDays, format, parseISO } from "date-fns";
 import { DayForm } from "./DayForm";
 import { DayRow } from "./DayRow";
 import { phaseColor, phaseLabel } from "./phase";
+import { WeekIntegration } from "./WeekIntegration";
 
 type Props = {
   week: PlanWeek;
@@ -91,6 +92,8 @@ export function WeekDetail({ week, phase, days, today, onToggle, onUpdate, onAdd
           )}
         </div>
       )}
+
+      <WeekIntegration week={week} days={days} />
 
       <ul className="mt-3 divide-y divide-line">
         {days.map((day) => (

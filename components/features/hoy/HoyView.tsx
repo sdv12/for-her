@@ -8,6 +8,7 @@ import { useDB } from "@/lib/mock/store";
 import { selectToday } from "@/lib/today";
 import { HeroToday } from "./HeroToday";
 import { RecentMistakes } from "./RecentMistakes";
+import { RouteToday } from "./RouteToday";
 import { Shortcuts } from "./Shortcuts";
 import { TodayStats } from "./TodayStats";
 import { WeekChecklist } from "./WeekChecklist";
@@ -40,6 +41,7 @@ export function HoyView() {
       <PageHeader kicker={dateLabel.charAt(0).toUpperCase() + dateLabel.slice(1)} title={name ? `Hola, ${name}` : "Hoy"} />
       <div className="flex flex-col gap-5">
         <HeroToday v={v} />
+        <RouteToday db={db} today={v.today} />
         <TodayStats v={v} />
         <div className="grid items-start gap-5 desk:grid-cols-[1.35fr_1fr]">
           <WeekChecklist v={v} />

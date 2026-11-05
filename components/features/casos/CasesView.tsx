@@ -15,10 +15,24 @@ import { ageBand, FREQUENCY_LABEL, LEVEL_LABEL, patientLabel, rankFor, type AgeB
 import type { CaseArea, CaseLevel, ClinicalCase, Sex } from "@/lib/cases/types";
 import type { CaseAttempt } from "@/lib/data/types";
 import { useDB } from "@/lib/mock/store";
+import { EJES, getEje } from "@/lib/programa/ejes";
+import { matchesCase } from "@/lib/programa/match";
+import { getMateria, MATERIAS } from "@/lib/programa/materias";
 import { PatientIcon, Stars } from "./bits";
 
-type Filters = { level: CaseLevel | 0; band: AgeBand | ""; sex: Sex | ""; area: CaseArea | ""; state: "todos" | "nuevos" | "resueltos" | "mejorar" };
-const INITIAL: Filters = { level: 0, band: "", sex: "", area: "", state: "todos" };
+type Filters = {
+  level: CaseLevel | 0;
+  band: AgeBand | "";
+  sex: Sex | "";
+  area: CaseArea | "";
+  state: "todos" | "nuevos" | "resueltos" | "mejorar";
+  /** Del Programa integrado: eje clínico y materia de la FCM. */
+  eje: string;
+  materia: string;
+};
+const INITIAL: Filters = { level: 0, band: "", sex: "", area: "", state: "todos", eje: "", materia: "" };
+// Anatomía y Patología entran en todos los casos: no sirven como filtro.
+const MATERIAS_FILTRO = MATERIAS.filter((m) => !m.match.all);
 const BANDS: AgeBand[] = ["Lactantes", "Niñez", "Adolescencia", "Adultez", "Adultez mayor"];
 
 /** Mejor intento de cada caso (más estrellas). */
@@ -41,10 +55,12 @@ function matchesState(state: Filters["state"], best: CaseAttempt | undefined) {
   return !!best && total(best) < 7; // "Para mejorar": resuelto con menos de 7 de 9 estrellas
 }
 
-export function CasesView() {
+export function CasesView({ initialEje = "", initialMateria = "" }: { initialEje?: string; initialMateria?: string }) {
   const db = useDB();
   const router = useRouter();
-  const [f, setF] = useState<Filters>(INITIAL);
+  const [f, setF] = useState<Filters>({ ...INITIAL, eje: initialEje, materia: initialMateria });
+  const eje = f.eje ? getEje(f.eje) : undefined;
+  const materia = f.materia ? getMateria(f.materia) : undefined;
 
   const attempts = useMemo(() => db?.case_attempts ?? [], [db]);
   const best = useMemo(() => bestAttempts(attempts), [attempts]);
@@ -58,6 +74,8 @@ export function CasesView() {
       (!f.band || ageBand(c.patient) === f.band) &&
       (!f.sex || c.patient.sex === f.sex) &&
       (!f.area || c.area === f.area) &&
+      (!eje || matchesCase(eje.match, c)) &&
+      (!materia || matchesCase(materia.match, c)) &&
       matchesState(f.state, best.get(c.id)),
   );
 
@@ -124,7 +142,7 @@ export function CasesView() {
               </Pill>
             ))}
           </div>
-          <div className="grid grid-cols-2 gap-3 desk:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 desk:grid-cols-3">
             <SelectField label="Edad" value={f.band} onChange={(e) => setF({ ...f, band: e.target.value as AgeBand | "" })}>
               <option value="">Todas</option>
               {BANDS.map((b) => (
@@ -147,6 +165,22 @@ export function CasesView() {
               <option value="nuevos">Sin resolver</option>
               <option value="resueltos">Resueltos</option>
               <option value="mejorar">Para mejorar</option>
+            </SelectField>
+            <SelectField label="Eje clínico" value={f.eje} onChange={(e) => setF({ ...f, eje: e.target.value })}>
+              <option value="">Todos</option>
+              {EJES.map((e) => (
+                <option key={e.id} value={e.id}>
+                  {e.title}
+                </option>
+              ))}
+            </SelectField>
+            <SelectField label="Materia" value={f.materia} onChange={(e) => setF({ ...f, materia: e.target.value })}>
+              <option value="">Todas</option>
+              {MATERIAS_FILTRO.map((m) => (
+                <option key={m.id} value={m.id}>
+                  {m.name}
+                </option>
+              ))}
             </SelectField>
           </div>
         </section>

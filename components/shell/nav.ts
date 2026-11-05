@@ -5,6 +5,7 @@ import {
   ListChecks,
   MessageCircleQuestionMark,
   Mic,
+  Network,
   NotebookPen,
   Settings,
   SquareKanban,
@@ -32,6 +33,7 @@ export const NAV: NavGroup[] = [
     items: [
       { href: "/hoy", label: "Hoy", icon: Sunrise },
       { href: "/plan", label: "Plan", icon: CalendarRange, badge: (b) => (b.semanaActual ? `Sem ${b.semanaActual}` : null) },
+      { href: "/programa", label: "Programa integrado", icon: Network },
       { href: "/tablero", label: "Tablero", icon: SquareKanban, badge: (b) => count(b.tareasAbiertas) },
       { href: "/registros", label: "Registros", icon: CalendarCheck },
     ],
@@ -57,7 +59,7 @@ export const NAV: NavGroup[] = [
 
 /** Pantallas que en el celular se abren desde "Más" (tienen botón ← para volver). */
 export const MORE_ITEMS: NavItem[] = [
-  ...["/casos", "/preguntas", "/registros", "/simulacro", "/errores", "/foco", "/temario"].map(
+  ...["/programa", "/casos", "/preguntas", "/registros", "/simulacro", "/errores", "/foco", "/temario"].map(
     (href) => NAV.flatMap((g) => g.items).find((i) => i.href === href)!,
   ),
   { href: "/ajustes", label: "Ajustes", icon: Settings },

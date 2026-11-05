@@ -22,7 +22,7 @@ export function Sidebar() {
 
   return (
     <aside className="fixed inset-y-0 left-0 hidden w-[260px] flex-col border-r border-line bg-canvas desk:flex">
-      <div className="flex flex-1 flex-col gap-5 overflow-y-auto px-4 pt-5 pb-4">
+      <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-4 pt-5 pb-4">
         <Link href="/hoy" className="self-start rounded-btn px-2 py-1">
           <Logo />
         </Link>
@@ -31,7 +31,7 @@ export function Sidebar() {
 
         <SidebarQuickAdd />
 
-        <nav aria-label="Secciones" className="flex flex-col gap-4">
+        <nav aria-label="Secciones" className="flex flex-col gap-3">
           {NAV.map((group) => (
             <div key={group.label}>
               <p className="mb-1 px-3 text-xs font-semibold tracking-wide text-muted uppercase">{group.label}</p>

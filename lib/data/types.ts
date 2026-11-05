@@ -160,6 +160,14 @@ export type CaseAttempt = Row & {
 
 export type SyllabusTopic = Row & { subject_id: string; name: string; level: 0 | 1 | 2 | 3; sort: number };
 
+/** Avance de la ruta integrada de 12 semanas (Programa). Agregado después de la v1: puede faltar. */
+export type RouteState = {
+  /** Fecha elegida para empezar (la ruta arranca el lunes de esa semana). */
+  start: ISODate | null;
+  /** Sesiones hechas ("semana-día-m|n") y respuestas de autoevaluación ("eval-eje-n"). */
+  done: string[];
+};
+
 export type DB = {
   version: 1;
   profile: Profile;
@@ -178,4 +186,5 @@ export type DB = {
   focus_sessions: FocusSession[];
   syllabus_topics: SyllabusTopic[];
   case_attempts: CaseAttempt[];
+  route?: RouteState;
 };

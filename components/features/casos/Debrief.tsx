@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Brain, BookOpen, Eye, Gavel, Dices, GraduationCap, Layers, Lightbulb, Mic, RotateCcw, Sparkles, TriangleAlert, Trophy } from "lucide-react";
+import { Brain, BookOpen, Network, Eye, Gavel, Dices, GraduationCap, Layers, Lightbulb, Mic, RotateCcw, Sparkles, TriangleAlert, Trophy } from "lucide-react";
 import { CardSheet } from "@/components/features/tarjetas/CardSheet";
 import { Button, buttonClasses } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -19,6 +19,7 @@ import { useDB } from "@/lib/mock/store";
 import { cn } from "@/lib/cn";
 import { RelevanceBadge, Stars } from "./bits";
 import { Quiz } from "./Quiz";
+import { CaseIntegration } from "./CaseIntegration";
 
 export type Outcome = { attempt: CaseAttempt; score: CaseScore & { hypothesisHit: boolean }; mistake: boolean; minutes: number };
 type Picks = { asked: string[]; examined: string[]; studies: string[]; mgmt: string[]; hypotheses: string[]; presentation: string };
@@ -194,6 +195,10 @@ export function Debrief({ c, outcome, picks, onRetry }: { c: ClinicalCase; outco
             </ul>
           </Section>
         </div>
+
+        <Section title="Cómo se integra" icon={<Network aria-hidden className="size-5" />}>
+          <CaseIntegration c={c} />
+        </Section>
 
         <Section title="Fuentes" icon={<BookOpen aria-hidden className="size-5" />}>
           <ul className="flex list-disc flex-col gap-1 pl-5 text-sm text-muted">

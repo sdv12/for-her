@@ -1,9 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ListChecks, Pencil, Plus } from "lucide-react";
+import Link from "next/link";
+import { ListChecks, Network, Pencil, Plus } from "lucide-react";
 import { PageHeader } from "@/components/shell/PageHeader";
-import { Button } from "@/components/ui/Button";
+import { Button, buttonClasses } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Dot } from "@/components/ui/Pill";
@@ -24,6 +25,8 @@ import {
   updateSubject,
 } from "@/lib/mock/actions/syllabus";
 import { useDB } from "@/lib/mock/store";
+import { fold } from "@/lib/plan-import/dates";
+import { MATERIAS, YEAR_LABEL } from "@/lib/programa/materias";
 import { colorForNewSubject, subjectColorVar } from "@/lib/subjects";
 import { LEVELS, mastery, nextLevel } from "@/lib/syllabus";
 import { SubjectSheet } from "./SubjectSheet";
@@ -48,9 +51,14 @@ export function SyllabusView() {
       backHref="/mas"
       backLabel="Volver a Más"
       actions={
-        <Button variant="secondary" onClick={() => setEditing(null)} disabled={!db}>
-          <Plus aria-hidden /> Nueva materia
-        </Button>
+        <>
+          <Link href="/programa/materias" className={buttonClasses({ variant: "secondary" })}>
+            <Network aria-hidden /> Materias de la FCM
+          </Link>
+          <Button variant="secondary" onClick={() => setEditing(null)} disabled={!db}>
+            <Plus aria-hidden /> Nueva materia
+          </Button>
+        </>
       }
     />
   );
@@ -113,6 +121,7 @@ export function SyllabusView() {
                     </Button>
                   </div>
                   {pct !== null && <ProgressBar label={`Dominio de ${subject.name}`} value={pct} tone="sage" className="mt-2" />}
+                  <ProgramaLink name={subject.name} />
 
                   <ul className="mt-4 flex flex-wrap gap-2">
                     {topics.map((t) => {
@@ -230,5 +239,16 @@ function AddTopic({ subjectName, onAdd }: { subjectName: string; onAdd: (name: s
         <Plus aria-hidden />
       </Button>
     </form>
+  );
+}
+
+/** Si la materia es una de las 14 del Programa integrado, vínculo a sus unidades oficiales. */
+function ProgramaLink({ name }: { name: string }) {
+  const m = MATERIAS.find((x) => [x.name, ...x.aliases].some((n) => fold(n) === fold(name)));
+  if (!m) return null;
+  return (
+    <Link href={`/programa/materia/${m.id}`} className="mt-2 inline-flex items-center gap-1.5 rounded-btn py-1 text-sm font-semibold text-accent-text hover:underline">
+      <Network aria-hidden className="size-4" /> Programa de la FCM · {YEAR_LABEL[m.year]}
+    </Link>
   );
 }

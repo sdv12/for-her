@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.18.0 — 2026-11-04
+
+- Programa integrado (sección nueva, en Planificar): une el plan de estudio integrado con los programas oficiales de la FCM-UNC (revisión 2024). No reemplaza ni modifica tu Plan, tu Temario ni tus casos: los complementa.
+  - Ejes clínicos: los 10 ejes integradores (diabetes, cardiovascular, infecciones, neoplasias, embarazo, trauma, renal, respiratorio, sistema nervioso, piel) y 10 problemas complementarios, cada uno con qué aporta cada materia (central o secundaria), la conexión que hay que poder explicar, las patologías troncales, los casos clínicos para practicarlo y una autoevaluación para tildar.
+  - Materias por año: las 14 materias ubicadas de 1.º a 5.º año, con las unidades troncales de sus programas, en qué ejes participan y sus casos. Un botón suma las unidades al Temario sin duplicar ni tocar lo que ya tenías, y desde ahí marcás tu nivel.
+  - Ruta de 12 semanas en 4 fases (bases, grandes síndromes, especialidades, integración), con una sesión de mañana y otra de noche por día para tildar. Elegís cuándo empieza y la sesión del día aparece en Hoy.
+  - Método: distribución mañana y noche, semana tipo, plantilla de razonamiento en 9 apartados, ejemplo del pie diabético, repasos espaciados, autoevaluación y criterio para avanzar.
+- Plan: cada semana de tu cronograma muestra qué ejes integra, la conexión para explicar y un caso para practicarla.
+- Casos clínicos: filtros por eje clínico y por materia, y en cada resolución una sección "Cómo se integra" con sus ejes y materias.
+- Temario: acceso a las materias de la FCM y, en las materias que coinciden, vínculo a su programa.
+- El respaldo exportado incluye el avance de la ruta.
+
 ## v0.17.0 — 2026-11-04
 
 - Casos clínicos: 50 casos nuevos (288 en total), todos con preguntas del tribunal, priorizando lo más frecuente en Argentina, en guardias, por edad y por sexo.
