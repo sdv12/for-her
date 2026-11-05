@@ -106,7 +106,7 @@ export function RutaView() {
               <div>
                 <h2 className="text-lg font-semibold">{moving ? "Mover el inicio de la ruta" : "¿Cuándo empezás?"}</h2>
                 <p className="text-sm text-muted">
-                  La ruta arranca el lunes de la semana que elijas y convive con tu Plan: no lo reemplaza ni lo modifica. {moving && "El avance se conserva."}
+                  La ruta arranca el lunes de la semana que elijas y convive con tu Plan: no lo reemplaza ni lo modifica. Los días que tu cronograma tiene tema, Hoy sigue ese tema (un solo eje por día) y la ruta manda los días sin cronograma. {moving && "El avance se conserva."}
                 </p>
               </div>
               <form

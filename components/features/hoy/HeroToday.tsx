@@ -13,7 +13,7 @@ import { TodayAgenda } from "./TodayAgenda";
 
 /**
  * Tarjeta héroe "Hoy toca": el tema del día (del cronograma o, si no hay, de la ruta integrada)
- * y adentro "Tu día", con todo lo que toca hoy junto: cronograma, ruta, tarjetas y Tablero.
+ * y adentro "Tu día": recuperar, estudiar, conectar, caso, oral y errores, más tarjetas y Tablero.
  */
 export function HeroToday({ v, agenda, db }: { v: TodayView; agenda: Agenda; db: DB }) {
   const list = <TodayAgenda agenda={agenda} db={db} />;
@@ -53,7 +53,7 @@ export function HeroToday({ v, agenda, db }: { v: TodayView; agenda: Agenda; db:
     const done = Boolean(v.day.done_at);
     return (
       <Shell
-        kicker={`Hoy toca · Semana ${v.week?.num ?? "?"}${v.phase ? ` · Fase ${phaseLabel(v.phase)}` : ""}${routeKicker ? ` · ${routeKicker}` : ""}`}
+        kicker={`Hoy toca · Semana ${v.week?.num ?? "?"}${v.phase ? ` · Fase ${phaseLabel(v.phase)}` : ""}`}
         title={v.day.content}
       >
         <div className="mt-4 flex flex-wrap gap-2">

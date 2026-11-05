@@ -30,12 +30,12 @@ const ORIGINS: Array<[Origin, string]> = [
   ["manual", "Anotados"],
 ];
 
-export function MistakesView() {
+export function MistakesView({ openNew = false }: { openNew?: boolean }) {
   const db = useDB();
   const toast = useToast();
   const [origin, setOrigin] = useState<Origin>("todos");
   const [reviewing, setReviewing] = useState(false);
-  const [panel, setPanel] = useState<Panel>(null);
+  const [panel, setPanel] = useState<Panel>(openNew ? { kind: "edit", id: null } : null);
 
   const data = useMemo(() => {
     if (!db) return null;

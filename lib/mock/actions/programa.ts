@@ -82,3 +82,14 @@ export function addMateriasToTemario(ids?: string[]): TemarioSummary {
     return summary;
   });
 }
+
+/** Tilde de un ítem de "Tu día" (Hoy). Devuelve si quedó hecho. Guarda solo las últimas 8 semanas. */
+export function toggleDayCheck(key: string): boolean {
+  return mutate((db) => {
+    const list = db.day_checks ?? [];
+    const has = list.includes(key);
+    const cutoff = new Date(Date.now() - 56 * 86_400_000).toISOString().slice(0, 10);
+    db.day_checks = (has ? list.filter((k) => k !== key) : [...list, key]).filter((k) => k.slice(0, 10) >= cutoff);
+    return !has;
+  });
+}

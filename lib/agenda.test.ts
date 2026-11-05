@@ -3,41 +3,66 @@ import { selectAgenda } from "./agenda";
 import { buildSeed } from "./mock/seed";
 
 const at = (iso: string) => new Date(`${iso}T12:00:00`);
+const shape = (a: ReturnType<typeof selectAgenda>) => a.items.map((i) => `${i.slot}:${i.source}`);
 
-describe("Tu día (agenda de Hoy)", () => {
-  it("junta cronograma y ruta en mañana y noche", () => {
+describe("Tu día (Hoy) para un examen oral integrador", () => {
+  it("con cronograma: un solo eje, mañana para comprender y noche para conectar, aplicar y decirlo en voz alta", () => {
     const db = buildSeed(at("2026-10-06"));
-    db.route = { start: "2026-10-05", done: ["1-1-n"] };
-    const a = selectAgenda(db, at("2026-10-06")); // martes: día del plan + sesión 2 de la ruta
-    expect(a.items.map((i) => `${i.slot}:${i.source}`).slice(0, 3)).toEqual(["manana:cronograma", "manana:ruta", "noche:ruta"]);
-    expect(a.route).toMatchObject({ week: 1, day: 1, ejeId: "diabetes" });
-    expect(a.items.find((i) => i.slot === "noche")?.done).toBe(true);
-    expect(a.total).toBe(3);
-    expect(a.done).toBe(1);
+    db.route = { start: "2026-10-05", done: [] }; // la ruta no compite con el cronograma
+    const a = selectAgenda(db, at("2026-10-06")); // martes: anatomía cardíaca
+    expect(a.focus).toBe("cronograma");
+    expect(a.eje?.id).toBe("cardiovascular");
+    expect(shape(a)).toEqual([
+      "manana:recuperar",
+      "manana:cronograma",
+      "noche:conectar",
+      "noche:caso",
+      "noche:oral",
+      "noche:errores",
+      "dia:tarjetas",
+      "dia:errores",
+    ]);
+    expect(a.items.find((i) => i.source === "recuperar")?.text).toContain("Tráquea");
+    // La pregunta oral sale de tu banco y es del eje del día.
+    expect(a.items.find((i) => i.source === "oral")?.action).toMatchObject({ type: "link" });
+    expect(a.items.find((i) => i.source === "oral")?.text).toMatch(/gasto cardíaco|Insuficiencia cardíaca/);
   });
 
-  it("sin ruta ni día del plan queda solo lo que haya (tarjetas)", () => {
+  it("solo con la ruta: el tema y la conexión salen de la sesión de la ruta", () => {
     const db = buildSeed(at("2026-10-06"));
-    const a = selectAgenda(db, at("2026-10-10")); // sábado sin día del plan
-    expect(a.route).toBeNull();
-    expect(a.items.every((i) => i.source === "tarjetas")).toBe(true);
-    expect(a.total).toBe(0);
+    db.plans = [];
+    db.route = { start: "2026-10-05", done: ["1-1-m"] };
+    const a = selectAgenda(db, at("2026-10-06"));
+    expect(a.focus).toBe("ruta");
+    expect(a.eje?.id).toBe("diabetes");
+    expect(shape(a).filter((s) => !s.startsWith("dia"))).toEqual(["manana:recuperar", "manana:ruta", "noche:ruta", "noche:caso", "noche:oral", "noche:errores"]);
+    // Si la noche de la ruta ya es un caso, no se suma otro.
+    const jueves = selectAgenda(db, at("2026-10-08"));
+    expect(shape(jueves).filter((x) => x === "noche:caso")).toEqual([]);
+    expect(a.items.find((i) => i.slot === "manana" && i.source === "ruta")?.done).toBe(true);
   });
 
-  it("el domingo de la ruta no tiene sesiones para marcar, y antes de empezar tampoco", () => {
+  it("sábado de repaso y caso acumulativo; domingo de descanso", () => {
     const db = buildSeed(at("2026-10-06"));
-    db.route = { start: "2026-10-05", done: [] };
-    expect(selectAgenda(db, at("2026-10-11")).items.some((i) => i.source === "ruta")).toBe(false);
-    db.route = { start: "2026-10-19", done: [] };
-    const before = selectAgenda(db, at("2026-10-06"));
-    expect(before.route?.status).toBe("antes");
-    expect(before.items.some((i) => i.source === "ruta")).toBe(false);
+    expect(shape(selectAgenda(db, at("2026-10-10")))).toEqual(["manana:errores", "noche:caso", "noche:oral", "dia:tarjetas"]);
+    expect(shape(selectAgenda(db, at("2026-10-11")))).toEqual(["manana:descanso", "dia:tarjetas"]);
   });
 
-  it("suma las tareas propias del Tablero que vencen hoy", () => {
+  it("a tres semanas del examen la noche pasa a ser simulacro en modo tribunal", () => {
     const db = buildSeed(at("2026-10-06"));
+    db.profile.exam_date = "2026-10-20";
+    const a = selectAgenda(db, at("2026-10-06"));
+    expect(a.examClose).toBe(true);
+    expect(a.items.find((i) => i.key === "simulacro")?.action).toEqual({ type: "link", href: "/simulacro?modo=tribunal" });
+    expect(a.items.some((i) => i.key === "caso")).toBe(false);
+  });
+
+  it("los tildes propios del día se leen de day_checks y las tareas del Tablero se suman", () => {
+    const db = buildSeed(at("2026-10-06"));
+    db.day_checks = ["2026-10-06|conectar"];
     db.tasks.push({ ...db.tasks[0], id: "x", origin: "mia", plan_day_id: null, title: "Resumen de shock", due_date: "2026-10-06", status: "pend" });
     const a = selectAgenda(db, at("2026-10-06"));
+    expect(a.items.find((i) => i.source === "conectar")?.done).toBe(true);
     expect(a.items.find((i) => i.source === "tablero")?.text).toBe("Resumen de shock");
   });
 });

@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.20.0 — 2026-11-05
+
+- Hoy, rediseñado para el examen oral integrador: "Tu día" sigue un solo eje por día (el del tema de tu cronograma; si no hay, el de la ruta integrada) y se arma en dos bloques.
+  - Mañana · comprender: recuperar sin apuntes lo del día anterior (10 min) y estudiar el tema del cronograma cerrando con un esquema (35 min).
+  - Noche · recuperar y aplicar: conectar el tema con otra materia del eje (20 min), el caso clínico del día (25 min), una pregunta de tu banco en voz alta como en el tribunal y anotar en Errores lo que no salió (15 min).
+  - En cualquier momento: tarjetas vencidas, un error para repasar y tus tareas del Tablero.
+  - El sábado es de repaso de errores y caso acumulativo; el domingo, de descanso; a tres semanas del examen, la noche pasa a ser simulacro en modo tribunal.
+  - La ruta integrada ya no compite con el cronograma: manda los días sin cronograma.
+- Errores: "Anotá en Errores" desde Hoy abre directo el formulario.
+
 ## v0.19.0 — 2026-11-05
 
 - Hoy: la tarjeta "Hoy toca" junta todo lo del día en "Tu día", ordenado en mañana, noche y en cualquier momento: el día del cronograma, las sesiones de la ruta integrada, las tarjetas para repasar y tus tareas del Tablero que vencen hoy. Cada parte es opcional: sirve con cronograma, con ruta o con las dos.

@@ -57,6 +57,7 @@ const backupSchema = z.object({
     theme: z.enum(["system", "light", "dark"]),
   }),
   route: z.object({ start: z.string().nullable(), done: z.array(z.string()) }).optional(),
+  day_checks: z.array(z.string()).optional(),
   ...Object.fromEntries(TABLES.map((t) => [t, z.array(z.object({ id: z.string() }).loose())])),
 });
 
@@ -111,6 +112,7 @@ export function startFresh() {
     syllabus_topics: [],
     case_attempts: [],
     route: { start: null, done: [] },
+    day_checks: [],
   });
 }
 

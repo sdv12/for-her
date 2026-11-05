@@ -187,4 +187,6 @@ export type DB = {
   syllabus_topics: SyllabusTopic[];
   case_attempts: CaseAttempt[];
   route?: RouteState;
+  /** Tildes de "Tu día" en Hoy ("YYYY-MM-DD|item"). Agregado después de la v1: puede faltar. */
+  day_checks?: string[];
 };
