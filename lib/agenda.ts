@@ -1,8 +1,9 @@
 import { addDays, format, parseISO } from "date-fns";
 import { CASES } from "@/lib/cases";
 import { patientLabel } from "@/lib/cases/engine";
-import type { DB } from "@/lib/data/types";
+import type { DB, ExamQuestion } from "@/lib/data/types";
 import { daysUntilExam } from "@/lib/dates";
+import { integratePlan, type WeekInfo } from "@/lib/integracion";
 import { selectActivePlan } from "@/lib/plan";
 import { toISODate } from "@/lib/plan-import/dates";
 import { getEje } from "@/lib/programa/ejes";
@@ -14,17 +15,32 @@ import type { Eje } from "@/lib/programa/types";
 /*
  * "Tu día", pensado para un examen oral integrador ante tribunal.
  *
- * Un solo eje por día (el del tema de tu cronograma; si no hay, el de la ruta integrada), y dos bloques:
- * - Mañana · comprender: recuperar lo de ayer sin apuntes y estudiar el tema.
- * - Noche · recuperar y aplicar: conectar con otra materia, resolver un caso, decirlo en voz alta como en el
- *   tribunal y anotar en Errores lo que no salió.
- * Más lo espaciado (tarjetas, un error para repasar) y tus tareas del Tablero.
- * Sábado: repaso de errores y caso acumulativo. Domingo: descanso. A 3 semanas del examen, la noche es simulacro.
+ * Integra tu cronograma, tus preguntas de examen y el plan integrado (lib/integracion.ts):
+ * un solo eje por día (el de la semana de tu cronograma; si no hay, el de la ruta integrada) y dos bloques.
+ * - Mañana · comprender: recuperar lo de ayer sin apuntes y el tema del cronograma (respetando su modo).
+ * - Noche · recuperar y aplicar: una integración según el día (lunes puente con otra semana del mismo eje,
+ *   martes y jueves caso clínico, miércoles materia transversal, viernes caso), una pregunta de la semana
+ *   en voz alta y anotar errores.
+ * Sábado: errores, repaso espaciado (preguntas de alta prioridad de hace 1 y 3 semanas) y caso acumulativo.
+ * Domingo: descanso. A 3 semanas del examen, la noche pasa a ser simulacro en modo tribunal.
  * Cada fuente es opcional: con cronograma, con ruta, con las dos o sin ninguna el día se arma igual.
  */
 
 export type AgendaSlot = "manana" | "noche" | "dia";
-export type AgendaSource = "cronograma" | "ruta" | "recuperar" | "conectar" | "caso" | "oral" | "errores" | "tarjetas" | "tablero" | "descanso";
+export type AgendaSource =
+  | "cronograma"
+  | "ruta"
+  | "recuperar"
+  | "conectar"
+  | "puente"
+  | "transversal"
+  | "caso"
+  | "oral"
+  | "espaciado"
+  | "errores"
+  | "tarjetas"
+  | "tablero"
+  | "descanso";
 
 export type AgendaAction =
   | { type: "plan-day"; dayId: string }
@@ -54,6 +70,8 @@ export type Agenda = {
   eje: Eje | null;
   /** De dónde sale el tema del día. */
   focus: "cronograma" | "ruta" | null;
+  /** La semana de tu cronograma con su capa integrada (si hay cronograma). */
+  week: WeekInfo | null;
   kind: "habil" | "sabado" | "domingo";
   examClose: boolean;
   done: number;
@@ -69,6 +87,8 @@ function seed(date: string): number {
   return Math.floor(parseISO(date).getTime() / 86_400_000);
 }
 
+const short = (s: string, max = 70) => (s.length > max ? `${s.slice(0, max - 1).trimEnd()}…` : s);
+
 export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
   const today = toISODate(now);
   const yesterday = format(addDays(parseISO(today), -1), "yyyy-MM-dd");
@@ -81,14 +101,18 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
   const items: AgendaItem[] = [];
   const check = (id: string): AgendaAction => ({ type: "check", key: dayKey(today, id) });
   const checked = (id: string) => checks.has(dayKey(today, id));
+  const practiced = new Set(db.simulations.map((s) => s.question_id).filter(Boolean));
+  const oralToday = db.simulations.some((s) => toISODate(new Date(s.created_at)) === today);
 
-  // 1. Tema del día: cronograma primero; si no hay día del cronograma, la ruta integrada.
+  // 1. Tu cronograma y su capa integrada.
   const view = selectActivePlan(db);
   const allDays = view ? view.weeks.flatMap((w) => view.daysByWeek.get(w.id) ?? []) : [];
   const planDay = allDays.find((d) => d.date === today) ?? null;
-  const planWeek = planDay && view ? view.weeks.find((w) => w.id === planDay.week_id) : undefined;
   const prevPlanDay = allDays.filter((d) => d.date < today).sort((a, b) => b.date.localeCompare(a.date))[0] ?? null;
+  const currentWeek = view ? (planDay ? view.weeks.find((w) => w.id === planDay.week_id) : view.weeks.find((w) => w.start_date <= today && today <= w.end_date)) : undefined;
+  const week: WeekInfo | null = view && currentWeek ? (integratePlan(db, view).get(currentWeek.id) ?? null) : null;
 
+  // 2. Ruta integrada (manda solo los días sin cronograma).
   let route: RouteToday | null = null;
   let routeSession: { m: string; n: string; week: number; day: number } | null = null;
   let routeEje: Eje | null = null;
@@ -107,7 +131,7 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
 
   const focus: Agenda["focus"] = planDay ? "cronograma" : routeSession ? "ruta" : null;
   const eje: Eje | null = planDay
-    ? (ejesForText(`${planDay.content} ${planWeek?.title ?? ""}`, 1)[0] ?? ejesForText(planWeek?.title ?? "", 1)[0] ?? null)
+    ? (week?.eje ?? ejesForText(`${planDay.content} ${currentWeek?.title ?? ""}`, 1)[0] ?? null)
     : routeSession
       ? routeEje
       : null;
@@ -120,7 +144,6 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
   if (kind === "domingo") {
     items.push({ key: "descanso", slot: "manana", source: "descanso", label: "Domingo", text: "Descanso o recuperación liviana. Sin obligación de estudio.", done: false, action: { type: "link", href: "/hoy" } });
   } else if (kind === "sabado") {
-    // Sábado: errores de la semana a la mañana, caso acumulativo a la noche.
     const openMistakes = db.mistakes.filter((m) => !m.resolved_at).length;
     items.push({
       key: "errores-semana",
@@ -133,6 +156,20 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
       href: "/errores",
     });
     if (planDay) pushPlanDay();
+    if (week?.spaced.length) {
+      const weeksLabel = [...new Set(week.spaced.map((q) => q.source?.match(/semana (\d+)/i)?.[1]).filter(Boolean))].join(" y ");
+      const first = week.spaced.find((q) => !practiced.has(q.id)) ?? week.spaced[0];
+      items.push({
+        key: "espaciado",
+        slot: "manana",
+        source: "espaciado",
+        label: `Repaso espaciado${weeksLabel ? ` · semanas ${weeksLabel}` : ""}`,
+        text: `${week.spaced.length} preguntas de prioridad alta, en voz alta. Empezá por: «${short(first.text)}»`,
+        done: checked("espaciado"),
+        action: check("espaciado"),
+        href: `/simulacro?pregunta=${first.id}`,
+      });
+    }
     const pool = CASES.filter((c) => played.has(c.id));
     const acumulativo = pool.length ? pool[n % pool.length] : CASES[n % CASES.length];
     items.push({
@@ -144,12 +181,11 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
       done: playedToday.size > 0,
       action: { type: "link", href: `/casos/${acumulativo.id}` },
     });
-    pushOral();
+    if (!week?.spaced.length) pushOral();
   } else {
     // Día hábil. Mañana: recuperar lo de ayer y estudiar el tema.
     const prevText = prevPlanDay && prevPlanDay.date >= format(addDays(parseISO(today), -4), "yyyy-MM-dd") ? prevPlanDay.content : null;
-    const prevRoute =
-      !prevText && routeSession && routeSession.day > 0 ? sessionsFor(RUTA[routeSession.week - 1])[routeSession.day - 1].morning : null;
+    const prevRoute = !prevText && routeSession && routeSession.day > 0 ? sessionsFor(RUTA[routeSession.week - 1])[routeSession.day - 1].morning : null;
     const recall = prevText ?? prevRoute;
     if (recall) {
       items.push({
@@ -168,43 +204,46 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
       items.push({ key: `ruta-${key}`, slot: "manana", source: "ruta", label: `Ruta · semana ${routeSession.week}`, text: routeSession.m, done: (db.route?.done ?? []).includes(key), action: { type: "route", key } });
     }
 
-    // Noche: conectar, caso, oral, errores.
+    // Noche: una integración según el día, la pregunta oral y el cierre.
     if (eje) {
       if (focus === "ruta" && routeSession) {
         const key = sessionKey(routeSession.week, routeSession.day, "n");
         items.push({ key: `ruta-${key}`, slot: "noche", source: "ruta", label: `Ruta · semana ${routeSession.week}`, text: routeSession.n, done: (db.route?.done ?? []).includes(key), action: { type: "route", key } });
-      } else {
-        const filas = eje.filas.filter((f) => f.peso === "central");
-        const fila = filas[n % filas.length];
-        const materia = getMateria(fila.materia)!;
+        if (!/caso/i.test(routeSession.n)) pushCaso();
+      } else if (examClose) {
+        pushCaso();
+      } else if (jsDay === 1 && week?.puentes.length) {
+        const p = week.puentes[0];
         items.push({
-          key: "conectar",
+          key: "puente",
           slot: "noche",
-          source: "conectar",
-          label: `20 min · conectá con ${materia.name}`,
-          text: fila.text,
-          done: checked("conectar"),
-          action: check("conectar"),
-          href: `/programa/eje/${eje.id}`,
+          source: "puente",
+          label: `20 min · puente con la semana ${p.week.num}`,
+          text:
+            p.dir === "antes"
+              ? `Recuperá «${p.week.title}» sin apuntes y explicá qué de eso usás en el tema de esta semana.`
+              : `Anticipá la clínica: lo de esta semana se usa en «${p.week.title}». ¿Para qué te sirve?`,
+          done: checked("puente"),
+          action: check("puente"),
+          href: `/plan?semana=${p.week.num}`,
         });
-      }
-      if (examClose) {
-        items.push({ key: "simulacro", slot: "noche", source: "oral", label: "Falta poco para el examen", text: "Simulacro en modo tribunal: preguntas encadenadas, en voz alta.", done: db.simulations.some((s) => toISODate(new Date(s.created_at)) === today && s.mode === "tribunal"), action: { type: "link", href: "/simulacro?modo=tribunal" } });
-      } else if (!(focus === "ruta" && routeSession && /caso/i.test(routeSession.n))) {
-        const cases = casesForEje(eje);
-        const pending = cases.filter((c) => !played.has(c.id));
-        const pick = (pending.length ? pending : cases)[n % Math.max(1, (pending.length ? pending : cases).length)];
-        if (pick) {
-          items.push({
-            key: "caso",
-            slot: "noche",
-            source: "caso",
-            label: "25 min · caso del día",
-            text: `${patientLabel(pick.patient)} (${eje.title.split(",")[0].toLowerCase()})`,
-            done: cases.some((c) => playedToday.has(c.id)),
-            action: { type: "link", href: `/casos/${pick.id}` },
-          });
-        }
+      } else if (jsDay === 3 && week?.transversalQuestions.length) {
+        const pool = week.transversalQuestions.filter((q) => q.priority <= 2);
+        const list = pool.length ? pool : week.transversalQuestions;
+        const q = list.find((x) => !practiced.has(x.id)) ?? list[n % list.length];
+        items.push({
+          key: "transversal",
+          slot: "noche",
+          source: "transversal",
+          label: `20 min · materia transversal: ${week.transversal.name}`,
+          text: q.text,
+          done: practiced.has(q.id) && oralToday,
+          action: { type: "link", href: `/simulacro?pregunta=${q.id}` },
+        });
+      } else if (jsDay === 1 || jsDay === 3) {
+        pushConectar(eje);
+      } else {
+        pushCaso();
       }
       pushOral();
     }
@@ -214,7 +253,7 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
         slot: "noche",
         source: "errores",
         label: "15 min · cierre",
-        text: "Anotá en Errores lo que no pudiste explicar.",
+        text: isSimulation ? "Corregí la simulación: anotá en Errores lo que no pudiste explicar." : "Anotá en Errores lo que no pudiste explicar.",
         done: db.mistakes.some((m) => toISODate(new Date(m.created_at)) === today) || checked("anotar"),
         action: check("anotar"),
         href: "/errores?nuevo=1",
@@ -243,12 +282,12 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
   const order: AgendaSlot[] = ["manana", "noche", "dia"];
   items.sort((a, b) => order.indexOf(a.slot) - order.indexOf(b.slot));
   const markable = items.filter((i) => i.source !== "descanso" && i.source !== "tablero");
-  return { items, route, eje, focus, kind, examClose, done: markable.filter((i) => i.done).length, total: markable.length };
+  return { items, route, eje, focus, week, kind, examClose, done: markable.filter((i) => i.done).length, total: markable.length };
 
   function pushPlanDay() {
     // Respeta el modo del día del cronograma: estudio, repaso activo o simulación oral.
     const mode = planDay!.mode.toLowerCase();
-    const sem = planWeek ? `, semana ${planWeek.num}` : "";
+    const sem = currentWeek ? `, semana ${currentWeek.num}` : "";
     const [label, text, href] = isSimulation
       ? [`Simulación oral${sem}`, `${planDay!.content}. En voz alta y sin apuntes.`, "/simulacro?modo=tribunal"]
       : /recall puro|repaso/.test(mode)
@@ -257,19 +296,55 @@ export function selectAgenda(db: DB, now: Date = new Date()): Agenda {
     items.push({ key: `plan-${planDay!.id}`, slot: "manana", source: "cronograma", label, text, done: Boolean(planDay!.done_at), action: { type: "plan-day", dayId: planDay!.id }, href });
   }
 
+  function pushConectar(e: Eje) {
+    const filas = e.filas.filter((f) => f.peso === "central");
+    const fila = filas[n % filas.length];
+    const materia = getMateria(fila.materia)!;
+    items.push({ key: "conectar", slot: "noche", source: "conectar", label: `20 min · conectá con ${materia.name}`, text: fila.text, done: checked("conectar"), action: check("conectar"), href: `/programa/eje/${e.id}` });
+  }
+
+  function pushCaso() {
+    if (examClose) {
+      items.push({ key: "simulacro", slot: "noche", source: "oral", label: "Falta poco para el examen", text: "Simulacro en modo tribunal: preguntas encadenadas, en voz alta.", done: db.simulations.some((s) => toISODate(new Date(s.created_at)) === today && s.mode === "tribunal"), action: { type: "link", href: "/simulacro?modo=tribunal" } });
+      return;
+    }
+    if (!eje) return;
+    const cases = casesForEje(eje);
+    const pending = cases.filter((c) => !played.has(c.id));
+    const list = pending.length ? pending : cases;
+    const pick = list[n % Math.max(1, list.length)];
+    if (!pick) return;
+    items.push({
+      key: "caso",
+      slot: "noche",
+      source: "caso",
+      label: "25 min · caso del día",
+      text: `${patientLabel(pick.patient)} (${eje.title.split(",")[0].toLowerCase()})`,
+      done: cases.some((c) => playedToday.has(c.id)),
+      action: { type: "link", href: `/casos/${pick.id}` },
+    });
+  }
+
   function pushOral() {
     if (isSimulation) return;
-    // Una pregunta de tu banco del eje del día (las más tomadas primero); si no hay, la conexión del eje.
-    const qs = db.exam_questions
-      .filter((q) => !eje || ejesForText(q.text, 3).some((e) => e.id === eje.id))
-      .sort((a, b) => a.priority - b.priority || b.times_asked - a.times_asked);
-    const top = qs.slice(0, 5);
-    const q = top.length ? top[n % top.length] : null;
-    const doneOral = db.simulations.some((s) => toISODate(new Date(s.created_at)) === today);
+    // Primero las preguntas de ESTA semana de tu cronograma (sin practicar, alta prioridad primero);
+    // si no hay, las de tu banco que tratan el eje; si tampoco, explicar la conexión del eje.
+    let q: ExamQuestion | null = null;
+    if (week?.questions.length) {
+      const pending = week.questions.filter((x) => !practiced.has(x.id));
+      const list = (pending.length ? pending : week.questions).slice(0, 6);
+      q = list[n % list.length];
+    } else {
+      const top = db.exam_questions
+        .filter((x) => !eje || ejesForText(x.text, 3).some((e) => e.id === eje.id))
+        .sort((a, b) => a.priority - b.priority || b.times_asked - a.times_asked)
+        .slice(0, 5);
+      q = top.length ? top[n % top.length] : null;
+    }
     if (q) {
-      items.push({ key: "oral", slot: "noche", source: "oral", label: "En voz alta, como en el tribunal", text: q.text, done: doneOral, action: { type: "link", href: `/simulacro?pregunta=${q.id}` } });
+      items.push({ key: "oral", slot: "noche", source: "oral", label: "En voz alta, como en el tribunal", text: q.text, done: oralToday, action: { type: "link", href: `/simulacro?pregunta=${q.id}` } });
     } else if (eje) {
-      items.push({ key: "oral", slot: "noche", source: "oral", label: "En voz alta, como en el tribunal", text: `Explicá sin mirar, en 3 minutos, la conexión de ${eje.title.toLowerCase()}.`, done: doneOral || checked("oral"), action: check("oral"), href: `/programa/eje/${eje.id}` });
+      items.push({ key: "oral", slot: "noche", source: "oral", label: "En voz alta, como en el tribunal", text: `Explicá sin mirar, en 3 minutos, la conexión de ${eje.title.toLowerCase()}.`, done: oralToday || checked("oral"), action: check("oral"), href: `/programa/eje/${eje.id}` });
     }
   }
 }

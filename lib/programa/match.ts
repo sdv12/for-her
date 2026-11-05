@@ -44,7 +44,7 @@ export function materiasForCase(c: ClinicalCase): Materia[] {
  * Se compara sin acentos ni mayúsculas.
  */
 const TEXT_KEYWORDS: Record<string, RegExp> = {
-  diabetes: /diabet|insulin|glucem|cetoacid|obesidad|sindrome metabolico|pancreas endocrino|pie diabetico/,
+  diabetes: /diabet|\bdbt\b|\bcad\b|insulin|glucem|cetoacid|obesidad|sindrome metabolico|pancreas endocrino|pie diabetico/,
   cardiovascular: /cardi|corazon|coronari|hipertens|\bhta\b|infarto|\biam\b|aterosclero|arritmi|fibrilacion|valvul|aorta|gasto cardiaco|frank|presion arterial|dislipem|\bacv\b|insuficiencia cardiaca/,
   infecciones: /infecc|sepsis|antibiot|antimicrob|bacteri|virus|viral|parasit|micosis|tuberculos|\bvih\b|sifilis|dengue|chagas|meningit|neumonia|febril/,
   neoplasias: /cancer|neoplas|tumor|oncolog|carcinoma|linfoma|leucemia|metasta|displasia|premalign/,

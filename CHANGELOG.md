@@ -9,6 +9,13 @@
   - El sábado es de repaso de errores y caso acumulativo; el domingo, de descanso; a tres semanas del examen, la noche pasa a ser simulacro en modo tribunal.
   - La ruta integrada ya no compite con el cronograma: manda los días sin cronograma.
   - Respeta el modo de cada día del cronograma: si es simulación oral, la mañana es la simulación (sin sumar otra pregunta a la noche); si es repaso activo, sin apuntes y en voz alta.
+- Cronograma integrado (Plan → Cronograma integrado): tu cronograma, sin cambios, más la capa del plan integrado, calculada a partir de lo que importaste:
+  - el eje clínico de cada semana;
+  - puentes entre semanas del mismo eje (lo básico con su clínica, por ejemplo Fisiología CV con HTA e IC);
+  - una materia transversal por semana (Farmacología, Semiología, Imágenes, Patología, Cirugía, Salud mental…), para cubrir lo que el cronograma no tiene como semana propia;
+  - las preguntas de cada semana: las del cronograma y las del banco que tratan su tema, con las de prioridad alta primero.
+- Hoy usa esa capa: el lunes a la noche, puente con otra semana; martes, jueves y viernes, caso; el miércoles, materia transversal con una pregunta de tu banco; cada noche, una pregunta de la semana en voz alta (primero las que no practicaste); el sábado, repaso espaciado de las preguntas de prioridad alta de hace 1 y 3 semanas.
+- Plan: cada semana muestra su eje, puentes, materia transversal, preguntas y el repaso del sábado; se puede abrir una semana directo (/plan?semana=9).
 - Errores: "Anotá en Errores" desde Hoy abre directo el formulario.
 
 ## v0.19.0 — 2026-11-05

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { CalendarRange, Upload } from "lucide-react";
+import { CalendarRange, Network, Upload } from "lucide-react";
 import { buttonClasses } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { useToast } from "@/components/ui/Toast";
@@ -16,7 +16,7 @@ import { WeekDetail } from "./WeekDetail";
 import { useToggleDay } from "./useToggleDay";
 import { WeekStrip } from "./WeekStrip";
 
-export function PlanView() {
+export function PlanView({ initialWeekNum = null }: { initialWeekNum?: number | null }) {
   const db = useDB();
   const toast = useToast();
   const view = useMemo(() => (db ? selectActivePlan(db) : null), [db]);
@@ -43,7 +43,7 @@ export function PlanView() {
   }
 
   const { plan, phases, weeks, daysByWeek } = view;
-  const week = weeks.find((w) => w.id === selectedId) ?? currentWeek(weeks, today)!;
+  const week = weeks.find((w) => w.id === selectedId) ?? weeks.find((w) => w.num === initialWeekNum) ?? currentWeek(weeks, today)!;
   const phase = phases.find((p) => p.id === week.phase_id);
 
   function onDelete(day: PlanDay) {
@@ -63,9 +63,14 @@ export function PlanView() {
               {plan.title} · {formatRange(weeks[0].start_date, weeks[weeks.length - 1].end_date)}
             </p>
           </div>
-          <Link href="/plan/importar" className={buttonClasses({ variant: "secondary" })}>
-            <Upload aria-hidden /> Importar cronograma
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/plan/integrado" className={buttonClasses({ variant: "primary" })}>
+              <Network aria-hidden /> Cronograma integrado
+            </Link>
+            <Link href="/plan/importar" className={buttonClasses({ variant: "secondary" })}>
+              <Upload aria-hidden /> Importar cronograma
+            </Link>
+          </div>
         </div>
         <WeekStrip weeks={weeks} phases={phases} daysByWeek={daysByWeek} selectedId={week.id} today={today} onSelect={setSelectedId} />
       </section>
