@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.19.0 — 2026-11-05
+
+- Hoy: la tarjeta "Hoy toca" junta todo lo del día en "Tu día", ordenado en mañana, noche y en cualquier momento: el día del cronograma, las sesiones de la ruta integrada, las tarjetas para repasar y tus tareas del Tablero que vencen hoy. Cada parte es opcional: sirve con cronograma, con ruta o con las dos.
+- Programa integrado: se suman Bioquímica (1.º), Fisiología e Histología (2.º), Semiología y Farmacología General (3.º) y Clínica Médica (I en 4.º y II en 5.º), con las unidades de sus programas oficiales y su aporte en cada eje. Se unen con las materias que ya tenías en el Temario (Bioquímica, Fisiología, Clínica) sin duplicar temas.
+- Casos clínicos: al empezar un caso solo se muestra dónde se atiende (Guardia, Consultorio…), sin el área, para no adelantar el diagnóstico.
+
 ## v0.18.0 — 2026-11-04
 
 - Programa integrado (sección nueva, en Planificar): une el plan de estudio integrado con los programas oficiales de la FCM-UNC (revisión 2024). No reemplaza ni modifica tu Plan, tu Temario ni tus casos: los complementa.

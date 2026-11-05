@@ -167,7 +167,7 @@ function Game({ c, round, onRetry }: { c: ClinicalCase; round: number; onRetry: 
                   <div>
                     <p className="font-semibold">{patientLabel(c.patient)}</p>
                     <p className="text-sm text-muted">
-                      {c.setting} · {c.area}
+                      {c.setting}
                     </p>
                   </div>
                 </div>

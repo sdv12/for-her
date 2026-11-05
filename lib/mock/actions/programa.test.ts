@@ -12,11 +12,12 @@ describe("Programa → Temario", () => {
 
     const first = addMateriasToTemario();
     const db = getDB();
-    // "Anatomía" y "Salud comunitaria" ya existían en el seed: se reusan.
-    expect(first.subjectsCreated).toBe(MATERIAS.length - 2);
+    // Anatomía, Salud comunitaria, Bioquímica, Fisiología y Clínica ya existían en el seed: se reusan.
+    expect(first.subjectsCreated).toBe(MATERIAS.length - 5);
     expect(db.subjects.filter((s) => s.name === "Anatomía")).toHaveLength(1);
     expect(db.syllabus_topics.find((t) => t.id === traquea.id)?.level).toBe(traquea.level);
-    expect(first.topicsAdded).toBe(MATERIAS.reduce((n, m) => n + m.unidades.length, 0));
+    // "Insuficiencia cardíaca" (Clínica) y "Fisiología renal" ya estaban: no se duplican.
+    expect(first.topicsAdded).toBe(MATERIAS.reduce((n, m) => n + m.unidades.length, 0) - 2);
 
     expect(addMateriasToTemario()).toEqual({ subjectsCreated: 0, topicsAdded: 0 });
   });

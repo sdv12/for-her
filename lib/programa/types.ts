@@ -21,7 +21,13 @@ export type MateriaId =
   | "infectologia"
   | "cirugia"
   | "traumatologia"
-  | "pediatria";
+  | "pediatria"
+  | "bioquimica"
+  | "histologia"
+  | "fisiologia"
+  | "semiologia"
+  | "farmacologia-general"
+  | "clinica-medica";
 
 export type Year = 1 | 2 | 3 | 4 | 5;
 

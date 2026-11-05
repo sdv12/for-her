@@ -7,9 +7,9 @@ import { MATERIAS, getMateria } from "./materias";
 import { RUTA, FASES, routePosition, routeProgress, sessionKey, sessionsFor, dateOf } from "./ruta";
 
 describe("materias", () => {
-  it("son 14, con ids únicos, año y unidades válidas para el Temario", () => {
-    expect(MATERIAS).toHaveLength(14);
-    expect(new Set(MATERIAS.map((m) => m.id)).size).toBe(14);
+  it("son 20, con ids únicos, año y unidades válidas para el Temario", () => {
+    expect(MATERIAS).toHaveLength(20);
+    expect(new Set(MATERIAS.map((m) => m.id)).size).toBe(20);
     for (const m of MATERIAS) {
       expect(m.year).toBeGreaterThanOrEqual(1);
       expect(m.year).toBeLessThanOrEqual(5);
@@ -22,6 +22,8 @@ describe("materias", () => {
 
   it("cada materia específica tiene casos para practicar", () => {
     for (const m of MATERIAS) expect(casesForMateria(m).length, m.id).toBeGreaterThanOrEqual(5);
+    // Todas las materias participan en algún eje.
+    for (const m of MATERIAS) expect(EJES.some((e) => e.filas.some((f) => f.materia === m.id)), m.id).toBe(true);
   });
 });
 

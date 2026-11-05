@@ -58,7 +58,7 @@ export function MateriasView() {
       />
       <div className="flex flex-col gap-8">
         <p className="max-w-3xl text-[15px] leading-relaxed text-muted">
-          Las 14 materias del plan integrado, en el año en que se cursan en la carrera de Medicina de la FCM-UNC, con las unidades troncales de sus programas
+          Las materias troncales de la carrera, en el año en que se cursan en la carrera de Medicina de la FCM-UNC, con las unidades troncales de sus programas
           oficiales (revisión 2024). Al sumarlas al Temario podés marcar tu nivel en cada unidad; lo que ya tenías cargado queda igual.
         </p>
 

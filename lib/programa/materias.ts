@@ -1,7 +1,7 @@
 import type { Materia, Year } from "./types";
 
 /*
- * Las 14 materias del plan integrado, ubicadas por año según el listado de asignaturas de la carrera de Medicina
+ * Las materias troncales del plan integrado (las 14 del mapa más las básicas y clínicas que lo sostienen), ubicadas por año según el listado de asignaturas de la carrera de Medicina
  * de la FCM-UNC, con las unidades troncales de los programas oficiales (revisión 2024), resumidas.
  */
 
@@ -409,23 +409,201 @@ export const MATERIAS: Materia[] = [
     ],
     match: { areas: ["Pediatría"], underAge: 15 },
   },
+  {
+    id: "bioquimica",
+    name: "Bioquímica",
+    official: "Bioquímica y Biología Molecular",
+    year: 1,
+    area: "Estructura y función corporal",
+    aliases: ["Bioquimica", "Bioquímica y Biología Molecular"],
+    nucleos: "Metabolismo de glúcidos, lípidos y proteínas, hormonas, vitaminas y medio interno.",
+    aporte: "Explica la enfermedad a nivel molecular: por qué sube la glucemia, se forman cuerpos cetónicos o cae el potasio.",
+    unidades: [
+      { name: "Agua y biomoléculas", detail: "Distribución del agua corporal, glúcidos, lípidos, proteínas y ácidos nucleicos." },
+      { name: "Proteínas y proteínas de la sangre", detail: "Hemoglobina, albúmina, inmunoglobulinas; valor biológico." },
+      { name: "Termodinámica y enzimas", detail: "Cinética enzimática, inhibición, enzimas de importancia clínica." },
+      { name: "Metabolismo energético y generación de ATP", detail: "Ciclo de Krebs, cadena respiratoria, fosforilación oxidativa." },
+      { name: "Metabolismo de hidratos de carbono", detail: "Digestión y absorción, glucólisis, gluconeogénesis, glucógeno." },
+      { name: "Metabolismo de lípidos", detail: "Beta-oxidación, cetogénesis, colesterol y lipoproteínas." },
+      { name: "Metabolismo de compuestos nitrogenados", detail: "Aminoácidos, ciclo de la urea, hemo y bilirrubina, purinas y ácido úrico." },
+      { name: "Replicación, transcripción y traducción", detail: "Síntesis de ADN, ARN y proteínas; reparación del ADN." },
+      { name: "Mutaciones y enfermedades genéticas", detail: "Bases moleculares de las enfermedades hereditarias." },
+      { name: "Manipulación del ADN", detail: "ADN recombinante, PCR y aplicaciones diagnósticas." },
+      { name: "Hormonas y regulación del metabolismo", detail: "Insulina, glucagón, catecolaminas, cortisol, hormonas tiroideas." },
+      { name: "Vitaminas", detail: "Hidrosolubles y liposolubles: función y carencias." },
+      { name: "Integración y regulación metabólica", detail: "Ayuno, ingesta, ejercicio; interconversión de nutrientes." },
+      { name: "Metabolismo de tejidos especializados", detail: "Músculo, hígado, tejido adiposo, sistema nervioso." },
+      { name: "Equilibrio hidroelectrolítico y ácido-base", detail: "Agua, sodio y potasio; rol del pulmón y del riñón." },
+    ],
+    match: { keywords: /diabet|cetoacid|hipoglucem|hiperosmolar|dislipem|gota|anemia|hipotiroid|hipertiroid|hiperpotas|hiponatremia|ictericia|paracetamol|celiac|metabolico|deshidrat/ },
+  },
+  {
+    id: "histologia",
+    name: "Histología",
+    official: "Biología Celular, Histología y Embriología",
+    year: 2,
+    area: "Estructura y función corporal",
+    aliases: ["Histologia", "Biología Celular, Histología y Embriología", "Histología y Embriología"],
+    nucleos: "Célula, tejidos, embriología y desarrollo de órganos.",
+    aporte: "Muestra qué tejido normal se altera y de dónde vienen las malformaciones.",
+    unidades: [
+      { name: "La célula y sus compartimientos", detail: "Biología celular y molecular, ciclo celular." },
+      { name: "Embriología general", detail: "Etapas pre-embrionaria y embrionaria, bases celulares del desarrollo." },
+      { name: "Tejidos epitelial y conectivo", detail: "Tipos de epitelio, matriz extracelular." },
+      { name: "Tejido cartilaginoso y óseo", detail: "Osteogénesis, remodelado óseo." },
+      { name: "Sangre e inmunidad", detail: "Médula ósea, timo, ganglios y bazo; células de la inmunidad." },
+      { name: "Tejidos musculares", detail: "Esquelético, cardíaco y liso." },
+      { name: "Aparato cardiovascular", detail: "Corazón, vasos sanguíneos y linfáticos; embriología cardíaca." },
+      { name: "Sistema nervioso, sentidos y piel", detail: "Neurona, glía, órganos de los sentidos, piel y anexos." },
+      { name: "Sistema endocrino", detail: "Hipófisis, tiroides, paratiroides, suprarrenales, páncreas endocrino." },
+      { name: "Aparato respiratorio", detail: "Vías de conducción y respiración, alvéolo." },
+      { name: "Aparato urinario", detail: "Nefrona, vías urinarias; morfogénesis." },
+      { name: "Aparato digestivo", detail: "Túnicas del tubo digestivo, hígado y páncreas." },
+      { name: "Aparato reproductor masculino y femenino", detail: "Gónadas, vías genitales, ciclo ovárico y endometrial." },
+      { name: "Relación materno-fetal y teratogénesis", detail: "Placenta, teratógenos, genética médica y epigenética." },
+    ],
+    match: { all: true },
+  },
+  {
+    id: "fisiologia",
+    name: "Fisiología",
+    official: "Fisiología Humana",
+    year: 2,
+    area: "Estructura y función corporal",
+    aliases: ["Fisiologia", "Fisiología Humana"],
+    nucleos: "Homeostasis y función normal de cada aparato: circulación, respiración, riñón, endocrino, digestivo y nervioso.",
+    aporte: "Da la base para entender la fisiopatología: qué se altera y cómo compensa el cuerpo.",
+    unidades: [
+      { name: "Homeostasis y tejidos excitables", detail: "Sistemas de regulación, potencial de membrana y de acción." },
+      { name: "Fisiología de la circulación", detail: "Ciclo cardíaco, gasto cardíaco, presión arterial y su regulación." },
+      { name: "Fisiología de la respiración", detail: "Mecánica ventilatoria, intercambio gaseoso, control de la respiración." },
+      { name: "Fisiología renal", detail: "Filtrado glomerular, función tubular, balance de agua, sodio y ácido-base." },
+      { name: "Fisiología del sistema endocrino", detail: "Eje hipotálamo-hipofisario, tiroides, suprarrenal, páncreas." },
+      { name: "Fisiología de la reproducción", detail: "Eje gonadal, ciclo menstrual, embarazo y lactancia." },
+      { name: "Fisiología digestiva y nutrientes", detail: "Motilidad, secreciones, absorción, homeostasis de nutrientes." },
+      { name: "Fisiología del sistema nervioso", detail: "Sensibilidad, motricidad, sistema autónomo, funciones superiores." },
+      { name: "Mecanismos de defensa", detail: "Inmunidad innata y adaptativa, inflamación, hemostasia." },
+    ],
+    match: { all: true },
+  },
+  {
+    id: "semiologia",
+    name: "Semiología",
+    official: "Semiología",
+    year: 3,
+    area: "Medicina",
+    aliases: ["Semiologia"],
+    nucleos: "Historia clínica, examen físico general y por aparatos, síndromes.",
+    aporte: "Convierte síntomas y signos en un síndrome: el primer paso del diagnóstico diferencial.",
+    unidades: [
+      { name: "Introducción a la semiología", detail: "Relación médico-paciente, síntoma, signo y síndrome." },
+      { name: "Historia clínica y examen físico general", detail: "Anamnesis, signos vitales, seguridad del paciente." },
+      { name: "Tórax y aparato respiratorio", detail: "Inspección, palpación, percusión y auscultación; síndromes pleuropulmonares." },
+      { name: "Aparato cardiovascular", detail: "Dolor precordial, disnea, soplos, pulsos, edemas, presión arterial." },
+      { name: "Abdomen y aparato digestivo", detail: "Dolor abdominal, ictericia, hepatoesplenomegalia, ascitis." },
+      { name: "Aparato urinario y genitales", detail: "Puntos dolorosos, puño percusión, síndromes urinarios." },
+      { name: "Sistema hematopoyético e inmune", detail: "Palidez, adenopatías, esplenomegalia, púrpura." },
+      { name: "Sistema endocrino-metabólico", detail: "Bocio, signos de hiper e hipofunción, obesidad." },
+      { name: "Sistema osteoarticular", detail: "Movilidad articular, signos inflamatorios, columna." },
+      { name: "Sistema neuromuscular", detail: "Pares craneales, fuerza, reflejos, sensibilidad, marcha, meninges." },
+      { name: "Psicosemiología", detail: "Entrevista psiquiátrica, ánimo, ansiedad, conciencia." },
+    ],
+    match: { all: true },
+  },
+  {
+    id: "farmacologia-general",
+    name: "Farmacología General",
+    official: "Farmacología General",
+    year: 3,
+    area: "Farmacología",
+    aliases: ["Farmacologia General"],
+    nucleos: "Farmacocinética, farmacodinamia, riesgos de los medicamentos y grupos farmacológicos por sistema.",
+    aporte: "Da el mecanismo de acción que después se aplica en Farmacología Aplicada I y II.",
+    unidades: [
+      { name: "Conceptos de ciencias farmacológicas", detail: "Droga, fármaco, medicamento, vademécum." },
+      { name: "Farmacocinética", detail: "Vías de administración, absorción, distribución, metabolismo y excreción." },
+      { name: "Farmacodinamia y receptores", detail: "Mecanismos de acción, potencia, eficacia, agonistas y antagonistas." },
+      { name: "Riesgos del uso de medicamentos", detail: "Reacciones adversas, dependencia, interacciones." },
+      { name: "Farmacología en situaciones especiales", detail: "Niños, embarazo, lactancia y adulto mayor." },
+      { name: "Autacoides", detail: "Histamina, serotonina, eicosanoides y sus antagonistas." },
+      { name: "Farmacología respiratoria y digestiva", detail: "Broncodilatadores, antiulcerosos, antieméticos." },
+      { name: "Sistema nervioso autónomo", detail: "Colinérgicos y adrenérgicos, agonistas y bloqueantes." },
+      { name: "Farmacología cardiovascular", detail: "Antihipertensivos, antiarrítmicos, diuréticos, anticoagulantes." },
+      { name: "Farmacología del metabolismo", detail: "Hipolipemiantes, insulinas y antidiabéticos, tiroides, corticoides." },
+      { name: "Calcio, fósforo y hormonas sexuales", detail: "Vitamina D, PTH, estrógenos, progestágenos, andrógenos." },
+      { name: "Inflamación y dolor", detail: "AINE, paracetamol, opioides." },
+      { name: "Neuropsicofármacos", detail: "Ansiolíticos, antidepresivos, antipsicóticos, antiepilépticos." },
+      { name: "Quimioterapia antiinfecciosa", detail: "Antibióticos, CIM, antibiograma, mecanismos de resistencia." },
+    ],
+    match: { all: true },
+  },
+  {
+    id: "clinica-medica",
+    name: "Clínica Médica",
+    official: "Clínica Médica I y II",
+    year: 4,
+    yearNote: "Clínica Médica I en 4.º año y Clínica Médica II en 5.º año.",
+    area: "Medicina",
+    aliases: ["Clínica", "Clinica Medica", "Clínica Médica I", "Medicina Interna"],
+    nucleos: "Cardiología, neumonología, gastroenterología, hematología, nefrología, reumatología, endocrinología y metabolismo.",
+    aporte: "Integra todo en el paciente adulto: diagnóstico, gravedad y tratamiento de las enfermedades prevalentes.",
+    unidades: [
+      { name: "Insuficiencia cardíaca", detail: "Fracción de eyección reducida y preservada, descompensación.", part: "Clínica Médica I" },
+      { name: "Cardiopatía isquémica", detail: "Dolor torácico agudo, síndromes coronarios.", part: "Clínica Médica I" },
+      { name: "Valvulopatías, miocardio y pericardio", detail: "Valvulopatía mitral y aórtica, miocardiopatías, pericarditis, taponamiento.", part: "Clínica Médica I" },
+      { name: "Arritmias cardíacas", detail: "Bradiarritmias, taquiarritmias, fibrilación auricular, muerte súbita.", part: "Clínica Médica I" },
+      { name: "Hipertensión arterial y aterosclerosis", detail: "Urgencias y emergencias hipertensivas, enfermedad de la aorta, prevención.", part: "Clínica Médica I" },
+      { name: "Shock, hipotensión y síncope", detail: "Insuficiencia circulatoria y trastorno circulatorio periférico.", part: "Clínica Médica I" },
+      { name: "Insuficiencia respiratoria y EPOC-asma", detail: "Paciente respiratorio crítico, asma, EPOC, apnea del sueño.", part: "Clínica Médica I" },
+      { name: "Infecciones respiratorias", detail: "Bronquitis, neumonía de la comunidad y nosocomial.", part: "Clínica Médica I" },
+      { name: "Enfermedad pulmonar intersticial y tumores", detail: "Intersticiopatías, nódulo pulmonar, cáncer de pulmón.", part: "Clínica Médica I" },
+      { name: "Tromboembolismo y pleura", detail: "TEP, hipertensión pulmonar, derrame pleural, neumotórax.", part: "Clínica Médica I" },
+      { name: "Esófago, estómago e intestino", detail: "Úlcera péptica, hemorragia digestiva, diarrea, constipación.", part: "Clínica Médica I" },
+      { name: "Hígado, vías biliares y páncreas", detail: "Ictericia, hepatitis, cirrosis, hígado graso, pancreatitis.", part: "Clínica Médica I" },
+      { name: "Síndrome anémico", detail: "Ferropénica, megaloblástica, hemolítica.", part: "Clínica Médica I" },
+      { name: "Hemato-oncología y hemostasia", detail: "Leucemias, linfomas, mieloma, púrpuras, trombofilias.", part: "Clínica Médica I" },
+      { name: "Cuidados paliativos", detail: "Atención paliativa y discapacidad.", part: "Clínica Médica I" },
+      { name: "Trastornos hidroelectrolíticos y ácido-base", detail: "Sodio, potasio, calcio; acidosis y alcalosis.", part: "Clínica Médica II" },
+      { name: "Injuria renal aguda y enfermedad renal crónica", detail: "Clasificación, prevención, tratamiento.", part: "Clínica Médica II" },
+      { name: "Glomerulopatías e infección urinaria", detail: "Síndrome nefrótico y nefrítico, cistitis, pielonefritis.", part: "Clínica Médica II" },
+      { name: "Nefrotoxicidad y nefropatía diabética", detail: "Fármacos y riñón, nefropatía en el embarazo.", part: "Clínica Médica II" },
+      { name: "Artritis y espondiloartritis", detail: "Artritis reumatoidea, gota, espondilitis anquilosante.", part: "Clínica Médica II" },
+      { name: "Enfermedades sistémicas reumatológicas", detail: "Lupus, Sjögren, esclerodermia, vasculitis.", part: "Clínica Médica II" },
+      { name: "Osteoporosis y osteopatías médicas", detail: "Osteoporosis, osteomalacia, Paget.", part: "Clínica Médica II" },
+      { name: "Hipófisis, tiroides y suprarrenales", detail: "Hipo e hipertiroidismo, Cushing, insuficiencia suprarrenal.", part: "Clínica Médica II" },
+      { name: "Nutrición, obesidad y dislipemias", detail: "Obesidad, desnutrición, hipercolesterolemia.", part: "Clínica Médica II" },
+      { name: "Diabetes mellitus", detail: "Diagnóstico, tratamiento y complicaciones agudas y crónicas.", part: "Clínica Médica II" },
+      { name: "Geriatría", detail: "Envejecimiento, valoración geriátrica, síndromes geriátricos.", part: "Clínica Médica II" },
+    ],
+    match: { areas: ["Cardiovascular", "Respiratorio", "Endocrinología", "Gastroenterología", "Nefrourología", "Hematología", "Reumatología", "Neurología", "Oncología"] },
+  },
 ];
 
 export const YEAR_LABEL: Record<Year, string> = { 1: "1.er año", 2: "2.º año", 3: "3.er año", 4: "4.º año", 5: "5.º año" };
 
 /** Otras asignaturas del plan de la FCM por año: no están entre las 14 del plan integrado, pero se cruzan con ellas. */
 export const OTRAS_MATERIAS: Record<Year, string[]> = {
-  1: ["Bioquímica y Biología Molecular", "Medicina Antropológica", "Informática Médica"],
-  2: ["Fisiología Humana", "Física Biomédica", "Biología Celular, Histología y Embriología", "Medicina Psicosocial"],
-  3: ["Semiología", "Bacteriología y Virología Médica", "Parasitología y Micología", "Farmacología General"],
-  4: ["Clínica Médica I", "Clínica Neurológica", "Salud Mental", "Diagnóstico por Imágenes", "Medicina Preventiva y Social I"],
-  5: ["Clínica Médica II", "Clínica Otorrinolaringológica", "Clínica Urológica"],
+  1: ["Medicina Antropológica", "Informática Médica"],
+  2: ["Física Biomédica", "Medicina Psicosocial"],
+  3: ["Bacteriología y Virología Médica", "Parasitología y Micología"],
+  4: ["Clínica Neurológica", "Salud Mental", "Diagnóstico por Imágenes", "Medicina Preventiva y Social I"],
+  5: ["Clínica Otorrinolaringológica", "Clínica Urológica"],
 };
 
 export function getMateria(id: string): Materia | undefined {
   return MATERIAS.find((m) => m.id === id);
 }
 
+/** Orden dentro de cada año: primero las básicas y la clínica general, después las especialidades. */
+const ORDER = [
+  "anatomia", "bioquimica", "salud-comunitaria-1", "salud-comunitaria-2",
+  "fisiologia", "histologia", "salud-comunitaria-3",
+  "semiologia", "patologia", "farmacologia-general",
+  "clinica-medica", "farmacologia-1", "infectologia", "cirugia", "ginecologia", "dermatologia", "oftalmologia",
+  "pediatria", "traumatologia", "farmacologia-2",
+];
+
 export function materiasByYear(): Array<{ year: Year; materias: Materia[] }> {
-  return ([1, 2, 3, 4, 5] as const).map((year) => ({ year, materias: MATERIAS.filter((m) => m.year === year) }));
+  const sorted = [...MATERIAS].sort((a, b) => ORDER.indexOf(a.id) - ORDER.indexOf(b.id));
+  return ([1, 2, 3, 4, 5] as const).map((year) => ({ year, materias: sorted.filter((m) => m.year === year) }));
 }

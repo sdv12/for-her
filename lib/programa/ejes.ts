@@ -15,6 +15,10 @@ export const EJES: Eje[] = [
     priority: "P1",
     objetivo: "Paciente con hiperglucemia, obesidad o síndrome metabólico: reconocer complicaciones agudas y crónicas, prevenirlas y tratarlas.",
     filas: [
+      { materia: "bioquimica", text: "Metabolismo de la glucosa, insulina y glucagón, cetogénesis.", peso: "central" },
+      { materia: "fisiologia", text: "Regulación hormonal de la glucemia.", peso: "secundaria" },
+      { materia: "semiologia", text: "Examen del pie (sensibilidad, pulsos) y signos de deshidratación.", peso: "secundaria" },
+      { materia: "clinica-medica", text: "Diagnóstico, tratamiento y complicaciones agudas y crónicas de la diabetes.", peso: "central" },
       { materia: "anatomia", text: "Páncreas endocrino, irrigación, riñón, retina, nervios periféricos y pie.", peso: "central" },
       { materia: "patologia", text: "DM1 y DM2; lesión vascular, aterosclerosis, nefropatía y neuropatía.", peso: "central" },
       { materia: "farmacologia-2", text: "Insulinas y antidiabéticos (metformina, iSGLT2, arGLP-1, sulfonilureas): mecanismo, indicaciones, contraindicaciones y efectos adversos.", peso: "central" },
@@ -45,6 +49,11 @@ export const EJES: Eje[] = [
     priority: "P1",
     objetivo: "Reconocer daño vascular y de órgano blanco, riesgo cardiovascular y urgencias relacionadas.",
     filas: [
+      { materia: "fisiologia", text: "Ciclo cardíaco, gasto cardíaco y regulación de la presión arterial.", peso: "central" },
+      { materia: "semiologia", text: "Toma de la presión, pulsos, soplos y signos de insuficiencia cardíaca.", peso: "central" },
+      { materia: "clinica-medica", text: "Hipertensión, cardiopatía isquémica, insuficiencia cardíaca, arritmias y valvulopatías.", peso: "central" },
+      { materia: "farmacologia-general", text: "Mecanismo de antihipertensivos, diuréticos y anticoagulantes.", peso: "secundaria" },
+      { materia: "histologia", text: "Pared arterial y embriología cardíaca.", peso: "secundaria" },
       { materia: "anatomia", text: "Corazón, grandes vasos, circulación coronaria, vasos periféricos y riñón.", peso: "central" },
       { materia: "patologia", text: "Hipertensión, aterosclerosis, cardiopatía isquémica, infarto y daño vascular.", peso: "central" },
       { materia: "farmacologia-1", text: "Antihipertensivos, diuréticos, antiagregantes, hipolipemiantes y fármacos de la insuficiencia cardíaca.", peso: "central" },
@@ -73,6 +82,11 @@ export const EJES: Eje[] = [
     priority: "P1",
     objetivo: "Integrar puerta de entrada, agente causal, respuesta del huésped, gravedad, antimicrobianos y control del foco.",
     filas: [
+      { materia: "farmacologia-general", text: "Mecanismo de acción y resistencia de los antimicrobianos.", peso: "central" },
+      { materia: "fisiologia", text: "Inmunidad innata y adaptativa, fiebre.", peso: "secundaria" },
+      { materia: "histologia", text: "Barreras epiteliales y células de la inmunidad.", peso: "secundaria" },
+      { materia: "semiologia", text: "Síndrome febril, búsqueda del foco y signos meníngeos.", peso: "secundaria" },
+      { materia: "clinica-medica", text: "Neumonía, infección urinaria y sepsis en el adulto.", peso: "secundaria" },
       { materia: "anatomia", text: "Barreras, piel, vías respiratorias, aparato urinario, abdomen y meninges.", peso: "secundaria" },
       { materia: "patologia", text: "Inflamación aguda y crónica, necrosis, abscesos, granulomas y respuesta sistémica.", peso: "central" },
       { materia: "infectologia", text: "Bacterias, virus, hongos, parásitos, transmisión, diagnóstico y tratamiento; sepsis y shock séptico.", peso: "central" },
@@ -105,6 +119,10 @@ export const EJES: Eje[] = [
     priority: "P1",
     objetivo: "Conectar órgano de origen, biología tumoral, manifestaciones, diagnóstico, estadificación, tratamiento y prevención.",
     filas: [
+      { materia: "histologia", text: "Tejido normal de origen: base para reconocer displasia y neoplasia.", peso: "central" },
+      { materia: "bioquimica", text: "Mutaciones y bases moleculares del cáncer.", peso: "secundaria" },
+      { materia: "semiologia", text: "Adenopatías, masas y síndrome de impregnación.", peso: "secundaria" },
+      { materia: "clinica-medica", text: "Hemato-oncología, cáncer de pulmón y cuidados paliativos.", peso: "central" },
       { materia: "anatomia", text: "Órganos de origen, relaciones anatómicas, drenaje linfático y territorios de diseminación.", peso: "central" },
       { materia: "patologia", text: "Neoplasia benigna y maligna, displasia, metástasis, invasión y gradación.", peso: "central" },
       { materia: "farmacologia-1", text: "Analgesia del dolor oncológico (escalera analgésica) y reacciones adversas.", peso: "secundaria" },
@@ -134,6 +152,9 @@ export const EJES: Eje[] = [
     priority: "P1",
     objetivo: "Comprender los cambios fisiológicos del embarazo, identificar complicaciones materno-fetales y articular prevención y tratamiento.",
     filas: [
+      { materia: "fisiologia", text: "Fisiología de la reproducción, el embarazo y la lactancia.", peso: "central" },
+      { materia: "histologia", text: "Placenta, embriología y teratogénesis.", peso: "central" },
+      { materia: "farmacologia-general", text: "Fármacos en el embarazo y la lactancia.", peso: "secundaria" },
       { materia: "anatomia", text: "Pelvis, órganos genitales, irrigación uterina, placenta y relaciones anatómicas.", peso: "central" },
       { materia: "patologia", text: "Alteraciones placentarias, enfermedad trofoblástica y patología cervical y mamaria.", peso: "secundaria" },
       { materia: "farmacologia-1", text: "Anticoncepción: métodos, mecanismo, contraindicaciones y anticoncepción de emergencia.", peso: "central" },
@@ -164,6 +185,9 @@ export const EJES: Eje[] = [
     priority: "P1",
     objetivo: "Partir del mecanismo de lesión y la estructura afectada para evaluar gravedad, estabilizar y decidir conducta.",
     filas: [
+      { materia: "semiologia", text: "Examen osteoarticular y neurovascular del miembro.", peso: "central" },
+      { materia: "histologia", text: "Tejido óseo y cicatrización.", peso: "secundaria" },
+      { materia: "fisiologia", text: "Respuesta al shock hemorrágico.", peso: "secundaria" },
       { materia: "anatomia", text: "Huesos, articulaciones, músculos, tendones, nervios, vasos y compartimentos.", peso: "central" },
       { materia: "patologia", text: "Reparación tisular, inflamación, necrosis, infección y lesiones tumorales.", peso: "secundaria" },
       { materia: "traumatologia", text: "Fracturas, luxaciones, lesiones ligamentarias, meniscales y tendinosas.", peso: "central" },
@@ -195,6 +219,11 @@ export const EJES: Eje[] = [
     priority: "P1",
     objetivo: "Integrar función renal, volumen, electrolitos, infecciones y obstrucción urinaria.",
     filas: [
+      { materia: "fisiologia", text: "Filtrado glomerular, función tubular, balance de agua, sodio y ácido-base.", peso: "central" },
+      { materia: "bioquimica", text: "Equilibrio hidroelectrolítico y ácido-base.", peso: "central" },
+      { materia: "semiologia", text: "Puño percusión, edemas y signos de deshidratación.", peso: "secundaria" },
+      { materia: "clinica-medica", text: "Trastornos hidroelectrolíticos, injuria renal aguda, enfermedad renal crónica y glomerulopatías.", peso: "central" },
+      { materia: "histologia", text: "Estructura de la nefrona.", peso: "secundaria" },
       { materia: "anatomia", text: "Riñón, nefrona, vías urinarias, vejiga y próstata.", peso: "central" },
       { materia: "patologia", text: "Lesión renal aguda, enfermedad renal crónica y daño glomerular.", peso: "central" },
       { materia: "farmacologia-1", text: "Diuréticos y sus trastornos electrolíticos (hiponatremia por tiazidas).", peso: "central" },
@@ -224,6 +253,10 @@ export const EJES: Eje[] = [
     priority: "P1",
     objetivo: "Reconocer compromiso de vía aérea, parénquima o pleura, gravedad respiratoria y necesidad de soporte.",
     filas: [
+      { materia: "fisiologia", text: "Mecánica ventilatoria e intercambio gaseoso.", peso: "central" },
+      { materia: "semiologia", text: "Síndromes pleuropulmonares: consolidación, derrame, neumotórax, obstrucción.", peso: "central" },
+      { materia: "clinica-medica", text: "Insuficiencia respiratoria, asma, EPOC, neumonía y TEP.", peso: "central" },
+      { materia: "farmacologia-general", text: "Mecanismo de los broncodilatadores y corticoides.", peso: "secundaria" },
       { materia: "anatomia", text: "Vía aérea, pulmones, pleuras, irrigación y mecánica ventilatoria.", peso: "central" },
       { materia: "patologia", text: "Inflamación, obstrucción, consolidación, fibrosis y daño alveolar.", peso: "central" },
       { materia: "infectologia", text: "Neumonía, tuberculosis, infecciones virales y complicaciones.", peso: "central" },
@@ -253,6 +286,10 @@ export const EJES: Eje[] = [
     priority: "P2",
     objetivo: "Localizar anatómicamente la lesión, reconocer mecanismos y distinguir cuadros urgentes.",
     filas: [
+      { materia: "fisiologia", text: "Sensibilidad, motricidad y sistema nervioso autónomo.", peso: "central" },
+      { materia: "semiologia", text: "Pares craneales, fuerza, reflejos, sensibilidad y signos meníngeos.", peso: "central" },
+      { materia: "farmacologia-general", text: "Mecanismo de neuropsicofármacos y antiepilépticos.", peso: "secundaria" },
+      { materia: "histologia", text: "Neurona y glía.", peso: "secundaria" },
       { materia: "anatomia", text: "Encéfalo, médula, meninges, pares craneales, irrigación y vías nerviosas.", peso: "central" },
       { materia: "patologia", text: "Isquemia, hemorragia, inflamación, degeneración y tumores.", peso: "central" },
       { materia: "infectologia", text: "Meningitis, encefalitis y neuroinfecciones.", peso: "central" },
@@ -283,6 +320,10 @@ export const EJES: Eje[] = [
     priority: "P2",
     objetivo: "Diferenciar patrones infecciosos, inflamatorios, autoinmunes y neoplásicos de la piel.",
     filas: [
+      { materia: "histologia", text: "Piel y anexos; células de la inmunidad.", peso: "central" },
+      { materia: "fisiologia", text: "Mecanismos de defensa e hipersensibilidad.", peso: "secundaria" },
+      { materia: "farmacologia-general", text: "Autacoides: histamina y antihistamínicos.", peso: "central" },
+      { materia: "clinica-medica", text: "Enfermedades sistémicas reumatológicas (lupus) e inmunidad y alergia.", peso: "secundaria" },
       { materia: "anatomia", text: "Epidermis, dermis, anexos cutáneos y vascularización.", peso: "secundaria" },
       { materia: "patologia", text: "Inflamación, autoinmunidad, hipersensibilidad y neoplasias cutáneas.", peso: "central" },
       { materia: "dermatologia", text: "Dermatitis, psoriasis, urticaria, angioedema, enfermedades ampollares y acné.", peso: "central" },
@@ -313,6 +354,8 @@ export const EJES: Eje[] = [
     priority: "P1",
     objetivo: "Ferropenia, anemia megaloblástica, hemólisis, leucemias, linfomas y trastornos de la coagulación.",
     filas: [
+      { materia: "clinica-medica", text: "Síndrome anémico, hemato-oncología y hemostasia.", peso: "central" },
+      { materia: "bioquimica", text: "Hemoglobina, hierro, vitamina B12 y folato.", peso: "secundaria" },
       { materia: "patologia", text: "Patología de hematíes, leucocitos, ganglios, bazo y timo.", peso: "central" },
       { materia: "pediatria", text: "Anemia ferropénica del lactante, PTI y leucemia linfoblástica.", peso: "central" },
       { materia: "ginecologia", text: "Anemia del embarazo y menorragia.", peso: "central" },
@@ -334,6 +377,7 @@ export const EJES: Eje[] = [
     priority: "P1",
     objetivo: "Apendicitis, colecistitis, pancreatitis, obstrucción, perforación y peritonitis.",
     filas: [
+      { materia: "semiologia", text: "Examen del abdomen y signos de irritación peritoneal.", peso: "central" },
       { materia: "anatomia", text: "Proyección visceral, peritoneo, irrigación digestiva.", peso: "central" },
       { materia: "cirugia", text: "Diagnóstico y conducta quirúrgica del abdomen agudo.", peso: "central" },
       { materia: "pediatria", text: "Invaginación, apendicitis en el niño, estenosis de píloro.", peso: "secundaria" },
@@ -355,6 +399,7 @@ export const EJES: Eje[] = [
     priority: "P2",
     objetivo: "Enfermedad inflamatoria intestinal, celiaquía, úlcera péptica y cáncer colorrectal.",
     filas: [
+      { materia: "clinica-medica", text: "Úlcera péptica, hepatopatías, pancreatitis, diarrea y constipación.", peso: "central" },
       { materia: "patologia", text: "Aparato digestivo y glándulas anexas.", peso: "central" },
       { materia: "farmacologia-1", text: "Dispepsia, úlcera, erradicación de H. pylori, intestino irritable.", peso: "central" },
       { materia: "cirugia", text: "Cáncer colorrectal, hemorragia digestiva, hipertensión portal.", peso: "secundaria" },
@@ -375,6 +420,8 @@ export const EJES: Eje[] = [
     priority: "P2",
     objetivo: "Hipotiroidismo, hipertiroidismo, nódulos, insuficiencia suprarrenal y Cushing.",
     filas: [
+      { materia: "clinica-medica", text: "Hipófisis, tiroides y suprarrenales.", peso: "central" },
+      { materia: "fisiologia", text: "Ejes hormonales y retroalimentación.", peso: "central" },
       { materia: "anatomia", text: "Tiroides, paratiroides, suprarrenales e hipófisis.", peso: "central" },
       { materia: "patologia", text: "Patología endocrina.", peso: "central" },
       { materia: "pediatria", text: "Hipotiroidismo congénito y pesquisa neonatal.", peso: "secundaria" },
@@ -395,6 +442,7 @@ export const EJES: Eje[] = [
     priority: "P2",
     objetivo: "Osteoporosis, artrosis, artritis reumatoidea y fracturas por fragilidad.",
     filas: [
+      { materia: "clinica-medica", text: "Artritis, espondiloartritis y osteoporosis.", peso: "central" },
       { materia: "traumatologia", text: "Artrosis, artritis, fracturas por fragilidad.", peso: "central" },
       { materia: "farmacologia-2", text: "Osteoporosis, gota e hiperuricemia.", peso: "central" },
       { materia: "patologia", text: "Patología osteomioarticular.", peso: "secundaria" },
@@ -415,6 +463,8 @@ export const EJES: Eje[] = [
     priority: "P2",
     objetivo: "Delirium, demencias, Parkinson, depresión, ansiedad y riesgo suicida.",
     filas: [
+      { materia: "semiologia", text: "Psicosemiología: entrevista, ánimo, ansiedad y conciencia.", peso: "central" },
+      { materia: "farmacologia-general", text: "Mecanismo de los neuropsicofármacos.", peso: "secundaria" },
       { materia: "farmacologia-2", text: "Ansiedad, depresión, trastornos del sueño.", peso: "central" },
       { materia: "salud-comunitaria-1", text: "Determinantes sociales y red de cuidados.", peso: "secundaria" },
       { materia: "pediatria", text: "Salud mental del adolescente, autolesiones, TDAH.", peso: "secundaria" },
@@ -434,6 +484,7 @@ export const EJES: Eje[] = [
     priority: "P2",
     objetivo: "Sobredosis, intoxicación por paracetamol, monóxido de carbono, reacciones adversas e interacciones.",
     filas: [
+      { materia: "farmacologia-general", text: "Farmacocinética y riesgos del uso de medicamentos.", peso: "central" },
       { materia: "farmacologia-1", text: "Reacciones adversas a medicamentos y farmacovigilancia.", peso: "central" },
       { materia: "salud-comunitaria-1", text: "Salud ambiental: monóxido, plaguicidas, animales venenosos.", peso: "central" },
       { materia: "pediatria", text: "Ingestas accidentales, escorpionismo, cáusticos.", peso: "secundaria" },

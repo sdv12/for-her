@@ -90,7 +90,7 @@ export function CaseLinks({ cases, played, max = 6, moreHref }: { cases: Clinica
                 <span className="min-w-0 flex-1">
                   <span className="block text-[15px] leading-snug font-semibold">{done ? principal : patientLabel(c.patient)}</span>
                   <span className="block text-xs text-muted">
-                    {c.setting} · {c.area}
+                    {c.setting}
                   </span>
                 </span>
                 <ChevronRight aria-hidden className="size-4 shrink-0 text-muted" />

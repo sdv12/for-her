@@ -1,15 +1,24 @@
 import Link from "next/link";
-import { ArrowRight, Check, Clock, Upload } from "lucide-react";
+import { ArrowRight, Check, Clock, Route, Upload } from "lucide-react";
 import { ModeChip } from "@/components/features/plan/ModeChip";
 import { phaseLabel } from "@/components/features/plan/phase";
 import { buttonClasses } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Chip } from "@/components/ui/Pill";
 import { formatShortDate } from "@/lib/plan";
+import type { Agenda } from "@/lib/agenda";
+import type { DB } from "@/lib/data/types";
 import { startHref, type TodayView } from "@/lib/today";
+import { TodayAgenda } from "./TodayAgenda";
 
-/** Tarjeta héroe "Hoy toca": el día del plan de hoy, o qué hacer si no hay. */
-export function HeroToday({ v }: { v: TodayView }) {
+/**
+ * Tarjeta héroe "Hoy toca": el tema del día (del cronograma o, si no hay, de la ruta integrada)
+ * y adentro "Tu día", con todo lo que toca hoy junto: cronograma, ruta, tarjetas y Tablero.
+ */
+export function HeroToday({ v, agenda, db }: { v: TodayView; agenda: Agenda; db: DB }) {
+  const list = <TodayAgenda agenda={agenda} db={db} />;
+  const route = agenda.route;
+  const routeKicker = route ? (route.status === "antes" ? "La ruta integrada empieza el lunes" : `Ruta integrada · semana ${route.week}`) : null;
   const secondary = (
     <Link href="/plan" className={buttonClasses({ variant: "hero", size: "lg" })}>
       Ver el plan
@@ -21,13 +30,19 @@ export function HeroToday({ v }: { v: TodayView }) {
     </Link>
   );
 
-  if (!v.hasPlan) {
+  if (!v.hasPlan && !route) {
     return (
-      <Shell kicker="Hoy toca" title="Importá tu cronograma">
-        <p className="mt-2 max-w-xl text-[15px] opacity-85">Con el plan cargado, acá vas a ver qué toca cada día y arrancar con un toque.</p>
+      <Shell kicker="Hoy toca" title="Armá tu forma de estudiar">
+        <p className="mt-2 max-w-xl text-[15px] opacity-85">
+          Importá tu cronograma, empezá la ruta integrada de 12 semanas, o las dos: acá vas a ver qué toca cada día, todo junto.
+        </p>
+        {list}
         <Actions>
           <Link href="/plan/importar" className={buttonClasses({ variant: "primary", size: "lg" })}>
             <Upload aria-hidden /> Importá tu cronograma
+          </Link>
+          <Link href="/programa/ruta" className={buttonClasses({ variant: "hero", size: "lg" })}>
+            <Route aria-hidden /> Empezar la ruta
           </Link>
         </Actions>
       </Shell>
@@ -38,7 +53,7 @@ export function HeroToday({ v }: { v: TodayView }) {
     const done = Boolean(v.day.done_at);
     return (
       <Shell
-        kicker={`Hoy toca · Semana ${v.week?.num ?? "?"}${v.phase ? ` · Fase ${phaseLabel(v.phase)}` : ""}`}
+        kicker={`Hoy toca · Semana ${v.week?.num ?? "?"}${v.phase ? ` · Fase ${phaseLabel(v.phase)}` : ""}${routeKicker ? ` · ${routeKicker}` : ""}`}
         title={v.day.content}
       >
         <div className="mt-4 flex flex-wrap gap-2">
@@ -57,6 +72,7 @@ export function HeroToday({ v }: { v: TodayView }) {
             <span className="font-semibold text-hero-accent">Tip del tribunal:</span> {v.week.tip}
           </p>
         )}
+        {list}
         <Actions>
           <Link href={startHref(v.day.mode, v.dayTask?.id ?? null)} className={buttonClasses({ variant: "primary", size: "lg" })}>
             Empezar <ArrowRight aria-hidden />
@@ -73,11 +89,30 @@ export function HeroToday({ v }: { v: TodayView }) {
     </p>
   );
 
+  if (route) {
+    return (
+      <Shell kicker={`Hoy toca · ${routeKicker}`} title={route.title}>
+        <p className="mt-2 max-w-xl text-[15px] opacity-85">
+          Eje: {route.ejeTitle}.{v.hasPlan ? " Hoy no hay día del cronograma." : ""}
+        </p>
+        {next}
+        {list}
+        <Actions>
+          <Link href="/programa/ruta" className={buttonClasses({ variant: "primary", size: "lg" })}>
+            Ver la ruta <ArrowRight aria-hidden />
+          </Link>
+          {v.hasPlan && secondary}
+        </Actions>
+      </Shell>
+    );
+  }
+
   if (v.isWeekend) {
     return (
       <Shell kicker="Fin de semana" title="Descanso o repaso libre">
         <p className="mt-2 max-w-xl text-[15px] opacity-85">Si tenés ganas, unas tarjetas rápidas. Si no, descansar también es parte del plan.</p>
         {next}
+        {list}
         <Actions>
           {reviewCards}
           {secondary}
@@ -90,6 +125,7 @@ export function HeroToday({ v }: { v: TodayView }) {
     <Shell kicker="Hoy no hay nada del plan" title="Día libre de plan">
       <p className="mt-2 max-w-xl text-[15px] opacity-85">Aprovechá para repasar tarjetas o retomar lo que quedó pendiente en el Tablero.</p>
       {next}
+      {list}
       <Actions>
         {reviewCards}
         {secondary}

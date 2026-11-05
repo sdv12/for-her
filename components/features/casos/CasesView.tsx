@@ -228,7 +228,7 @@ function CaseCard({ c, best }: { c: ClinicalCase; best: CaseAttempt | undefined 
         <div className="min-w-0 flex-1">
           <p className="text-[15px] leading-snug font-semibold">{patientLabel(c.patient)}</p>
           <p className="text-xs text-muted">
-            {c.setting} · {c.area}
+            {c.setting}
           </p>
         </div>
         <Chip tone={c.level >= 3 ? "accent" : "neutral"}>{LEVEL_LABEL[c.level]}</Chip>
