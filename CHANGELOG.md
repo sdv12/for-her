@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.23.0 — 2026-11-07
+
+- Casos clínicos: 50 casos nuevos (388 en total), todos con preguntas del tribunal, priorizando lo más frecuente en Argentina (guardia, edad y sexo) y las patologías del plan maestro que todavía no tenían caso.
+  - 25 diagnósticos ya conocidos en otras personas y contextos: neumonía grave en una persona con alcoholismo y en situación de calle, hipoglucemia en el hijo de una madre diabética, angina crónica estable, fibrilación auricular por alcohol en un joven, TEP en el puerperio, TVP por anticonceptivos y viaje, HTA en un adolescente por coartación de aorta, epilepsia en una mujer que quiere embarazarse, demencia vascular, hemorragia subaracnoidea en una mujer joven, nefritis lúpica, desprendimiento de placenta por trauma, enfermedad pelviana inflamatoria en una adolescente, cáncer de mama durante la lactancia, síndrome de vena cava superior por cáncer de pulmón, leucemia mieloide crónica, hepatitis B en una embarazada, Chagas agudo vectorial en un niño, meningitis tuberculosa, prostatitis aguda después de una biopsia, cólico renal en una embarazada, síndrome nefrótico por glomerulopatía membranosa, vólvulo de sigmoides, hemorragia digestiva alta por AINE y traumatismo de cráneo leve en un niño.
+  - 25 diagnósticos nuevos: feocromocitoma, hiperparatiroidismo primario, cáncer de endometrio, cáncer de ovario, isoinmunización Rh, prolapso de cordón, enfermedad de membrana hialina, enterocolitis necrotizante, fibrosis quística, escarlatina, criptococosis meníngea, neumonía por Pneumocystis, absceso pulmonar, estenosis mitral, miocardiopatía hipertrófica, miocarditis, cáncer de páncreas, cáncer de vejiga, anemia hemolítica autoinmune, pénfigo vulgar, retinopatía diabética, osteosarcoma, síndrome neuroléptico maligno, lesión medular cervical y rotura del ligamento cruzado anterior.
+
 ## v0.22.0 — 2026-11-07
 
 - Casos clínicos: 50 casos nuevos (338 en total), todos con preguntas del tribunal, priorizando lo más frecuente en Argentina (guardia, edad y sexo) y las patologías del plan maestro que todavía no tenían caso.

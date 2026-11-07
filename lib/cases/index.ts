@@ -336,6 +336,56 @@ import { dengueEmbarazada } from "./data/dengue-embarazada";
 import { depresionAdultoMayor } from "./data/depresion-adulto-mayor";
 import { tormentaTiroidea } from "./data/tormenta-tiroidea";
 import { cirrosisEncefalopatia } from "./data/cirrosis-encefalopatia";
+import { abscesoPulmonar } from "./data/absceso-pulmonar";
+import { anemiaHemolitica } from "./data/anemia-hemolitica";
+import { anginaEstable } from "./data/angina-estable";
+import { cancerEndometrio } from "./data/cancer-endometrio";
+import { cancerMamaLactancia } from "./data/cancer-mama-lactancia";
+import { cancerOvario } from "./data/cancer-ovario";
+import { cancerPancreas } from "./data/cancer-pancreas";
+import { cancerPulmonVenaCava } from "./data/cancer-pulmon-vena-cava";
+import { cancerVejiga } from "./data/cancer-vejiga";
+import { chagasAgudo } from "./data/chagas-agudo";
+import { coartacionAorta } from "./data/coartacion-aorta";
+import { colicoRenalEmbarazada } from "./data/colico-renal-embarazada";
+import { criptococosisMeningea } from "./data/criptococosis-meningea";
+import { demenciaVascular } from "./data/demencia-vascular";
+import { desprendimientoTrauma } from "./data/desprendimiento-trauma";
+import { enterocolitisNecrotizante } from "./data/enterocolitis-necrotizante";
+import { epiAdolescente } from "./data/epi-adolescente";
+import { epilepsiaMujerFertil } from "./data/epilepsia-mujer-fertil";
+import { escarlatina } from "./data/escarlatina";
+import { estenosisMitral } from "./data/estenosis-mitral";
+import { faAlcohol } from "./data/fa-alcohol";
+import { feocromocitoma } from "./data/feocromocitoma";
+import { fibrosisQuistica } from "./data/fibrosis-quistica";
+import { hdaAines } from "./data/hda-aines";
+import { hepatitisBEmbarazada } from "./data/hepatitis-b-embarazada";
+import { hiperparatiroidismo } from "./data/hiperparatiroidismo";
+import { hipoglucemiaRecienNacido } from "./data/hipoglucemia-recien-nacido";
+import { hsaMujerJoven } from "./data/hsa-mujer-joven";
+import { isoinmunizacionRh } from "./data/isoinmunizacion-rh";
+import { lesionMedular } from "./data/lesion-medular";
+import { leucemiaMieloideCronica } from "./data/leucemia-mieloide-cronica";
+import { lupusNefritis } from "./data/lupus-nefritis";
+import { membranaHialina } from "./data/membrana-hialina";
+import { meningitisTuberculosa } from "./data/meningitis-tuberculosa";
+import { miocardiopatiaHipertrofica } from "./data/miocardiopatia-hipertrofica";
+import { miocarditis } from "./data/miocarditis";
+import { nacAlcoholista } from "./data/nac-alcoholista";
+import { nefroticoAdulto } from "./data/nefrotico-adulto";
+import { neurolepticoMaligno } from "./data/neuroleptico-maligno";
+import { osteosarcoma } from "./data/osteosarcoma";
+import { penfigo } from "./data/penfigo";
+import { pneumocystis } from "./data/pneumocystis";
+import { prolapsoCordon } from "./data/prolapso-cordon";
+import { prostatitisAguda } from "./data/prostatitis-aguda";
+import { retinopatiaDiabetica } from "./data/retinopatia-diabetica";
+import { roturaLca } from "./data/rotura-lca";
+import { tecNino } from "./data/tec-nino";
+import { tepPuerperio } from "./data/tep-puerperio";
+import { tvpAnticonceptivos } from "./data/tvp-anticonceptivos";
+import { volvuloSigmoides } from "./data/volvulo-sigmoides";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -691,6 +741,56 @@ export const CASES: ClinicalCase[] = [
   depresionAdultoMayor,
   tormentaTiroidea,
   cirrosisEncefalopatia,
+  abscesoPulmonar,
+  anemiaHemolitica,
+  anginaEstable,
+  cancerEndometrio,
+  cancerMamaLactancia,
+  cancerOvario,
+  cancerPancreas,
+  cancerPulmonVenaCava,
+  cancerVejiga,
+  chagasAgudo,
+  coartacionAorta,
+  colicoRenalEmbarazada,
+  criptococosisMeningea,
+  demenciaVascular,
+  desprendimientoTrauma,
+  enterocolitisNecrotizante,
+  epiAdolescente,
+  epilepsiaMujerFertil,
+  escarlatina,
+  estenosisMitral,
+  faAlcohol,
+  feocromocitoma,
+  fibrosisQuistica,
+  hdaAines,
+  hepatitisBEmbarazada,
+  hiperparatiroidismo,
+  hipoglucemiaRecienNacido,
+  hsaMujerJoven,
+  isoinmunizacionRh,
+  lesionMedular,
+  leucemiaMieloideCronica,
+  lupusNefritis,
+  membranaHialina,
+  meningitisTuberculosa,
+  miocardiopatiaHipertrofica,
+  miocarditis,
+  nacAlcoholista,
+  nefroticoAdulto,
+  neurolepticoMaligno,
+  osteosarcoma,
+  penfigo,
+  pneumocystis,
+  prolapsoCordon,
+  prostatitisAguda,
+  retinopatiaDiabetica,
+  roturaLca,
+  tecNino,
+  tepPuerperio,
+  tvpAnticonceptivos,
+  volvuloSigmoides,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);
