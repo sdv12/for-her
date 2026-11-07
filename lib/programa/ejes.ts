@@ -72,7 +72,7 @@ export const EJES: Eje[] = [
     clinica: "Muchas veces asintomática; alarma: dolor torácico opresivo, disnea, déficit neurológico, TA ≥ 180/120 con síntomas, edema agudo de pulmón.",
     diferenciales: "Urgencia vs emergencia hipertensiva; SCA vs disección vs TEP vs pericarditis; HTA esencial vs secundaria.",
     tratamiento: "Hábitos, IECA o ARA II, tiazida, calcioantagonista; estatina según riesgo; en el SCA, antiagregación y reperfusión.",
-    match: { areas: ["Cardiovascular"], keywords: /hipertens|hta|preeclamp|acv|isquemia-arterial|aneurisma|dislipem|iam|chagasica/ },
+    match: { areas: ["Cardiovascular"], keywords: /hipertens|hta|preeclamp|acv|isquemia-arterial|aneurisma|dislipem|iam|chagasica|fallot|cardiopatia/ },
   },
   {
     id: "infecciones",

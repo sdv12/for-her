@@ -286,6 +286,56 @@ import { cancerCuello } from "./data/cancer-cuello";
 import { linfomaHodgkin } from "./data/linfoma-hodgkin";
 import { fracturaExpuesta } from "./data/fractura-expuesta";
 import { encefalitisHerpetica } from "./data/encefalitis-herpetica";
+import { cushing } from "./data/cushing";
+import { hiperaldosteronismo } from "./data/hiperaldosteronismo";
+import { tetralogiaFallot } from "./data/tetralogia-fallot";
+import { sop } from "./data/sop";
+import { miomatosis } from "./data/miomatosis";
+import { crohn } from "./data/crohn";
+import { colitisUlcerosa } from "./data/colitis-ulcerosa";
+import { psoriasis } from "./data/psoriasis";
+import { melanoma } from "./data/melanoma";
+import { stevensJohnson } from "./data/stevens-johnson";
+import { osteomielitis } from "./data/osteomielitis";
+import { sindromeCompartimental } from "./data/sindrome-compartimental";
+import { fascitisNecrotizante } from "./data/fascitis-necrotizante";
+import { tetanos } from "./data/tetanos";
+import { sdra } from "./data/sdra";
+import { siadh } from "./data/siadh";
+import { rpm } from "./data/rpm";
+import { hellp } from "./data/hellp";
+import { cancerGastrico } from "./data/cancer-gastrico";
+import { hepatocarcinoma } from "./data/hepatocarcinoma";
+import { ait } from "./data/ait";
+import { fracturaVertebral } from "./data/fractura-vertebral";
+import { antifosfolipidico } from "./data/antifosfolipidico";
+import { hemofilia } from "./data/hemofilia";
+import { claudicacion } from "./data/claudicacion";
+import { iamShockCardiogenico } from "./data/iam-shock-cardiogenico";
+import { icFepAdultaMayor } from "./data/ic-fep-adulta-mayor";
+import { emergenciaHipertensiva } from "./data/emergencia-hipertensiva";
+import { pieDiabeticoIsquemico } from "./data/pie-diabetico-isquemico";
+import { ercNefropatiaDiabetica } from "./data/erc-nefropatia-diabetica";
+import { shockSepticoNeumonia } from "./data/shock-septico-neumonia";
+import { tbcVih } from "./data/tbc-vih";
+import { sifilisPrimaria } from "./data/sifilis-primaria";
+import { pielonefritisAdultaMayor } from "./data/pielonefritis-adulta-mayor";
+import { meningitisViral } from "./data/meningitis-viral";
+import { acvJovenAnticonceptivos } from "./data/acv-joven-anticonceptivos";
+import { eclampsiaAdolescente } from "./data/eclampsia-adolescente";
+import { hppRetencionPlacenta } from "./data/hpp-retencion-placenta";
+import { amenazaAborto } from "./data/amenaza-aborto";
+import { asmaAdolescenteGrave } from "./data/asma-adolescente-grave";
+import { apendicitisAdultoMayor } from "./data/apendicitis-adulto-mayor";
+import { pancreatitisHipertrigliceridemia } from "./data/pancreatitis-hipertrigliceridemia";
+import { obstruccionCancerColon } from "./data/obstruccion-cancer-colon";
+import { herniaCrural } from "./data/hernia-crural";
+import { fracturaSupracondilea } from "./data/fractura-supracondilea";
+import { traumaAbdominalBazo } from "./data/trauma-abdominal-bazo";
+import { dengueEmbarazada } from "./data/dengue-embarazada";
+import { depresionAdultoMayor } from "./data/depresion-adulto-mayor";
+import { tormentaTiroidea } from "./data/tormenta-tiroidea";
+import { cirrosisEncefalopatia } from "./data/cirrosis-encefalopatia";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -591,6 +641,56 @@ export const CASES: ClinicalCase[] = [
   linfomaHodgkin,
   fracturaExpuesta,
   encefalitisHerpetica,
+  cushing,
+  hiperaldosteronismo,
+  tetralogiaFallot,
+  sop,
+  miomatosis,
+  crohn,
+  colitisUlcerosa,
+  psoriasis,
+  melanoma,
+  stevensJohnson,
+  osteomielitis,
+  sindromeCompartimental,
+  fascitisNecrotizante,
+  tetanos,
+  sdra,
+  siadh,
+  rpm,
+  hellp,
+  cancerGastrico,
+  hepatocarcinoma,
+  ait,
+  fracturaVertebral,
+  antifosfolipidico,
+  hemofilia,
+  claudicacion,
+  iamShockCardiogenico,
+  icFepAdultaMayor,
+  emergenciaHipertensiva,
+  pieDiabeticoIsquemico,
+  ercNefropatiaDiabetica,
+  shockSepticoNeumonia,
+  tbcVih,
+  sifilisPrimaria,
+  pielonefritisAdultaMayor,
+  meningitisViral,
+  acvJovenAnticonceptivos,
+  eclampsiaAdolescente,
+  hppRetencionPlacenta,
+  amenazaAborto,
+  asmaAdolescenteGrave,
+  apendicitisAdultoMayor,
+  pancreatitisHipertrigliceridemia,
+  obstruccionCancerColon,
+  herniaCrural,
+  fracturaSupracondilea,
+  traumaAbdominalBazo,
+  dengueEmbarazada,
+  depresionAdultoMayor,
+  tormentaTiroidea,
+  cirrosisEncefalopatia,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);

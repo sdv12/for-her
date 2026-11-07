@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.22.0 — 2026-11-07
+
+- Casos clínicos: 50 casos nuevos (338 en total), todos con preguntas del tribunal, priorizando lo más frecuente en Argentina (guardia, edad y sexo) y las patologías del plan maestro que todavía no tenían caso.
+  - 25 diagnósticos ya conocidos en otras personas y contextos: IAM con shock cardiogénico, IC con fracción preservada en una adulta mayor, emergencia hipertensiva con encefalopatía, pie diabético neuroisquémico, nefropatía diabética, shock séptico por neumonía, tuberculosis con VIH en una persona que estuvo privada de libertad, sífilis primaria en un joven, pielonefritis con delirium en una adulta mayor, meningitis viral, ACV en una joven con anticonceptivos, eclampsia en una adolescente, hemorragia posparto por retención de placenta, amenaza de aborto, asma casi fatal en un adolescente, apendicitis en un adulto mayor, pancreatitis por triglicéridos, obstrucción por cáncer de colon, hernia crural estrangulada, fractura supracondílea en un niño, rotura de bazo en un motociclista, dengue en una embarazada, depresión con riesgo suicida en un adulto mayor, tormenta tiroidea y encefalopatía hepática.
+  - 25 diagnósticos nuevos: síndrome de Cushing, hiperaldosteronismo primario, tetralogía de Fallot, ovario poliquístico, miomatosis, enfermedad de Crohn, colitis ulcerosa, psoriasis, melanoma, Stevens-Johnson, osteomielitis, síndrome compartimental, fascitis necrotizante, tétanos, SDRA, SIADH, rotura prematura de membranas, HELLP, cáncer gástrico, hepatocarcinoma, AIT, fractura vertebral por osteoporosis, síndrome antifosfolipídico, hemofilia A y enfermedad arterial periférica.
+
 ## v0.21.0 — 2026-11-05
 
 - Plan maestro integrado como plantilla (Plan → Importar → Plan maestro): 24 semanas en 4 fases, un eje clínico por semana, temas troncales en orden de prioridad, patologías para el Temario y la plantilla DFDCT de cada semana. La semana 1 arranca el día que se carga y dura hasta el viernes 13 de noviembre; desde la 2 respeta las fechas del plan (de lunes a viernes, con el corte de fiestas).
