@@ -410,7 +410,7 @@ export const EJES: Eje[] = [
     clinica: "Dispepsia, diarrea crónica, pérdida de peso; alarma: anemia, sangrado, disfagia, edad > 50 con síntomas nuevos.",
     diferenciales: "Funcional vs orgánico; malabsorción vs inflamación.",
     tratamiento: "IBP, erradicación, dieta sin TACC; endoscopía ante síntomas de alarma.",
-    match: { keywords: /celiac|ulcera-duodenal|reflujo|cancer-colorrectal|higado-graso|hepatitis-c|cirrosis|constipacion|colitis|hemorragia-digestiva/ },
+    match: { keywords: /acalasia|celiac|ulcera-duodenal|reflujo|cancer-colorrectal|higado-graso|hepatitis-c|cirrosis|constipacion|colitis|hemorragia-digestiva/ },
   },
   {
     id: "tiroides",
@@ -432,7 +432,7 @@ export const EJES: Eje[] = [
     clinica: "Cambios de peso, temblor, intolerancia al frío o al calor; alarma: hipotensión con hiponatremia e hiperpotasemia, tormenta tiroidea.",
     diferenciales: "Primario vs central; tiroiditis vs Graves; nódulo benigno vs maligno.",
     tratamiento: "Levotiroxina, antitiroideos y betabloqueantes, hidrocortisona EV en la crisis suprarrenal.",
-    match: { keywords: /tiroid|addison|hashimoto|graves/ },
+    match: { keywords: /tiroid|addison|hashimoto|graves|prolactinoma/ },
   },
   {
     id: "osteoarticular",
@@ -474,7 +474,7 @@ export const EJES: Eje[] = [
     clinica: "Cambio cognitivo o del ánimo; alarma: ideación suicida, agitación, fluctuación de la conciencia.",
     diferenciales: "Delirium vs demencia vs depresión; orgánico vs primario.",
     tratamiento: "Tratar la causa, ISRS, psicoterapia, evaluación del riesgo y red.",
-    match: { areas: ["Salud mental"], keywords: /delirium|demencia|parkinson|abstinencia|intento-suicidio/ },
+    match: { areas: ["Salud mental"], keywords: /delirium|demencia|parkinson|abstinencia|intento-suicidio|espectro-autista/ },
   },
   {
     id: "intoxicaciones",

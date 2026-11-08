@@ -386,6 +386,56 @@ import { tecNino } from "./data/tec-nino";
 import { tepPuerperio } from "./data/tep-puerperio";
 import { tvpAnticonceptivos } from "./data/tvp-anticonceptivos";
 import { volvuloSigmoides } from "./data/volvulo-sigmoides";
+import { abscesoPeriamigdalino } from "./data/absceso-periamigdalino";
+import { acalasia } from "./data/acalasia";
+import { acidosisLacticaMetformina } from "./data/acidosis-lactica-metformina";
+import { acvCardioembolico } from "./data/acv-cardioembolico";
+import { alzheimerInicioPrecoz } from "./data/alzheimer-inicio-precoz";
+import { anemiaPerniciosa } from "./data/anemia-perniciosa";
+import { artritisGonococica } from "./data/artritis-gonococica";
+import { asmaEmbarazada } from "./data/asma-embarazada";
+import { bulimiaNerviosa } from "./data/bulimia-nerviosa";
+import { cadDebutNina } from "./data/cad-debut-nina";
+import { cancerColorrectalLynch } from "./data/cancer-colorrectal-lynch";
+import { cancerRenal } from "./data/cancer-renal";
+import { catarata } from "./data/catarata";
+import { celulitisLinfedema } from "./data/celulitis-linfedema";
+import { comunicacionInterventricular } from "./data/comunicacion-interventricular";
+import { dengueAdultoMayor } from "./data/dengue-adulto-mayor";
+import { ectopicoRotoDiu } from "./data/ectopico-roto-diu";
+import { ela } from "./data/ela";
+import { epocCorPulmonale } from "./data/epoc-cor-pulmonale";
+import { ercPoliquistosis } from "./data/erc-poliquistosis";
+import { esclerodermia } from "./data/esclerodermia";
+import { espondilodiscitis } from "./data/espondilodiscitis";
+import { fiebreReumatica } from "./data/fiebre-reumatica";
+import { hepatitisAutoinmune } from "./data/hepatitis-autoinmune";
+import { hipoglucemiaGlibenclamida } from "./data/hipoglucemia-glibenclamida";
+import { hipopotasemia } from "./data/hipopotasemia";
+import { hipoventilacionObesidad } from "./data/hipoventilacion-obesidad";
+import { iamAnteriorTabaquista } from "./data/iam-anterior-tabaquista";
+import { insuficienciaMitral } from "./data/insuficiencia-mitral";
+import { iraRabdomiolisis } from "./data/ira-rabdomiolisis";
+import { leucemiaLinfaticaCronica } from "./data/leucemia-linfatica-cronica";
+import { linfomaNoHodgkin } from "./data/linfoma-no-hodgkin";
+import { meningitisNeonatal } from "./data/meningitis-neonatal";
+import { miocardiopatiaPeriparto } from "./data/miocardiopatia-periparto";
+import { molaHidatiforme } from "./data/mola-hidatiforme";
+import { neumoniaLegionella } from "./data/neumonia-legionella";
+import { neurosifilis } from "./data/neurosifilis";
+import { obesidad } from "./data/obesidad";
+import { paracoccidioidomicosis } from "./data/paracoccidioidomicosis";
+import { peritonitisUlceraPerforada } from "./data/peritonitis-ulcera-perforada";
+import { placentaAcreta } from "./data/placenta-acreta";
+import { polineuropatiaDiabetica } from "./data/polineuropatia-diabetica";
+import { preeclampsiaGraveEdadAvanzada } from "./data/preeclampsia-grave-edad-avanzada";
+import { prolactinoma } from "./data/prolactinoma";
+import { ptt } from "./data/ptt";
+import { retrasoDesarrolloTea } from "./data/retraso-desarrollo-tea";
+import { schonleinHenoch } from "./data/schonlein-henoch";
+import { sepsisPuerperal } from "./data/sepsis-puerperal";
+import { tbcPleural } from "./data/tbc-pleural";
+import { toxoplasmosisCerebralVih } from "./data/toxoplasmosis-cerebral-vih";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -791,6 +841,56 @@ export const CASES: ClinicalCase[] = [
   tepPuerperio,
   tvpAnticonceptivos,
   volvuloSigmoides,
+  abscesoPeriamigdalino,
+  acalasia,
+  acidosisLacticaMetformina,
+  acvCardioembolico,
+  alzheimerInicioPrecoz,
+  anemiaPerniciosa,
+  artritisGonococica,
+  asmaEmbarazada,
+  bulimiaNerviosa,
+  cadDebutNina,
+  cancerColorrectalLynch,
+  cancerRenal,
+  catarata,
+  celulitisLinfedema,
+  comunicacionInterventricular,
+  dengueAdultoMayor,
+  ectopicoRotoDiu,
+  ela,
+  epocCorPulmonale,
+  ercPoliquistosis,
+  esclerodermia,
+  espondilodiscitis,
+  fiebreReumatica,
+  hepatitisAutoinmune,
+  hipoglucemiaGlibenclamida,
+  hipopotasemia,
+  hipoventilacionObesidad,
+  iamAnteriorTabaquista,
+  insuficienciaMitral,
+  iraRabdomiolisis,
+  leucemiaLinfaticaCronica,
+  linfomaNoHodgkin,
+  meningitisNeonatal,
+  miocardiopatiaPeriparto,
+  molaHidatiforme,
+  neumoniaLegionella,
+  neurosifilis,
+  obesidad,
+  paracoccidioidomicosis,
+  peritonitisUlceraPerforada,
+  placentaAcreta,
+  polineuropatiaDiabetica,
+  preeclampsiaGraveEdadAvanzada,
+  prolactinoma,
+  ptt,
+  retrasoDesarrolloTea,
+  schonleinHenoch,
+  sepsisPuerperal,
+  tbcPleural,
+  toxoplasmosisCerebralVih,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);

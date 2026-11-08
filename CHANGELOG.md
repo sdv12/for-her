@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.24.0 — 2026-11-08
+
+- Casos clínicos: 50 casos nuevos (438 en total), todos con preguntas del tribunal, priorizando lo más frecuente en Argentina (guardia, edad y sexo) y las patologías del plan maestro que todavía no tenían caso.
+  - 25 diagnósticos ya conocidos en otras personas y contextos: cetoacidosis como debut en una niña, hipoglucemia por glibenclamida en un adulto mayor con enfermedad renal, IAM anterior en un tabaquista, insuficiencia cardíaca por miocardiopatía periparto, preeclampsia grave con ovodonación, sepsis puerperal, toxoplasmosis cerebral con VIH avanzado, tuberculosis pleural, neurosífilis, dengue con signos de alarma en un adulto mayor anticoagulado, celulitis sobre linfedema, espondilodiscitis, artritis gonocócica, EPOC con cor pulmonale, crisis de asma en una embarazada, neumonía por Legionella, insuficiencia renal por rabdomiólisis, enfermedad renal por poliquistosis con uremia, cáncer colorrectal con síndrome de Lynch, anemia perniciosa, embarazo ectópico roto con DIU, placenta previa con acretismo, meningitis neonatal, ACV cardioembólico y Alzheimer de inicio precoz.
+  - 25 diagnósticos nuevos: polineuropatía diabética, obesidad grado 3, síndrome de obesidad-hipoventilación con insuficiencia respiratoria tipo II, acidosis láctica por metformina, hipopotasemia, comunicación interventricular, linfoma no Hodgkin, leucemia linfática crónica, úlcera perforada, insuficiencia mitral, fiebre reumática, mola hidatiforme, prolactinoma, acalasia, cáncer renal, esclerosis lateral amiotrófica, bulimia nerviosa, esclerodermia, trastorno del espectro autista, púrpura de Schönlein-Henoch, absceso periamigdalino, catarata, paracoccidioidomicosis, hepatitis autoinmune y púrpura trombótica trombocitopénica.
+
 ## v0.23.0 — 2026-11-07
 
 - Casos clínicos: 50 casos nuevos (388 en total), todos con preguntas del tribunal, priorizando lo más frecuente en Argentina (guardia, edad y sexo) y las patologías del plan maestro que todavía no tenían caso.
