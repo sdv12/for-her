@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.26.0 — 2026-11-12
+
+- Casos clínicos: 50 casos nuevos (538 en total), todos con preguntas del tribunal, priorizando lo más frecuente en Argentina (guardia, edad y sexo).
+  - 25 diagnósticos ya conocidos en otras personas y contextos: neumonía con influenza en una embarazada, diarrea por Salmonella en un brote alimentario, cistitis recurrente posmenopáusica, insuficiencia cardíaca por miocardiopatía alcohólica, hipertensión por anticonceptivos, LADA, coma mixedematoso, crisis suprarrenal por suspender corticoides, ACV cerebeloso, epilepsia de ausencias, migraña con aura en un varón, tuberculosis ganglionar, dengue ambulatorio, pancreatitis necrotizante infectada, colecistitis alitiásica en terapia intensiva, candidiasis recurrente con diabetes, neumonía por varicela en un adulto, coqueluche en una adulta con un lactante, quemadura eléctrica de alto voltaje, delirium posoperatorio, artritis reumatoidea en un varón fumador, compresión medular por cáncer de próstata, hernia umbilical atascada, crisis de asma por AINE e insuficiencia hepática por hepatitis A.
+  - 25 diagnósticos nuevos: policitemia vera, hipocalcemia postiroidectomía, acromegalia, cáncer de tiroides, cáncer de esófago, cáncer de testículo, cefalea en racimos, hipertensión intracraneal idiopática, neuritis óptica, oclusión de la arteria central de la retina, otitis externa, neuritis vestibular, leishmaniasis cutánea, histoplasmosis diseminada con VIH, mpox, parotiditis con orquitis, síndrome de Down neonatal, estenosis de canal lumbar, rotura del tendón de Aquiles, trastorno por estrés postraumático, demencia frontotemporal, colestasis intrahepática del embarazo, prolapso genital, carcinoma basocelular y latrodectismo.
+
 ## v0.25.0 — 2026-11-11
 
 - Casos clínicos: 50 casos nuevos (488 en total), todos con preguntas del tribunal, priorizando lo más frecuente en Argentina (guardia, edad y sexo).

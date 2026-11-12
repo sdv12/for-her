@@ -486,6 +486,56 @@ import { toc } from "./data/toc";
 import { tumorWilms } from "./data/tumor-wilms";
 import { vihAgudo } from "./data/vih-agudo";
 import { wolffParkinsonWhite } from "./data/wolff-parkinson-white";
+import { acromegalia } from "./data/acromegalia";
+import { acvVertebrobasilar } from "./data/acv-vertebrobasilar";
+import { artritisReumatoideaVaron } from "./data/artritis-reumatoidea-varon";
+import { asmaAines } from "./data/asma-aines";
+import { cancerEsofago } from "./data/cancer-esofago";
+import { cancerProstataCompresionMedular } from "./data/cancer-prostata-compresion-medular";
+import { cancerTesticulo } from "./data/cancer-testiculo";
+import { cancerTiroides } from "./data/cancer-tiroides";
+import { candidiasisRecurrenteDiabetica } from "./data/candidiasis-recurrente-diabetica";
+import { carcinomaBasocelular } from "./data/carcinoma-basocelular";
+import { cefaleaRacimos } from "./data/cefalea-racimos";
+import { cistitisRecurrentePosmenopausica } from "./data/cistitis-recurrente-posmenopausica";
+import { colecistitisAlitiasica } from "./data/colecistitis-alitiasica";
+import { colestasisEmbarazo } from "./data/colestasis-embarazo";
+import { comaMixedematoso } from "./data/coma-mixedematoso";
+import { coquelucheAdulta } from "./data/coqueluche-adulta";
+import { crisisSuprarrenalCorticoides } from "./data/crisis-suprarrenal-corticoides";
+import { deliriumPostoperatorio } from "./data/delirium-postoperatorio";
+import { demenciaFrontotemporal } from "./data/demencia-frontotemporal";
+import { dengueAmbulatorio } from "./data/dengue-ambulatorio";
+import { diarreaSalmonellaAdulto } from "./data/diarrea-salmonella-adulto";
+import { epilepsiaAusencias } from "./data/epilepsia-ausencias";
+import { estenosisCanalLumbar } from "./data/estenosis-canal-lumbar";
+import { hepatitisAInsuficienciaHepatica } from "./data/hepatitis-a-insuficiencia-hepatica";
+import { herniaUmbilicalAtascada } from "./data/hernia-umbilical-atascada";
+import { hipertensionIntracranealIdiopatica } from "./data/hipertension-intracraneal-idiopatica";
+import { hipocalcemiaPostiroidectomia } from "./data/hipocalcemia-postiroidectomia";
+import { histoplasmosisVih } from "./data/histoplasmosis-vih";
+import { htaAnticonceptivos } from "./data/hta-anticonceptivos";
+import { lada } from "./data/lada";
+import { latrodectismo } from "./data/latrodectismo";
+import { leishmaniasis } from "./data/leishmaniasis";
+import { migranaConAura } from "./data/migrana-con-aura";
+import { miocardiopatiaDilatadaAlcoholica } from "./data/miocardiopatia-dilatada-alcoholica";
+import { mpox } from "./data/mpox";
+import { nacEmbarazada } from "./data/nac-embarazada";
+import { neuritisOptica } from "./data/neuritis-optica";
+import { neuritisVestibular } from "./data/neuritis-vestibular";
+import { oclusionArteriaRetina } from "./data/oclusion-arteria-retina";
+import { otitisExterna } from "./data/otitis-externa";
+import { pancreatitisNecrotizante } from "./data/pancreatitis-necrotizante";
+import { parotiditis } from "./data/parotiditis";
+import { policitemiaVera } from "./data/policitemia-vera";
+import { prolapsoGenital } from "./data/prolapso-genital";
+import { quemaduraElectrica } from "./data/quemadura-electrica";
+import { roturaAquiles } from "./data/rotura-aquiles";
+import { sindromeDownNeonatal } from "./data/sindrome-down-neonatal";
+import { tbcGanglionar } from "./data/tbc-ganglionar";
+import { tept } from "./data/tept";
+import { varicelaAdultoNeumonia } from "./data/varicela-adulto-neumonia";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -991,6 +1041,56 @@ export const CASES: ClinicalCase[] = [
   tumorWilms,
   vihAgudo,
   wolffParkinsonWhite,
+  acromegalia,
+  acvVertebrobasilar,
+  artritisReumatoideaVaron,
+  asmaAines,
+  cancerEsofago,
+  cancerProstataCompresionMedular,
+  cancerTesticulo,
+  cancerTiroides,
+  candidiasisRecurrenteDiabetica,
+  carcinomaBasocelular,
+  cefaleaRacimos,
+  cistitisRecurrentePosmenopausica,
+  colecistitisAlitiasica,
+  colestasisEmbarazo,
+  comaMixedematoso,
+  coquelucheAdulta,
+  crisisSuprarrenalCorticoides,
+  deliriumPostoperatorio,
+  demenciaFrontotemporal,
+  dengueAmbulatorio,
+  diarreaSalmonellaAdulto,
+  epilepsiaAusencias,
+  estenosisCanalLumbar,
+  hepatitisAInsuficienciaHepatica,
+  herniaUmbilicalAtascada,
+  hipertensionIntracranealIdiopatica,
+  hipocalcemiaPostiroidectomia,
+  histoplasmosisVih,
+  htaAnticonceptivos,
+  lada,
+  latrodectismo,
+  leishmaniasis,
+  migranaConAura,
+  miocardiopatiaDilatadaAlcoholica,
+  mpox,
+  nacEmbarazada,
+  neuritisOptica,
+  neuritisVestibular,
+  oclusionArteriaRetina,
+  otitisExterna,
+  pancreatitisNecrotizante,
+  parotiditis,
+  policitemiaVera,
+  prolapsoGenital,
+  quemaduraElectrica,
+  roturaAquiles,
+  sindromeDownNeonatal,
+  tbcGanglionar,
+  tept,
+  varicelaAdultoNeumonia,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);
