@@ -436,6 +436,56 @@ import { schonleinHenoch } from "./data/schonlein-henoch";
 import { sepsisPuerperal } from "./data/sepsis-puerperal";
 import { tbcPleural } from "./data/tbc-pleural";
 import { toxoplasmosisCerebralVih } from "./data/toxoplasmosis-cerebral-vih";
+import { abscesoBartholin } from "./data/absceso-bartholin";
+import { acvDiseccionCarotidea } from "./data/acv-diseccion-carotidea";
+import { apendicitisPlastron } from "./data/apendicitis-plastron";
+import { bacteriuriaAsintomaticaEmbarazo } from "./data/bacteriuria-asintomatica-embarazo";
+import { bronquiectasias } from "./data/bronquiectasias";
+import { celiaquiaNino } from "./data/celiaquia-nino";
+import { chagasArritmia } from "./data/chagas-arritmia";
+import { cirrosisHepatorrenal } from "./data/cirrosis-hepatorrenal";
+import { colangitisBiliarPrimaria } from "./data/colangitis-biliar-primaria";
+import { colecistitisEmbarazada } from "./data/colecistitis-embarazada";
+import { coledocolitiasis } from "./data/coledocolitiasis";
+import { controlPrenatalAdolescente } from "./data/control-prenatal-adolescente";
+import { desnutricionInfantil } from "./data/desnutricion-infantil";
+import { diabetesInsipida } from "./data/diabetes-insipida";
+import { dm2Insulinizacion } from "./data/dm2-insulinizacion";
+import { fibrosisPulmonarIdiopatica } from "./data/fibrosis-pulmonar-idiopatica";
+import { fracturaCaderaVaron } from "./data/fractura-cadera-varon";
+import { fracturaEscafoides } from "./data/fractura-escafoides";
+import { glioblastoma } from "./data/glioblastoma";
+import { gravesEmbarazo } from "./data/graves-embarazo";
+import { hematomaSubduralCronico } from "./data/hematoma-subdural-cronico";
+import { hemocromatosis } from "./data/hemocromatosis";
+import { hemorragiaDigestivaBaja } from "./data/hemorragia-digestiva-baja";
+import { hemorragiaPospartoDesgarro } from "./data/hemorragia-posparto-desgarro";
+import { htaResistente } from "./data/hta-resistente";
+import { insuficienciaAortica } from "./data/insuficiencia-aortica";
+import { intoxicacionAlcoholicaAdolescente } from "./data/intoxicacion-alcoholica-adolescente";
+import { intoxicacionLitio } from "./data/intoxicacion-litio";
+import { intoxicacionOpioides } from "./data/intoxicacion-opioides";
+import { ituReflujoVesicoureteral } from "./data/itu-reflujo-vesicoureteral";
+import { kawasakiIncompleto } from "./data/kawasaki-incompleto";
+import { meningitisNeumococica } from "./data/meningitis-neumococica";
+import { neumoniaPostInfluenza } from "./data/neumonia-post-influenza";
+import { neumotoraxSecundarioEpoc } from "./data/neumotorax-secundario-epoc";
+import { neuralgiaTrigemino } from "./data/neuralgia-trigemino";
+import { pancreatitisCronica } from "./data/pancreatitis-cronica";
+import { paralisisBell } from "./data/paralisis-bell";
+import { pielonefritisEnfisematosa } from "./data/pielonefritis-enfisematosa";
+import { psitacosis } from "./data/psitacosis";
+import { sarcoidosis } from "./data/sarcoidosis";
+import { sincopeOrtostatico } from "./data/sincope-ortostatico";
+import { sindromeSheehan } from "./data/sindrome-sheehan";
+import { talasemiaMenor } from "./data/talasemia-menor";
+import { tbcMultirresistente } from "./data/tbc-multirresistente";
+import { tepCancer } from "./data/tep-cancer";
+import { tiroiditisPosparto } from "./data/tiroiditis-posparto";
+import { toc } from "./data/toc";
+import { tumorWilms } from "./data/tumor-wilms";
+import { vihAgudo } from "./data/vih-agudo";
+import { wolffParkinsonWhite } from "./data/wolff-parkinson-white";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -891,6 +941,56 @@ export const CASES: ClinicalCase[] = [
   sepsisPuerperal,
   tbcPleural,
   toxoplasmosisCerebralVih,
+  abscesoBartholin,
+  acvDiseccionCarotidea,
+  apendicitisPlastron,
+  bacteriuriaAsintomaticaEmbarazo,
+  bronquiectasias,
+  celiaquiaNino,
+  chagasArritmia,
+  cirrosisHepatorrenal,
+  colangitisBiliarPrimaria,
+  colecistitisEmbarazada,
+  coledocolitiasis,
+  controlPrenatalAdolescente,
+  desnutricionInfantil,
+  diabetesInsipida,
+  dm2Insulinizacion,
+  fibrosisPulmonarIdiopatica,
+  fracturaCaderaVaron,
+  fracturaEscafoides,
+  glioblastoma,
+  gravesEmbarazo,
+  hematomaSubduralCronico,
+  hemocromatosis,
+  hemorragiaDigestivaBaja,
+  hemorragiaPospartoDesgarro,
+  htaResistente,
+  insuficienciaAortica,
+  intoxicacionAlcoholicaAdolescente,
+  intoxicacionLitio,
+  intoxicacionOpioides,
+  ituReflujoVesicoureteral,
+  kawasakiIncompleto,
+  meningitisNeumococica,
+  neumoniaPostInfluenza,
+  neumotoraxSecundarioEpoc,
+  neuralgiaTrigemino,
+  pancreatitisCronica,
+  paralisisBell,
+  pielonefritisEnfisematosa,
+  psitacosis,
+  sarcoidosis,
+  sincopeOrtostatico,
+  sindromeSheehan,
+  talasemiaMenor,
+  tbcMultirresistente,
+  tepCancer,
+  tiroiditisPosparto,
+  toc,
+  tumorWilms,
+  vihAgudo,
+  wolffParkinsonWhite,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);

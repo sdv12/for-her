@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.25.0 — 2026-11-11
+
+- Casos clínicos: 50 casos nuevos (488 en total), todos con preguntas del tribunal, priorizando lo más frecuente en Argentina (guardia, edad y sexo).
+  - 25 diagnósticos ya conocidos en otras personas y contextos: bacteriuria asintomática en el embarazo, neumonía estafilocócica después de una gripe, pielonefritis con reflujo vesicoureteral en una niña, hipertensión resistente, insulinización en la diabetes tipo 2, tiroiditis posparto, Graves en el embarazo, síncope ortostático en un adulto mayor, ACV por disección carotídea, meningitis neumocócica en un adulto sin bazo, pielonefritis enfisematosa, colecistitis en una embarazada, síndrome hepatorrenal, tuberculosis multirresistente, infección aguda por VIH, taquicardia ventricular por Chagas, control prenatal en una adolescente, Kawasaki incompleto en un lactante, apendicitis complicada con absceso, TEP asociado a cáncer, intoxicación alcohólica en una adolescente, neumotórax secundario a EPOC, hemorragia posparto por desgarro, fractura de cadera en un varón anticoagulado y celiaquía clásica en una niña.
+  - 25 diagnósticos nuevos: parálisis de Bell, hematoma subdural crónico, neuralgia del trigémino, glioblastoma, coledocolitiasis, hemorragia digestiva baja diverticular, pancreatitis crónica, colangitis biliar primaria, hemocromatosis, talasemia menor, absceso de Bartholin, síndrome de Sheehan, diabetes insípida, sarcoidosis, fibrosis pulmonar idiopática, bronquiectasias, insuficiencia aórtica, Wolff-Parkinson-White, intoxicación por opioides, intoxicación por litio, trastorno obsesivo-compulsivo, tumor de Wilms, psitacosis, desnutrición aguda grave y fractura de escafoides.
+
 ## v0.24.0 — 2026-11-08
 
 - Casos clínicos: 50 casos nuevos (438 en total), todos con preguntas del tribunal, priorizando lo más frecuente en Argentina (guardia, edad y sexo) y las patologías del plan maestro que todavía no tenían caso.
