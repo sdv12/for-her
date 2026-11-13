@@ -410,7 +410,7 @@ export const EJES: Eje[] = [
     clinica: "Dispepsia, diarrea crónica, pérdida de peso; alarma: anemia, sangrado, disfagia, edad > 50 con síntomas nuevos.",
     diferenciales: "Funcional vs orgánico; malabsorción vs inflamación.",
     tratamiento: "IBP, erradicación, dieta sin TACC; endoscopía ante síntomas de alarma.",
-    match: { keywords: /acalasia|celiac|ulcera-duodenal|reflujo|cancer-colorrectal|higado-graso|hepatitis-c|cirrosis|constipacion|colitis|hemorragia-digestiva/ },
+    match: { keywords: /acalasia|celiac|intestino-irritable|ulcera-duodenal|reflujo|cancer-colorrectal|higado-graso|hepatitis-c|cirrosis|constipacion|colitis|hemorragia-digestiva/ },
   },
   {
     id: "tiroides",
@@ -494,7 +494,7 @@ export const EJES: Eje[] = [
     clinica: "Toxíndrome; alarma: depresión respiratoria, convulsiones, arritmias.",
     diferenciales: "Colinérgico, anticolinérgico, simpaticomimético, opioide, sedativo.",
     tratamiento: "ABC, carbón activado si corresponde, antídotos (N-acetilcisteína, atropina, flumazenil con cuidado, oxígeno al 100 %).",
-    match: { areas: ["Toxicología"], keywords: /intoxic|paracetamol|benzodiacep|tiazida|nefrotoxica|amiodarona|cocaina|abuso-analgesicos/ },
+    match: { areas: ["Toxicología"], keywords: /intoxic|paracetamol|benzodiacep|tiazida|nefrotoxica|amiodarona|cocaina|abuso-analgesicos|pila-boton/ },
   },
   {
     id: "salud-sexual",
@@ -534,7 +534,7 @@ export const EJES: Eje[] = [
     clinica: "Ictericia, rechazo del alimento, hipotermia o fiebre; alarma: ictericia en las primeras 24 h, letargo, apneas.",
     diferenciales: "Fisiológica vs patológica; sepsis precoz vs tardía.",
     tratamiento: "Luminoterapia, antibióticos empíricos, tratamiento de la madre y del niño en las infecciones verticales.",
-    match: { keywords: /neonat|congenit|ictericia|prematuro|displasia-desarrollo|colico-del-lactante/ },
+    match: { keywords: /neonat|congenit|ictericia|prematuro|displasia-desarrollo|colico-del-lactante|criptorquid/ },
   },
   {
     id: "prevencion",

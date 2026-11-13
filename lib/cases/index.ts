@@ -536,6 +536,106 @@ import { sindromeDownNeonatal } from "./data/sindrome-down-neonatal";
 import { tbcGanglionar } from "./data/tbc-ganglionar";
 import { tept } from "./data/tept";
 import { varicelaAdultoNeumonia } from "./data/varicela-adulto-neumonia";
+import { abscesoMamarioPuerperal } from "./data/absceso-mamario-puerperal";
+import { abstinenciaAlcoholicaConvulsion } from "./data/abstinencia-alcoholica-convulsion";
+import { acvLacunar } from "./data/acv-lacunar";
+import { aitAmaurosisFugaz } from "./data/ait-amaurosis-fugaz";
+import { anafilaxiaMedicamentosa } from "./data/anafilaxia-medicamentosa";
+import { anemiaFerropenicaVaron } from "./data/anemia-ferropenica-varon";
+import { anorexiaVaron } from "./data/anorexia-varon";
+import { apendicitisMujerJoven } from "./data/apendicitis-mujer-joven";
+import { botulismo } from "./data/botulismo";
+import { cancerMamaVaron } from "./data/cancer-mama-varon";
+import { carcinomaEspinocelular } from "./data/carcinoma-espinocelular";
+import { celulitisOrbitaria } from "./data/celulitis-orbitaria";
+import { cetoacidosisEmbarazo } from "./data/cetoacidosis-embarazo";
+import { chikungunya } from "./data/chikungunya";
+import { cirrosisAscitisDebut } from "./data/cirrosis-ascitis-debut";
+import { colangiocarcinoma } from "./data/colangiocarcinoma";
+import { criptorquidia } from "./data/criptorquidia";
+import { crisisMiastenica } from "./data/crisis-miastenica";
+import { cuerpoLuteoHemorragico } from "./data/cuerpo-luteo-hemorragico";
+import { cushingIatrogenico } from "./data/cushing-iatrogenico";
+import { dengueNinoAlarma } from "./data/dengue-nino-alarma";
+import { depresionPostinfarto } from "./data/depresion-postinfarto";
+import { dermatitisContacto } from "./data/dermatitis-contacto";
+import { diverticulitisAbsceso } from "./data/diverticulitis-absceso";
+import { embarazoPostermino } from "./data/embarazo-postermino";
+import { empiemaPleural } from "./data/empiema-pleural";
+import { encefalopatiaWernicke } from "./data/encefalopatia-wernicke";
+import { endocarditisProtesisValvular } from "./data/endocarditis-protesis-valvular";
+import { endometriosisAdolescente } from "./data/endometriosis-adolescente";
+import { epiglotitisAdulto } from "./data/epiglotitis-adulto";
+import { esclerosisMultipleVaron } from "./data/esclerosis-multiple-varon";
+import { estrongiloidiasis } from "./data/estrongiloidiasis";
+import { fibromialgia } from "./data/fibromialgia";
+import { fiebreTifoidea } from "./data/fiebre-tifoidea";
+import { fisuraAnal } from "./data/fisura-anal";
+import { flutterAuricular } from "./data/flutter-auricular";
+import { fracturaTobillo } from "./data/fractura-tobillo";
+import { gravesOrbitopatiaVaron } from "./data/graves-orbitopatia-varon";
+import { guillainBarreNino } from "./data/guillain-barre-nino";
+import { hdaUlceraHpJoven } from "./data/hda-ulcera-hp-joven";
+import { hepatitisBReactivacion } from "./data/hepatitis-b-reactivacion";
+import { herpesGenital } from "./data/herpes-genital";
+import { hidrocefaliaNormotensiva } from "./data/hidrocefalia-normotensiva";
+import { hipercolesterolemiaFamiliar } from "./data/hipercolesterolemia-familiar";
+import { hiperemesisCannabinoide } from "./data/hiperemesis-cannabinoide";
+import { hipernatremia } from "./data/hipernatremia";
+import { hiperplasiaProstatica } from "./data/hiperplasia-prostatica";
+import { hiperplasiaSuprarrenalCongenita } from "./data/hiperplasia-suprarrenal-congenita";
+import { hiperpotasemiaDialisis } from "./data/hiperpotasemia-dialisis";
+import { hipertensionPulmonar } from "./data/hipertension-pulmonar";
+import { hipoacusiaSubita } from "./data/hipoacusia-subita";
+import { hiponatremiaEjercicio } from "./data/hiponatremia-ejercicio";
+import { hipotermia } from "./data/hipotermia";
+import { hipotiroidismoAdultoMayor } from "./data/hipotiroidismo-adulto-mayor";
+import { iamVentriculoDerecho } from "./data/iam-ventriculo-derecho";
+import { icDescompensadaAines } from "./data/ic-descompensada-aines";
+import { insuficienciaOvaricaPrematura } from "./data/insuficiencia-ovarica-prematura";
+import { intentoSuicidioAdultoMayor } from "./data/intento-suicidio-adulto-mayor";
+import { intoxicacionBenzodiacepinas } from "./data/intoxicacion-benzodiacepinas";
+import { intoxicacionDigoxina } from "./data/intoxicacion-digoxina";
+import { iraContrasteIodado } from "./data/ira-contraste-iodado";
+import { ituSondaVesical } from "./data/itu-sonda-vesical";
+import { lupusEmbarazo } from "./data/lupus-embarazo";
+import { malloryWeiss } from "./data/mallory-weiss";
+import { manoPieBoca } from "./data/mano-pie-boca";
+import { melanomaAcral } from "./data/melanoma-acral";
+import { meningitisListeriaEmbarazada } from "./data/meningitis-listeria-embarazada";
+import { nacResidenciaGeriatrica } from "./data/nac-residencia-geriatrica";
+import { nefritisIntersticialAguda } from "./data/nefritis-intersticial-aguda";
+import { nefropatiaIga } from "./data/nefropatia-iga";
+import { neumonitisHipersensibilidad } from "./data/neumonitis-hipersensibilidad";
+import { neutropeniaFebrilNino } from "./data/neutropenia-febril-nino";
+import { osteoporosis } from "./data/osteoporosis";
+import { pancreatitisBiliarAdultaMayor } from "./data/pancreatitis-biliar-adulta-mayor";
+import { parkinsonInicioJoven } from "./data/parkinson-inicio-joven";
+import { pilaBoton } from "./data/pila-boton";
+import { polimialgiaReumatica } from "./data/polimialgia-reumatica";
+import { politraumaPeatonAdultoMayor } from "./data/politrauma-peaton-adulto-mayor";
+import { ptiAdulta } from "./data/pti-adulta";
+import { quemaduraAdultoMayor } from "./data/quemadura-adulto-mayor";
+import { rabiaProfilaxis } from "./data/rabia-profilaxis";
+import { rciu } from "./data/rciu";
+import { sindromeIntestinoIrritable } from "./data/sindrome-intestino-irritable";
+import { sindromeSerotoninergico } from "./data/sindrome-serotoninergico";
+import { sjogren } from "./data/sjogren";
+import { sobreanticoagulacionWarfarina } from "./data/sobreanticoagulacion-warfarina";
+import { taquicardiaVentricular } from "./data/taquicardia-ventricular";
+import { tbcDiabetico } from "./data/tbc-diabetico";
+import { temblorEsencial } from "./data/temblor-esencial";
+import { tepPostoperatorioRodilla } from "./data/tep-postoperatorio-rodilla";
+import { tiroiditisSubaguda } from "./data/tiroiditis-subaguda";
+import { trastornoLimitePersonalidad } from "./data/trastorno-limite-personalidad";
+import { trombosisVenosaCerebral } from "./data/trombosis-venosa-cerebral";
+import { tvpEmbarazo } from "./data/tvp-embarazo";
+import { urticariaCronica } from "./data/urticaria-cronica";
+import { uveitisAnterior } from "./data/uveitis-anterior";
+import { vaginosisEmbarazo } from "./data/vaginosis-embarazo";
+import { vihProfilaxisPostexposicion } from "./data/vih-profilaxis-postexposicion";
+import { vonWillebrand } from "./data/von-willebrand";
+import { zosterRamsayHunt } from "./data/zoster-ramsay-hunt";
 import { EXTRAS } from "./extras";
 import type { ClinicalCase } from "./types";
 
@@ -1091,6 +1191,106 @@ export const CASES: ClinicalCase[] = [
   tbcGanglionar,
   tept,
   varicelaAdultoNeumonia,
+  abscesoMamarioPuerperal,
+  abstinenciaAlcoholicaConvulsion,
+  acvLacunar,
+  aitAmaurosisFugaz,
+  anafilaxiaMedicamentosa,
+  anemiaFerropenicaVaron,
+  anorexiaVaron,
+  apendicitisMujerJoven,
+  botulismo,
+  cancerMamaVaron,
+  carcinomaEspinocelular,
+  celulitisOrbitaria,
+  cetoacidosisEmbarazo,
+  chikungunya,
+  cirrosisAscitisDebut,
+  colangiocarcinoma,
+  criptorquidia,
+  crisisMiastenica,
+  cuerpoLuteoHemorragico,
+  cushingIatrogenico,
+  dengueNinoAlarma,
+  depresionPostinfarto,
+  dermatitisContacto,
+  diverticulitisAbsceso,
+  embarazoPostermino,
+  empiemaPleural,
+  encefalopatiaWernicke,
+  endocarditisProtesisValvular,
+  endometriosisAdolescente,
+  epiglotitisAdulto,
+  esclerosisMultipleVaron,
+  estrongiloidiasis,
+  fibromialgia,
+  fiebreTifoidea,
+  fisuraAnal,
+  flutterAuricular,
+  fracturaTobillo,
+  gravesOrbitopatiaVaron,
+  guillainBarreNino,
+  hdaUlceraHpJoven,
+  hepatitisBReactivacion,
+  herpesGenital,
+  hidrocefaliaNormotensiva,
+  hipercolesterolemiaFamiliar,
+  hiperemesisCannabinoide,
+  hipernatremia,
+  hiperplasiaProstatica,
+  hiperplasiaSuprarrenalCongenita,
+  hiperpotasemiaDialisis,
+  hipertensionPulmonar,
+  hipoacusiaSubita,
+  hiponatremiaEjercicio,
+  hipotermia,
+  hipotiroidismoAdultoMayor,
+  iamVentriculoDerecho,
+  icDescompensadaAines,
+  insuficienciaOvaricaPrematura,
+  intentoSuicidioAdultoMayor,
+  intoxicacionBenzodiacepinas,
+  intoxicacionDigoxina,
+  iraContrasteIodado,
+  ituSondaVesical,
+  lupusEmbarazo,
+  malloryWeiss,
+  manoPieBoca,
+  melanomaAcral,
+  meningitisListeriaEmbarazada,
+  nacResidenciaGeriatrica,
+  nefritisIntersticialAguda,
+  nefropatiaIga,
+  neumonitisHipersensibilidad,
+  neutropeniaFebrilNino,
+  osteoporosis,
+  pancreatitisBiliarAdultaMayor,
+  parkinsonInicioJoven,
+  pilaBoton,
+  polimialgiaReumatica,
+  politraumaPeatonAdultoMayor,
+  ptiAdulta,
+  quemaduraAdultoMayor,
+  rabiaProfilaxis,
+  rciu,
+  sindromeIntestinoIrritable,
+  sindromeSerotoninergico,
+  sjogren,
+  sobreanticoagulacionWarfarina,
+  taquicardiaVentricular,
+  tbcDiabetico,
+  temblorEsencial,
+  tepPostoperatorioRodilla,
+  tiroiditisSubaguda,
+  trastornoLimitePersonalidad,
+  trombosisVenosaCerebral,
+  tvpEmbarazo,
+  urticariaCronica,
+  uveitisAnterior,
+  vaginosisEmbarazo,
+  vihProfilaxisPostexposicion,
+  vonWillebrand,
+  zosterRamsayHunt,
 ]
   .map(withExtra)
   .sort((a, b) => a.level - b.level);
