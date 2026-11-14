@@ -410,7 +410,7 @@ export const EJES: Eje[] = [
     clinica: "Dispepsia, diarrea crónica, pérdida de peso; alarma: anemia, sangrado, disfagia, edad > 50 con síntomas nuevos.",
     diferenciales: "Funcional vs orgánico; malabsorción vs inflamación.",
     tratamiento: "IBP, erradicación, dieta sin TACC; endoscopía ante síntomas de alarma.",
-    match: { keywords: /acalasia|celiac|intestino-irritable|ulcera-duodenal|reflujo|cancer-colorrectal|higado-graso|hepatitis-c|cirrosis|constipacion|colitis|hemorragia-digestiva/ },
+    match: { keywords: /acalasia|celiac|intestino-irritable|barrett|esofagitis|crohn|ulcera-duodenal|reflujo|cancer-colorrectal|higado-graso|hepatitis-c|cirrosis|constipacion|colitis|hemorragia-digestiva/ },
   },
   {
     id: "tiroides",
@@ -432,7 +432,7 @@ export const EJES: Eje[] = [
     clinica: "Cambios de peso, temblor, intolerancia al frío o al calor; alarma: hipotensión con hiponatremia e hiperpotasemia, tormenta tiroidea.",
     diferenciales: "Primario vs central; tiroiditis vs Graves; nódulo benigno vs maligno.",
     tratamiento: "Levotiroxina, antitiroideos y betabloqueantes, hidrocortisona EV en la crisis suprarrenal.",
-    match: { keywords: /tiroid|addison|hashimoto|graves|prolactinoma/ },
+    match: { keywords: /tiroid|addison|hashimoto|graves|prolactinoma|bocio/ },
   },
   {
     id: "osteoarticular",
@@ -514,7 +514,7 @@ export const EJES: Eje[] = [
     clinica: "Flujo, úlcera genital, dolor pelviano; alarma: fiebre con dolor pelviano, masa anexial.",
     diferenciales: "Vaginosis vs candidiasis vs tricomoniasis; úlcera sifilítica vs herpética.",
     tratamiento: "Tratamiento sindrómico, tratar a la pareja, testeo de VIH y sífilis, preservativo.",
-    match: { keywords: /sifilis|vih|uretritis|condiloma|vaginosis|candidiasis|pelviana|tuboovarico|endometriosis|climaterio|anticoncep|dismenorrea|vph/ },
+    match: { keywords: /sifilis|vih|uretritis|condiloma|vaginosis|candidiasis|pelviana|tuboovarico|endometriosis|climaterio|anticoncep|dismenorrea|vph|pubertad|puberal/ },
   },
   {
     id: "recien-nacido",
@@ -554,7 +554,7 @@ export const EJES: Eje[] = [
     clinica: "Persona sana o con factores de riesgo; oportunidad perdida de vacunar o pesquisar.",
     diferenciales: "Prevención primaria, secundaria, terciaria y cuaternaria.",
     tratamiento: "Vacunar, pesquisar, notificar, educar y derivar.",
-    match: { areas: ["Salud comunitaria"], keywords: /tabaquismo|control-prenatal|tuberculosis|chagas|hidatid|dengue|sarampion|coqueluche|tetanica|dislipemia|hta-esencial|cancer-cuello|vph|mordedura|violencia|pesquisa/ },
+    match: { areas: ["Salud comunitaria"], keywords: /tabaquismo|control-prenatal|tuberculosis|chagas|hidatid|dengue|sarampion|coqueluche|tetanica|dislipemia|hta-esencial|cancer-cuello|vph|mordedura|violencia|pesquisa|talla-baja/ },
   },
 ];
 
