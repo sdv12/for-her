@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTheme } from "next-themes";
 import { Download, RotateCcw, Sparkles, Upload } from "lucide-react";
+import { InstallCard } from "@/components/shell/InstallApp";
 import { PageHeader } from "@/components/shell/PageHeader";
 import { VersionTag } from "@/components/shell/VersionTag";
 import { Button } from "@/components/ui/Button";
@@ -99,6 +100,8 @@ export function SettingsView() {
             fullWidth
           />
         </Card>
+
+        <InstallCard />
 
         <Card className="flex flex-col gap-4 p-5 desk:p-6">
           <div>

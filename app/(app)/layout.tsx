@@ -1,5 +1,6 @@
 import { FocusPill } from "@/components/features/foco/FocusPill";
 import { FocusRuntime } from "@/components/features/foco/FocusRuntime";
+import { PwaRuntime } from "@/components/shell/InstallApp";
 import { QuickAddProvider } from "@/components/shell/QuickAdd";
 import { MobileTabBar } from "@/components/shell/MobileTabBar";
 import { Sidebar } from "@/components/shell/Sidebar";
@@ -16,6 +17,7 @@ export default function AppLayout({ children }: LayoutProps<"/">) {
         <FocusPill />
         <MobileTabBar />
         <FocusRuntime />
+        <PwaRuntime />
       </QuickAddProvider>
     </ToastProvider>
   );

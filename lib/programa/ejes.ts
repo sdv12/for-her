@@ -39,7 +39,7 @@ export const EJES: Eje[] = [
     clinica: "Poliuria, polidipsia, pérdida de peso; alarma: deshidratación, respiración de Kussmaul, alteración de conciencia, pie con infección o isquemia.",
     diferenciales: "DM1 vs DM2 vs secundaria; cetoacidosis vs hiperosmolar vs acidosis láctica; hipoglucemia por insulina, sulfonilurea o alcohol.",
     tratamiento: "Cambios de hábitos, metformina, insulina; en las agudas hidratación, insulina EV y potasio; objetivos de HbA1c y control de factores de riesgo.",
-    match: { keywords: /diabet|cetoacid|hipoglucem|hiperosmolar|metabolico|obesidad|higado-graso|isglt2|sulfonilurea/ },
+    match: { keywords: /diabet|cetoacid|hipoglucem|realimentacion|hiperosmolar|metabolico|obesidad|higado-graso|isglt2|sulfonilurea/ },
   },
   {
     id: "cardiovascular",
@@ -242,7 +242,7 @@ export const EJES: Eje[] = [
     tratamiento: "Volumen según la causa, retirar nefrotóxicos, corregir electrolitos con cuidado, antibiótico en la ITU, desobstruir.",
     match: {
       areas: ["Nefrourología"],
-      keywords: /deshidrat|diarrea|hiponatremia|hiperpotas|renal|urinari|pielonef|cistitis|uremico|nefrot|litiasis|hiperosmolar|golpe-de-calor/,
+      keywords: /deshidrat|diarrea|hiponatremia|hiperpotas|renal|urinari|enuresis|pielonef|cistitis|uremico|nefrot|litiasis|hiperosmolar|golpe-de-calor/,
     },
   },
   {
@@ -275,7 +275,7 @@ export const EJES: Eje[] = [
     tratamiento: "Oxígeno según objetivo, broncodilatadores, corticoides, antibiótico si es bacteriana; drenaje si hay neumotórax o empiema.",
     match: {
       areas: ["Respiratorio"],
-      keywords: /neumon|asma|bronquiol|crup|laringitis|epoc|tep|tromboembolismo|neumotorax|coqueluche|cuerpo-extrano-via|influenza|hantavirus|tuberculosis|derrame|inhalac|apnea/,
+      keywords: /neumon|asma|laringomalacia|bronquiol|crup|laringitis|epoc|tep|tromboembolismo|neumotorax|coqueluche|cuerpo-extrano-via|influenza|hantavirus|tuberculosis|derrame|inhalac|apnea/,
     },
   },
   {
@@ -410,7 +410,7 @@ export const EJES: Eje[] = [
     clinica: "Dispepsia, diarrea crónica, pérdida de peso; alarma: anemia, sangrado, disfagia, edad > 50 con síntomas nuevos.",
     diferenciales: "Funcional vs orgánico; malabsorción vs inflamación.",
     tratamiento: "IBP, erradicación, dieta sin TACC; endoscopía ante síntomas de alarma.",
-    match: { keywords: /acalasia|celiac|intestino-irritable|barrett|esofagitis|crohn|ulcera-duodenal|reflujo|cancer-colorrectal|higado-graso|hepatitis-c|cirrosis|constipacion|colitis|hemorragia-digestiva/ },
+    match: { keywords: /acalasia|celiac|intestino-irritable|lactosa|barrett|esofagitis|crohn|ulcera-duodenal|reflujo|cancer-colorrectal|higado-graso|hepatitis-c|cirrosis|constipacion|colitis|hemorragia-digestiva/ },
   },
   {
     id: "tiroides",
@@ -514,7 +514,7 @@ export const EJES: Eje[] = [
     clinica: "Flujo, úlcera genital, dolor pelviano; alarma: fiebre con dolor pelviano, masa anexial.",
     diferenciales: "Vaginosis vs candidiasis vs tricomoniasis; úlcera sifilítica vs herpética.",
     tratamiento: "Tratamiento sindrómico, tratar a la pareja, testeo de VIH y sífilis, preservativo.",
-    match: { keywords: /sifilis|vih|uretritis|condiloma|vaginosis|candidiasis|pelviana|tuboovarico|endometriosis|climaterio|anticoncep|dismenorrea|vph|pubertad|puberal/ },
+    match: { keywords: /sifilis|vih|uretritis|condiloma|vaginosis|candidiasis|pelviana|tuboovarico|endometriosis|climaterio|anticoncep|dismenorrea|vph|pubertad|puberal|hipogonadismo/ },
   },
   {
     id: "recien-nacido",
@@ -534,7 +534,7 @@ export const EJES: Eje[] = [
     clinica: "Ictericia, rechazo del alimento, hipotermia o fiebre; alarma: ictericia en las primeras 24 h, letargo, apneas.",
     diferenciales: "Fisiológica vs patológica; sepsis precoz vs tardía.",
     tratamiento: "Luminoterapia, antibióticos empíricos, tratamiento de la madre y del niño en las infecciones verticales.",
-    match: { keywords: /neonat|congenit|ictericia|prematuro|displasia-desarrollo|colico-del-lactante|criptorquid/ },
+    match: { keywords: /neonat|congenit|brue|ictericia|prematuro|displasia-desarrollo|colico-del-lactante|criptorquid/ },
   },
   {
     id: "prevencion",

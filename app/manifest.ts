@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 
-/** PWA: "Agregar a pantalla de inicio" en el celular. Offline queda fuera de v1. */
+/** PWA instalable en la compu y el celular; el service worker (public/sw.js) la hace abrir sin internet. */
 export default function manifest(): MetadataRoute.Manifest {
   return {
+    id: "/hoy",
     name: "For her",
     short_name: "For her",
     description: "Estudio activo para el examen oral integrador: plan, tarjetas, simulacro y tribunal.",
@@ -10,7 +11,6 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/hoy",
     scope: "/",
     display: "standalone",
-    orientation: "portrait",
     background_color: "#F3F7FC",
     theme_color: "#F3F7FC",
     categories: ["education", "productivity"],

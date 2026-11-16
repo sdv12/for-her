@@ -7,6 +7,7 @@ import { useFocus } from "@/lib/focus-store";
 import { useNavBadges } from "@/lib/mock/badges";
 import { cn } from "@/lib/cn";
 import { ExamCountdown } from "./ExamCountdown";
+import { InstallButton } from "./InstallApp";
 import { useQuickAdd } from "./QuickAdd";
 import { Logo } from "./Logo";
 import { NAV, isActive, type NavItem } from "./nav";
@@ -52,6 +53,7 @@ export function Sidebar() {
           item={{ href: "/ajustes", label: "Ajustes", icon: Settings }}
           active={isActive(pathname, "/ajustes")}
         />
+        <InstallButton />
         <div className="flex items-center justify-between">
           <ThemeToggle withLabel />
           <VersionTag className="pr-2" />

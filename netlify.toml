@@ -5,3 +5,10 @@
 
 [build.environment]
   NODE_VERSION = "24"
+
+# El service worker siempre fresco, así cada versión nueva llega enseguida.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Service-Worker-Allowed = "/"
